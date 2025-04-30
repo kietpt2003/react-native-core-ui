@@ -1,6 +1,6 @@
 {
   "name": "@kietpt/react-native-core-ui",
-  "version": "0.0.1-a",
+  "version": "0.0.1-b",
   "description": "React Native Core UI components by KietPT",
   "main": "dist/index.js",
   "scripts": {
@@ -8,6 +8,11 @@
     "publish-lib": "yarn build && npm publish --access public"
   },
   "author": "tuankiet.pham",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kietpt2003/react-native-core-ui.git"
+  },
+  "homepage": "https://github.com/kietpt2003/react-native-core-ui#readme",
   "license": "MIT",
   "peerDependencies": {
     "d4dpocket": "^0.1.8",

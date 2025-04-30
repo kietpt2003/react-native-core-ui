@@ -1,5 +1,3 @@
-[![npm](https://img.shields.io/npm/v/@react-native-vector-icons/common.svg)](https://npmjs.com/package/@kietpt/react-native-core-ui/common.svg) [![npm](https://img.shields.io/npm/dm/@kietpt/react-native-core-ui/common.svg)](https://npmjs.com/package/@kietpt/react-native-core-ui/common)
-
 # React Native Core UI
 
 Accelerate your React Native development with a rich set of customizable UI components built for consistency and performance. Designed to streamline layout and styling, these components are ideal for building modern, responsive, and scalable interfaces across all screens. Seamlessly adaptable and theme-ready for effortless branding.
