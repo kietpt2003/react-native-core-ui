@@ -2,7 +2,6 @@ const esbuild = require('esbuild');
 const { join } = require('path');
 const fs = require('fs');
 const { execSync } = require('child_process');
-const tsconfigPaths = require('@esbuild-plugins/tsconfig-paths').default;
 
 // Xóa thư mục dist
 const distPath = join(__dirname, 'dist');
@@ -34,9 +33,6 @@ esbuild.build({
     'react-native-permissions',
     'react-native-vector-icons',
   ],
-  plugins: [
-    tsconfigPaths({ tsconfig: join(__dirname, 'tsconfig.json') })
-  ],
   loader: {
     '.js': 'jsx',
     '.ts': 'ts',
@@ -44,7 +40,7 @@ esbuild.build({
   },
   minify: false,
   sourcemap: true,
-  platform: 'neutral',
+  platform: 'node',
   target: 'esnext',
 }).then(() => {
   console.log('✅ Build success!');
