@@ -1,33 +1,45 @@
-// build.js
 const esbuild = require('esbuild');
 const { join } = require('path');
 const fs = require('fs');
+const { execSync } = require('child_process');
+
+const distPath = join(__dirname, 'dist');
 
 // Xóa thư mục dist/ trước khi build
-const distPath = join(__dirname, 'dist');
 if (fs.existsSync(distPath)) {
   fs.rmSync(distPath, { recursive: true, force: true });
 }
 
-// Build
+// 1. Build declaration files bằng tsc
+console.log('📦 Building declaration files...');
+execSync('tsc --emitDeclarationOnly --declaration --outDir dist', { stdio: 'inherit' });
+
+// 2. Bundle JS bằng esbuild
+console.log('📦 Bundling JS with esbuild...');
 esbuild.build({
-  entryPoints: ['index.js'], // Entry file chính
+  entryPoints: ['index.js'], // file entry point chính
   bundle: true,
-  format: 'cjs', // CommonJS cho compatibility
+  format: 'cjs',
   outfile: 'dist/index.js',
-  external: [ // Không bundle các dependencies chính
+  external: [
     'react',
     'react-native',
     'react-native-device-info',
     'react-native-iphone-x-helper',
     'd4dpocket',
+    '@react-native-camera-roll/camera-roll',
+    'react-native-gesture-handler',
+    'react-native-reanimated',
+    'react-native-safe-area-context',
+    'react-native-permissions',
+    'react-native-vector-icons',
   ],
   loader: {
-    '.js': 'jsx', // Đảm bảo xử lý JSX trong các file .js
+    '.js': 'jsx',
   },
-  minify: false, // Tùy bạn, dev thì nên false cho dễ debug
+  minify: false,
   sourcemap: true,
-  platform: 'node', // Cần để build chuẩn
+  platform: 'node',
 }).then(() => {
   console.log('✅ Build success!');
 }).catch((e) => {

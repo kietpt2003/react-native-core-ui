@@ -1,12 +1,12 @@
 import { View, Text, Animated as RNAnimated, TouchableOpacity, Image, Dimensions, StyleSheet, ListRenderItem } from 'react-native'
 import React, { Dispatch, forwardRef, SetStateAction, useImperativeHandle, useRef } from 'react'
-import { Colors } from '@constants';
+import { Colors } from '@constant';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, { runOnJS, SharedValue, useAnimatedScrollHandler, useSharedValue, withSpring } from 'react-native-reanimated';
 import { statusBarHeight } from '@utils';
 import { height as ScreenHeight, width } from '@utils';
 import AlbumHeaderFilter from './AlbumHeaderFilter';
-import { useGalleryAssets } from 'hooks/index';
+import { useGalleryAssets } from '@hooks';
 import { Album } from '@react-native-camera-roll/camera-roll';
 
 export type AlbumFilterProps = {

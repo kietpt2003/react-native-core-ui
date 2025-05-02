@@ -16,10 +16,10 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors } from '@constants';
+import { Colors } from '@constant';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { statusBarHeight, height as ScreenHeight, width as ScreenWidth } from '@utils';
-import { useGalleryAssets } from 'hooks';
+import { useGalleryAssets } from '@hooks';
 import { AlbumFilter, AlbumFilterMethods } from './components/AlbumFilter';
 import { Album } from '@react-native-camera-roll/camera-roll';
 

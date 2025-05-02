@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "React Native Core UI components by KietPT",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "node build.js",
     "publish-lib": "yarn build && npm publish --access public && npm publish --registry=https://npm.pkg.github.com/ --access public"

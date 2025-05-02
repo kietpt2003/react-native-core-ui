@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import React, { Dispatch, SetStateAction } from 'react'
 import { width } from '@utils';
-import { Colors } from '@constants';
+import { Colors } from '@constant';
 import { Album, PhotoIdentifier } from '@react-native-camera-roll/camera-roll';
 
 export type AlbumHeaderFilterProps = {

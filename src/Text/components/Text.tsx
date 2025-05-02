@@ -9,7 +9,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { scale } from '@utils';
-import { Colors, FontSize } from '@constants';
+import { Colors, FontSize } from '@constant';
 import { ReactNode } from 'react';
 
 interface TextProps extends RNTextProps {

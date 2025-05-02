@@ -1,18 +1,25 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-    "module": "commonjs",
-    "lib": ["esnext"],
-    "jsx": "react",
+    "target": "ES6",
+    "module": "ESNext",
+    "lib": ["ESNext"],
+    "jsx": "react-native",
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": false,
+    "outDir": "dist",
+    "moduleResolution": "node",
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
     "baseUrl": "./src",
     "paths": {
-      "@constants": ["constants/index"],
+      "@constant": ["constants/index"],
       "@utils": ["utils/index"],
-    },
+      "@hooks": ["hooks/index"],
+    }
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]
