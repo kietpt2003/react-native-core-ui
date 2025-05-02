@@ -506,6 +506,7 @@ __metadata:
     "@types/react-native-vector-icons": "npm:^6.4.18"
     d4dpocket: "npm:0.1.8"
     esbuild: "npm:^0.25.3"
+    esbuild-plugin-alias: "npm:^0.2.1"
     react-native-device-info: "npm:8.1.3"
     react-native-gesture-handler: "npm:2.9.0"
     react-native-iphone-x-helper: "npm:1.3.1"
@@ -681,6 +682,13 @@ __metadata:
   version: 8.0.0
   resolution: "emoji-regex@npm:8.0.0"
   checksum: 10c0/b6053ad39951c4cf338f9092d7bfba448cdfd46fe6a2a034700b149ac9ffbc137e361cbd3c442297f86bed2e5f7576c1b54cc0a6bf8ef5106cc62f496af35010
+  languageName: node
+  linkType: hard
+
+"esbuild-plugin-alias@npm:^0.2.1":
+  version: 0.2.1
+  resolution: "esbuild-plugin-alias@npm:0.2.1"
+  checksum: 10c0/a67bc6bc2744fc8637f7321f00c1f00e4fae86c182662421738ebfabf3ad344967b9c667185c6c34d9edd5b289807d34bfdceef94620e94e0a45683534af69e0
   languageName: node
   linkType: hard
 

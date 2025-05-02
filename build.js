@@ -1,15 +1,14 @@
 const esbuild = require('esbuild');
+const aliasPlugin = require('esbuild-plugin-alias');
 const { join } = require('path');
 const fs = require('fs');
 const { execSync } = require('child_process');
 
+// Xóa thư mục dist
 const distPath = join(__dirname, 'dist');
-
-// Xóa thư mục dist/ trước khi build
 if (fs.existsSync(distPath)) {
   fs.rmSync(distPath, { recursive: true, force: true });
 }
-
 // 1. Build declaration files bằng tsc
 console.log('📦 Building declaration files...');
 execSync('tsc --emitDeclarationOnly --declaration --outDir dist', { stdio: 'inherit' });
@@ -34,8 +33,17 @@ esbuild.build({
     'react-native-permissions',
     'react-native-vector-icons',
   ],
+  plugins: [
+    aliasPlugin({
+      '@constant': join(__dirname, 'src/constants/index.ts'),
+      '@utils': join(__dirname, 'src/utils/index.ts'),
+      '@hooks': join(__dirname, 'src/hooks/index.ts'),
+    })
+  ],
   loader: {
     '.js': 'jsx',
+    '.ts': 'ts',
+    '.tsx': 'tsx',
   },
   minify: false,
   sourcemap: true,
