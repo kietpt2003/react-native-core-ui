@@ -1,22 +1,23 @@
 const esbuild = require('esbuild');
-const aliasPlugin = require('esbuild-plugin-alias');
 const { join } = require('path');
 const fs = require('fs');
 const { execSync } = require('child_process');
+const tsconfigPaths = require('@esbuild-plugins/tsconfig-paths').default;
 
 // Xóa thư mục dist
 const distPath = join(__dirname, 'dist');
 if (fs.existsSync(distPath)) {
   fs.rmSync(distPath, { recursive: true, force: true });
 }
-// 1. Build declaration files bằng tsc
+
+// 1. Build declaration files bằng tsc (Chỉ cần nếu cần file .d.ts riêng)
 console.log('📦 Building declaration files...');
 execSync('tsc --emitDeclarationOnly --declaration --outDir dist', { stdio: 'inherit' });
 
-// 2. Bundle JS bằng esbuild
+// 2. Bundle JS với esbuild
 console.log('📦 Bundling JS with esbuild...');
 esbuild.build({
-  entryPoints: ['index.js'], // file entry point chính
+  entryPoints: ['index.ts'],
   bundle: true,
   format: 'cjs',
   outfile: 'dist/index.js',
@@ -34,11 +35,7 @@ esbuild.build({
     'react-native-vector-icons',
   ],
   plugins: [
-    aliasPlugin({
-      '@constant': join(__dirname, 'src/constants/index.ts'),
-      '@utils': join(__dirname, 'src/utils/index.ts'),
-      '@hooks': join(__dirname, 'src/hooks/index.ts'),
-    })
+    tsconfigPaths({ tsconfig: join(__dirname, 'tsconfig.json') })
   ],
   loader: {
     '.js': 'jsx',
@@ -47,7 +44,8 @@ esbuild.build({
   },
   minify: false,
   sourcemap: true,
-  platform: 'node',
+  platform: 'node', // Platform node cho package backend
+  target: 'esnext', // Đảm bảo target esnext cho cú pháp mới
 }).then(() => {
   console.log('✅ Build success!');
 }).catch((e) => {

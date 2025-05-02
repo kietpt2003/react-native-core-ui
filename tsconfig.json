@@ -16,9 +16,9 @@
     "skipLibCheck": true,
     "baseUrl": "./src",
     "paths": {
-      "@constant": ["constants/index"],
-      "@utils": ["utils/index"],
-      "@hooks": ["hooks/index"],
+      "@constant": ["constants"],
+      "@utils": ["utils"],
+      "@hooks": ["hooks"]
     }
   },
   "include": ["src"],
