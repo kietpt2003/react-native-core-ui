@@ -1,4 +1,4 @@
-import { Platform, StatusBar, Dimensions } from 'react-native';
+import { Platform, StatusBar, Dimensions, StyleProp } from 'react-native';
 import {
   isIphoneX,
   getBottomSpace,
@@ -15,39 +15,31 @@ const offset =
 
 const deviceHeight =
   isIphoneX() || Platform.OS === 'android'
-    ? standardLength - offset
+    ? standardLength - offset!
     : standardLength;
 
-export function RFPercentage(percent) {
+export function RFPercentage(percent: number) {
   const heightPercent = (percent * deviceHeight) / 100;
   return Math.round(heightPercent);
-}
-
-export function DeviceIpad() {
-  if (Platform.isPad === true) {
-    return true;
-  } else {
-    return false;
-  }
 }
 
 export { width, height };
 
 // guideline height for standard 5" device screen is 680
-export function RFValue(fontSize, standardScreenHeight = 680) {
+export function RFValue(fontSize: number, standardScreenHeight = 680) {
   const heightPercent = (fontSize * deviceHeight) / standardScreenHeight;
   return Math.round(heightPercent);
 }
 
 // padding, margin, fontSize, ....
-export const scale = size => (width / guidelineBaseWidth) * parseInt(size, 10);
+export const scale = (size: any) => (width / guidelineBaseWidth) * parseInt(size, 10);
 
 // width
-export const wScale = size =>
+export const wScale = (size:any) =>
   (height / guidelineBaseHeight) * parseInt(size, 10);
 
 // height
-export const hScale = (size, factor = 0.5) =>
+export const hScale = (size:any, factor = 0.5) =>
   parseInt(size, 10) +
   (scale(parseInt(size, 10)) - parseInt(size, 10)) * factor;
 
@@ -70,7 +62,7 @@ export const isTablet = DeviceInfo.isTablet();
  * @param {ViewStyle} styles.tablet - Styles for tablet
  * @param {ViewStyle} styles.phone - Styles for phone
  */
-export const StylePlatform = styles => {
+export const StylePlatform = (styles: StyleProp<any>) => {
   if (isTablet) {
     return styles.tablet || {};
   }
@@ -79,3 +71,5 @@ export const StylePlatform = styles => {
 
 export const SIZE_IMAGE = width / 2 - 2 - scale(5);
 export const SIZE_IMAGE_2 = (width - 8 - scale(10)) / 3;
+
+export const statusBarHeight = (Platform.OS == "android" && StatusBar.currentHeight) ? StatusBar.currentHeight : 0;

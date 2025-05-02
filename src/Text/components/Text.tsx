@@ -1,9 +1,35 @@
 import React from 'react';
-import { StyleSheet, Platform, View, Text as RNText } from 'react-native';
+import {
+  StyleSheet,
+  Platform,
+  View,
+  Text as RNText,
+  TextProps as RNTextProps,
+  TextStyle,
+  ViewStyle,
+} from 'react-native';
 import { scale } from '@utils';
 import { Colors, FontSize } from '@constants';
+import { ReactNode } from 'react';
 
-const Text = ({ style, color, bold, children, load, styleView, ...rest }) => {
+interface TextProps extends RNTextProps {
+  style?: TextStyle | TextStyle[];
+  styleView?: ViewStyle | ViewStyle[];
+  color?: string;
+  bold?: boolean;
+  load?: boolean;
+  children?: ReactNode;
+}
+
+const Text: React.FC<TextProps> = ({
+  style,
+  color,
+  bold,
+  children,
+  load,
+  styleView,
+  ...rest
+}) => {
   return (
     <View style={styleView}>
       {load ? (
@@ -18,7 +44,7 @@ const Text = ({ style, color, bold, children, load, styleView, ...rest }) => {
               ...Platform.select({
                 android: {
                   fontWeight: bold ? '700' : '400',
-                  fontFamily: bold ? 'Arial' : 'Arial',
+                  fontFamily: 'Arial',
                 },
                 ios: {
                   fontFamily: bold ? 'Arial Bold' : 'Arial',
@@ -27,7 +53,8 @@ const Text = ({ style, color, bold, children, load, styleView, ...rest }) => {
             },
             styles.text,
             style,
-          ]}>
+          ]}
+        >
           {children}
         </RNText>
       )}

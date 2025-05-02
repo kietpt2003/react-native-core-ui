@@ -1,1 +1,1 @@
-export { default as Text } from './src/components/Text';
+export { default as Text } from './src/Text/components/Text';
