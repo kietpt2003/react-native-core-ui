@@ -17,7 +17,7 @@ execSync('tsc --emitDeclarationOnly --declaration --outDir dist', { stdio: 'inhe
 // 2. Bundle JS với esbuild
 console.log('📦 Bundling JS with esbuild...');
 esbuild.build({
-  entryPoints: ['index.ts'],
+  entryPoints: ['src/index.ts'],
   bundle: true,
   format: 'cjs',
   outfile: 'dist/index.js',
@@ -44,8 +44,8 @@ esbuild.build({
   },
   minify: false,
   sourcemap: true,
-  platform: 'node', // Platform node cho package backend
-  target: 'esnext', // Đảm bảo target esnext cho cú pháp mới
+  platform: 'neutral',
+  target: 'esnext',
 }).then(() => {
   console.log('✅ Build success!');
 }).catch((e) => {
