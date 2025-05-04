@@ -1,13 +1,18 @@
-import { View, Text, Animated as RNAnimated, TouchableOpacity, Image, Dimensions, StyleSheet, ListRenderItem } from 'react-native'
+import { View, Text, Animated as RNAnimated, TouchableOpacity, Image, StyleSheet, ColorValue, TextStyle } from 'react-native'
 import React, { Dispatch, forwardRef, SetStateAction, useImperativeHandle, useRef } from 'react'
-import { Colors } from '@constant';
+import { Colors, FontSize } from '@constant';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, { runOnJS, SharedValue, useAnimatedScrollHandler, useSharedValue, withSpring } from 'react-native-reanimated';
 import { statusBarHeight } from '@utils';
 import { height as ScreenHeight, width } from '@utils';
 import AlbumHeaderFilter from './AlbumHeaderFilter';
-import { useGalleryAssets } from '@hooks';
-import { Album } from '@react-native-camera-roll/camera-roll';
+import { PhotoIdentifier } from '@react-native-camera-roll/camera-roll';
+import { Album } from 'hooks/useGalleryAssets';
+
+export interface AlbumFilterStyleProps {
+    titleColor?: ColorValue;
+    countColor?: ColorValue;
+}
 
 export type AlbumFilterProps = {
     setSelectedAlbum: Dispatch<SetStateAction<Album | null>>;
@@ -20,6 +25,16 @@ export type AlbumFilterProps = {
     setIsTop: Dispatch<SetStateAction<boolean>>;
     openHeight: number;
     setShowAlbumsList: Dispatch<SetStateAction<boolean>>;
+    albums: Album[];
+    assets: Record<string, PhotoIdentifier[]>;
+    fullAssets: PhotoIdentifier[];
+    totalAssets: number;
+    headerTitle: string;
+    headerBarColor: ColorValue;
+    backgroundColor: ColorValue;
+    albumItemStyle?: AlbumFilterStyleProps;
+    emptyGalleryMsg: string;
+    safeEmptyGalleryMsgStyle: Partial<TextStyle>;
 }
 
 export interface AlbumFilterMethods {
@@ -39,17 +54,20 @@ export const AlbumFilter = forwardRef<AlbumFilterMethods, AlbumFilterProps>(
             isTop,
             setIsTop,
             openHeight,
-            setShowAlbumsList
+            setShowAlbumsList,
+            albums,
+            assets,
+            fullAssets,
+            totalAssets,
+            headerTitle,
+            headerBarColor,
+            backgroundColor,
+            albumItemStyle,
+            emptyGalleryMsg,
+            safeEmptyGalleryMsgStyle
         }: AlbumFilterProps,
         ref
     ) => {
-        const {
-            albums,
-            photos,
-            fullPhotos,
-            totalImages
-        } = useGalleryAssets();
-
         const scrollY = useSharedValue(0);
         const context = useSharedValue(0);
         const timing = useSharedValue(0);
@@ -62,11 +80,13 @@ export const AlbumFilter = forwardRef<AlbumFilterMethods, AlbumFilterProps>(
 
         const panScroll = Gesture.Pan()
             .onBegin(() => {
+                'worklet';
                 context.value = topAnimation.value;
                 timing.value = 0;
                 runOnJS(setIsPanEnabled)(false);
             })
             .onUpdate(event => {
+                'worklet';
                 timing.value++;
 
                 if (event.velocityY > 0 && scrollY.value == 0 && isTop) {
@@ -86,11 +106,10 @@ export const AlbumFilter = forwardRef<AlbumFilterMethods, AlbumFilterProps>(
                 }
             })
             .onEnd((event) => {
+                'worklet';
                 runOnJS(setIsPanEnabled)(true);
                 runOnJS(setEnableScroll)(true);
                 const speedRate = 1 / timing.value;
-                console.log(speedRate, isPanEnabled, isTop);
-
 
                 if (isPanEnabled && isTop) {
                     if (event.velocityY > 0 && speedRate > 0.07 && scrollY.value == 0) {
@@ -132,6 +151,7 @@ export const AlbumFilter = forwardRef<AlbumFilterMethods, AlbumFilterProps>(
             setShowAlbumsList(true);
         }
         const handleCloseAlbumFilter = () => {
+            setIsPanEnabled(true); //Fix bug không kéo được khi albumFilter mở
             RNAnimated.timing(translateY, {
                 toValue: ScreenHeight, // Dịch chuyển đến vị trí ban đầu
                 duration: 800, // Thời gian chạy animation (ms)
@@ -151,51 +171,57 @@ export const AlbumFilter = forwardRef<AlbumFilterMethods, AlbumFilterProps>(
         return (
             <RNAnimated.View
                 style={[
-                    albumFilterStyleSheet.container,
+                    styles.container,
                     {
                         transform: [{ translateY }],
-                        backgroundColor: Colors.white,
+                        backgroundColor: backgroundColor,
                     }, // Thêm animation dịch chuyển
                 ]}
             >
                 <View style={[
-                    albumFilterStyleSheet.handleContainer,
+                    styles.handleContainer,
                     {
-                        backgroundColor: Colors.white
+                        backgroundColor: headerBarColor
                     }
                 ]} />
-                {(albums.length === 0 || fullPhotos.length === 0 || totalImages === 0) ? (
-                    <Text style={albumFilterStyleSheet.noImage}>Không có hình ảnh để hiển thị</Text>
+                {(albums.length === 0 || fullAssets.length === 0 || totalAssets === 0) ? (
+                    <Text style={[
+                        styles.noImage,
+                        safeEmptyGalleryMsgStyle
+                    ]}>{emptyGalleryMsg}</Text>
                 ) : (
                     <GestureDetector
                         gesture={Gesture.Simultaneous(panScroll, scrollViewGesture)}>
                         <Animated.FlatList
                             data={albums}
                             scrollEnabled={enableScroll}
-                            keyExtractor={(item) => item.title.toString()}
+                            keyExtractor={(item) => item.id.toString()}
                             showsVerticalScrollIndicator={false}
                             renderItem={({ item }) => {
-                                if (!photos[item.title]?.some(value => value.node.type === "Photos")) {
-                                    return null;
-                                }
-
                                 return (
                                     <TouchableOpacity
-                                    style={albumFilterStyleSheet.itemContentContainer}
-                                    onPress={() => {
-                                        handleCloseAlbumFilter();
-                                        setSelectedAlbum(item);
-                                    }}
+                                        style={styles.itemContentContainer}
+                                        onPress={() => {
+                                            handleCloseAlbumFilter();
+                                            setSelectedAlbum(item);
+                                        }}
+                                        activeOpacity={0.7}
                                     >
                                     <Image
                                         source={{
-                                        uri: photos[item.title]?.[0]?.node.image.uri,
+                                            uri: assets[item.id]?.[0]?.node.image.uri,
                                         }}
-                                        style={albumFilterStyleSheet.albumFirstImage}
+                                        style={styles.albumFirstImage}
                                     />
                                     <View>
-                                        <Text style={albumFilterStyleSheet.albumTitlteTxt}>{item.title}</Text>
-                                        <Text style={albumFilterStyleSheet.assetCountTxt}>{item.count}</Text>
+                                        <Text style={[
+                                            styles.albumTitlteTxt,
+                                            { color: albumItemStyle?.titleColor ? albumItemStyle.titleColor : Colors.black }
+                                        ]}>{item.title}</Text>
+                                        <Text style={[
+                                            styles.assetCountTxt,
+                                            { color: albumItemStyle?.countColor ? albumItemStyle.countColor : Colors.gray_A0A0A0 }
+                                        ]}>{item.count}</Text>
                                     </View>
                                     </TouchableOpacity>
                                 );
@@ -204,8 +230,10 @@ export const AlbumFilter = forwardRef<AlbumFilterMethods, AlbumFilterProps>(
                                 <AlbumHeaderFilter
                                     setSelectedAlbum={setSelectedAlbum}
                                     handleCloseAlbumFilter={handleCloseAlbumFilter}
-                                    fullPhotos={fullPhotos}
-                                    totalImages={totalImages}
+                                    fullAssets={fullAssets}
+                                    totalAssets={totalAssets}
+                                    headerTitle={headerTitle}
+                                    albumItemStyle={albumItemStyle}
                                 />
                             }
                             onScroll={onScroll}
@@ -217,7 +245,7 @@ export const AlbumFilter = forwardRef<AlbumFilterMethods, AlbumFilterProps>(
     }
 )
 
-const albumFilterStyleSheet = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         ...StyleSheet.absoluteFillObject,
         paddingHorizontal: 10,
@@ -242,8 +270,7 @@ const albumFilterStyleSheet = StyleSheet.create({
     },
     noImage: {
         textAlign: "center",
-        fontSize: 18,
-        color: Colors.black
+        fontSize: FontSize.fontSize18,
     },
     itemContentContainer: {
         flexDirection: "row",
@@ -251,11 +278,10 @@ const albumFilterStyleSheet = StyleSheet.create({
         marginBottom: 10
     },
     albumTitlteTxt: {
-        fontSize: 15,
-        color: Colors.black
+        fontSize: FontSize.fontSize16,
     },
     assetCountTxt: {
-        color: Colors.gray_A0A0A0
+        fontSize: FontSize.fontSize14,
     },
     albumFirstImage: {
         width: (width - 20) / 7,

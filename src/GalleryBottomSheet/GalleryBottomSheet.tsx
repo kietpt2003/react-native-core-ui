@@ -5,6 +5,7 @@ import React, {
     useCallback,
     useState,
     useRef,
+    useEffect,
 } from 'react';
 import Animated, {
     useSharedValue,
@@ -16,41 +17,67 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors } from '@constant';
+import { Colors, FontSize } from '@constant';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { statusBarHeight, height as ScreenHeight, width as ScreenWidth } from '@utils';
+import { statusBarHeight, height, width, filterAllowedTextStyle } from '@utils';
 import { useGalleryAssets } from '@hooks';
 import { AlbumFilter, AlbumFilterMethods } from './components/AlbumFilter';
-import { Album } from '@react-native-camera-roll/camera-roll';
-
-export interface BottomSheetGalleryProps {
-    snapTo: number;
-}
+import { Album } from 'hooks/useGalleryAssets';
+import { BottomSheetGalleryProps } from './types/GalleryBottomSheetTypes';
+import { limitedString } from 'd4dpocket';
+import PlayCircle from './components/PlayCircle';
+import { AssetType, PhotoIdentifier } from '@react-native-camera-roll/camera-roll';
+import SelectItem from './components/SelectItem';
 
 export interface BottomSheetGalleryMethods {
     handleBottomSheetGallery: () => void;
-    handleOpenPhoneSetting: () => void;
     isBottomSheetGalleryOpen: boolean;
 }
+
+const videoIconSize = 48;
 
 const GalleryBottomSheet = forwardRef<BottomSheetGalleryMethods, BottomSheetGalleryProps>(
     (
         {
-            snapTo,
+            openHeight = height / 2,
+            closeHeight = height,
+            maxHeight = 0,
+            headerBarColor = Colors.white,
+            barIconColor = Colors.black,
+            headerTitleStyle = {
+                color: Colors.black,
+            },
+            headerTitle = "Tất cả ảnh",
+            headerTitleIconColor = Colors.black,
+            backgroundColor = Colors.white,
+            emptyGalleryMsg = "Không có hình ảnh để hiển thị",
+            emptyGalleryMsgStyle = {
+                color: Colors.black,
+            },
+            videoIconStyle,
+            albumItemStyle,
+            assetType = "All",
+            maxSelectable = 5,
+            onSelectedAssetsChange,
         }: BottomSheetGalleryProps,
         ref,
     ) => {
+        const safeHeaderTitleStyle = filterAllowedTextStyle(headerTitleStyle);
+        const truncatedHeaderTitle = limitedString(headerTitle, 3);
+        const safeEmptyGalleryMsgStyle = filterAllowedTextStyle(emptyGalleryMsgStyle);
         const {
             albums,
-            fullPhotos,
-            fullPhotoPagination,
-            loadFullPhotos,
-            totalImages,
-            photos,
-            loadPhotos,
+            fullAssets,
+            fullAssetsPagination,
+            loadFullAssets,
+            totalAssets,
+            assets,
+            loadAssets,
             pagination,
             requestPermission,
-        } = useGalleryAssets();
+            hasPermission,
+            changeAssetType,
+        } = useGalleryAssets(assetType);
 
         // album filter
         const albumFilterRef = useRef<AlbumFilterMethods>(null);
@@ -58,8 +85,6 @@ const GalleryBottomSheet = forwardRef<BottomSheetGalleryMethods, BottomSheetGall
         const [showAlbumsList, setShowAlbumsList] = useState<boolean>(false);
 
         const inset = useSafeAreaInsets();
-        const closeHeight = ScreenHeight;
-        const openHeight = snapTo;
         const topAnimation = useSharedValue(closeHeight);
         const context = useSharedValue(0);
         const timing = useSharedValue(0);
@@ -70,6 +95,35 @@ const GalleryBottomSheet = forwardRef<BottomSheetGalleryMethods, BottomSheetGall
         const [isTop, setIsTop] = useState(false);
 
         const [isBottomSheetGalleryOpen, setIsBottomSheetGalleryOpen] = useState<boolean>(false);
+
+        const [assetTypeState, setAssetTypeState] = useState<AssetType>(assetType);
+
+        const [selectedAssets, setSelectedAssets] = useState<PhotoIdentifier[]>([]);
+        const toggleAsset = (item: PhotoIdentifier) => {
+            setSelectedAssets(prev => {
+                const index = prev.findIndex(asset => asset.node.image.uri === item.node.image.uri);
+
+                if (index !== -1) {
+                // Nếu đã tồn tại → xóa item khỏi mảng (giữ đúng thứ tự còn lại)
+                return [...prev.slice(0, index), ...prev.slice(index + 1)];
+                } else if (prev.length < maxSelectable) {
+                // Nếu chưa tồn tại và chưa đạt max → thêm vào cuối mảng
+                return [...prev, item];
+                } else {
+                // Đã đạt max → không thay đổi
+                return prev;
+                }
+            });   
+        };
+        const getSelectedInfo = (item: PhotoIdentifier): { isSelected: boolean; index: number } => {
+            const index = selectedAssets.findIndex(
+                asset => asset.node.image.uri === item.node.image.uri
+            );
+            return {
+                isSelected: index !== -1,
+                index,
+            };
+        };
 
         const expand = useCallback(() => {
             'worklet';
@@ -97,13 +151,11 @@ const GalleryBottomSheet = forwardRef<BottomSheetGalleryMethods, BottomSheetGall
             }
         }
 
-        const handleOpenPhoneSetting = async () => {
-            const hasPermission = await requestPermission();
-            if (hasPermission) {
-                handleBottomSheetGallery();
-            }
-        }
         const handleBottomSheetGallery = () => {
+            if (!hasPermission) {
+                requestPermission();
+                return;
+            }
             if (!isGalleryVisible) {
                 handleOpenBottomSheet();
                 expand();
@@ -123,10 +175,12 @@ const GalleryBottomSheet = forwardRef<BottomSheetGalleryMethods, BottomSheetGall
         const pan = Gesture.Pan()
             .enabled(isPanEnabled)
             .onBegin(() => {
+                'worklet';
                 context.value = topAnimation.value;
                 timing.value = 0;
             })
             .onUpdate(event => {
+                'worklet';
                 timing.value++;
                 topAnimation.value = withSpring(context.value + event.translationY, {
                     damping: 100,
@@ -134,11 +188,12 @@ const GalleryBottomSheet = forwardRef<BottomSheetGalleryMethods, BottomSheetGall
                 });
             })
             .onEnd((event) => {
+                'worklet';
                 const speedRate = 1 / timing.value;
 
                 if (!isTop) {
-                    if (event.velocityY < 0 && (topAnimation.value < ScreenHeight / 2 || (speedRate > 0.08 && topAnimation.value < openHeight))) {
-                        topAnimation.value = withSpring(ScreenHeight * .07, {
+                    if (event.velocityY < 0 && (topAnimation.value < height / 2 || (speedRate > 0.08 && topAnimation.value < openHeight))) {
+                        topAnimation.value = withSpring(maxHeight, {
                             damping: 100,
                             stiffness: 400,
                         });
@@ -156,14 +211,14 @@ const GalleryBottomSheet = forwardRef<BottomSheetGalleryMethods, BottomSheetGall
                             stiffness: 400,
                         });
                         runOnJS(setIsTop)(false);
-                    } else if (event.velocityY > 0 && (topAnimation.value >= ScreenHeight / 2 - statusBarHeight && speedRate <= 0.11)) {
+                    } else if (event.velocityY > 0 && (topAnimation.value >= height / 2 - statusBarHeight && speedRate <= 0.11)) {
                         topAnimation.value = withSpring(openHeight, {
                             damping: 100,
                             stiffness: 400,
                         });
                         runOnJS(setIsTop)(false);
                     } else {
-                        topAnimation.value = withSpring(ScreenHeight * .07, {
+                        topAnimation.value = withSpring(maxHeight, {
                             damping: 100,
                             stiffness: 400,
                         });
@@ -179,11 +234,13 @@ const GalleryBottomSheet = forwardRef<BottomSheetGalleryMethods, BottomSheetGall
 
         const panScroll = Gesture.Pan()
             .onBegin(() => {
+                'worklet';
                 context.value = topAnimation.value;
                 timing.value = 0;
                 runOnJS(setIsPanEnabled)(false);
             })
             .onUpdate(event => {
+                'worklet';
                 timing.value++;
 
                 if (event.velocityY > 0 && scrollY.value == 0 && isTop) {
@@ -203,6 +260,7 @@ const GalleryBottomSheet = forwardRef<BottomSheetGalleryMethods, BottomSheetGall
                 }
             })
             .onEnd((event) => {
+                'worklet';
                 runOnJS(setIsPanEnabled)(true);
                 runOnJS(setEnableScroll)(true);
                 const speedRate = 1 / timing.value;
@@ -215,20 +273,20 @@ const GalleryBottomSheet = forwardRef<BottomSheetGalleryMethods, BottomSheetGall
                         });
                         runOnJS(setIsTop)(false);
                     } else
-                        if (event.velocityY > 0 && (topAnimation.value >= ScreenHeight / 2 - statusBarHeight && speedRate <= 0.11)) {
+                        if (event.velocityY > 0 && (topAnimation.value >= height / 2 - statusBarHeight && speedRate <= 0.11)) {
                             topAnimation.value = withSpring(openHeight, {
                                 damping: 100,
                                 stiffness: 400,
                             });
                             runOnJS(setIsTop)(false);
                         } else {
-                            topAnimation.value = withSpring(ScreenHeight * .07, {
+                            topAnimation.value = withSpring(maxHeight, {
                                 damping: 100,
                                 stiffness: 400,
                             });
                         }
                 } else if (!isPanEnabled && enableScroll && isTop) {
-                    topAnimation.value = withSpring(ScreenHeight * .07, {
+                    topAnimation.value = withSpring(maxHeight, {
                         damping: 100,
                         stiffness: 400,
                     });
@@ -242,10 +300,25 @@ const GalleryBottomSheet = forwardRef<BottomSheetGalleryMethods, BottomSheetGall
             ref,
             () => ({
                 handleBottomSheetGallery,
-                handleOpenPhoneSetting,
                 isBottomSheetGalleryOpen,
             }),
         );
+
+        // Trigger when change asset type
+        useEffect(() => {
+            if (assetTypeState !== assetType) {
+                setAssetTypeState(assetType);
+                changeAssetType(assetType);
+                setSelectedAlbum(null); // For handling no data in album filter after reset album data
+            }
+        }, [assetType]);
+
+        // Trigger when selectedAssets change
+        useEffect(() => {
+            if (onSelectedAssetsChange) {
+                onSelectedAssetsChange(selectedAssets);
+            }
+        }, [selectedAssets]);
 
         return (
             <>
@@ -255,21 +328,23 @@ const GalleryBottomSheet = forwardRef<BottomSheetGalleryMethods, BottomSheetGall
                             styles.container,
                             animationStyle,
                             {
-                                backgroundColor: Colors.white,
+                                backgroundColor: backgroundColor,
                                 paddingBottom: inset.bottom,
                             },
                         ]}>
                         <View
                             style={[
-                                bottomSheetGalleryStyleSheet.handleContainer,
+                                styles.handleContainer,
                                 {
-                                    backgroundColor: Colors.white
+                                    backgroundColor: headerBarColor
                                 }
                             ]}
                         >
-                            <View style={bottomSheetGalleryStyleSheet.handleBar} />
+                            <View style={[styles.handleBar, {
+                                backgroundColor: barIconColor,
+                            }]} />
                             <TouchableOpacity
-                                style={bottomSheetGalleryStyleSheet.selectedAlbumContainer}
+                                style={styles.selectedAlbumContainer}
                                 onPress={() => {
                                     if (albumFilterRef.current != null) {
                                         if (!showAlbumsList) {
@@ -279,42 +354,75 @@ const GalleryBottomSheet = forwardRef<BottomSheetGalleryMethods, BottomSheetGall
                                         }
                                     }
                                 }}
-                                disabled={albums.length === 0 || fullPhotos.length === 0 || totalImages == 0}
+                                disabled={albums.length === 0 || fullAssets.length === 0 || totalAssets == 0}
                                 touchSoundDisabled={true}
+                                activeOpacity={0.7}
                             >
-                                <Text style={bottomSheetGalleryStyleSheet.handleText}>{selectedAlbum == null ? "Tất cả ảnh" : selectedAlbum.title}</Text>
-                                <AntDesign name={!showAlbumsList ? "down" : "up"} size={15} color={Colors.black} />
+                                <Text style={[styles.handleText,
+                                    safeHeaderTitleStyle
+                                ]}>{selectedAlbum == null ? truncatedHeaderTitle : selectedAlbum.title}</Text>
+                                <AntDesign name={!showAlbumsList ? "down" : "up"} size={15} color={headerTitleIconColor} />
                             </TouchableOpacity>
                         </View>
 
                         <GestureDetector
                             gesture={Gesture.Simultaneous(panScroll, scrollViewGesture)}>
-                            {(albums.length === 0 || fullPhotos.length === 0 || totalImages == 0) ? (
+                            {(albums.length === 0 || fullAssets.length === 0 || totalAssets == 0) ? (
                                 <View>
-                                    <Text style={bottomSheetGalleryStyleSheet.noImage}>Không có hình ảnh để hiển thị</Text>
+                                    <Text style={[
+                                        styles.noImage, 
+                                        safeEmptyGalleryMsgStyle
+                                    ]}>{emptyGalleryMsg}</Text>
                                 </View>
                             ) : (
                                 <Animated.FlatList
-                                    data={selectedAlbum == null ? fullPhotos : photos[selectedAlbum.title]}
+                                    data={selectedAlbum == null ? fullAssets : assets[selectedAlbum.id]}
                                     scrollEnabled={enableScroll}
-                                    renderItem={({ item }) => (
-                                        <Image
-                                            source={{ uri: item.node.image.uri }}
-                                            style={bottomSheetGalleryStyleSheet.image}
-                                        />
-                                    )}
+                                    keyExtractor={(item) => item.node.image.uri}
+                                    renderItem={({ item }) => {
+                                        const info = getSelectedInfo(item);
+                                        return (
+                                        <TouchableOpacity 
+                                            style={styles.image}
+                                            onPress={() => toggleAsset(item)}
+                                            activeOpacity={0.7}
+                                        >
+                                            <Image
+                                                source={{ uri: item.node.image.uri }}
+                                                style={styles.image}
+                                            />
+                                            {
+                                                item.node.type === "video/mp4" && 
+                                                    <PlayCircle 
+                                                        size={videoIconSize} 
+                                                        viewStyle={styles.videoIcon}
+                                                        circleStyle={videoIconStyle?.circleStyle}
+                                                        polygonStyle={videoIconStyle?.polygonStyle}
+                                                    />
+                                            }
+                                            {info.isSelected && (
+                                                <SelectItem
+                                                    selectItemStyle={{
+                                                        backgroundColor: Colors.white_80,
+                                                        iconColor: Colors.blue1890FF,
+                                                        textColor: Colors.white,
+                                                    }}
+                                                    value={info.index + 1}
+                                                />
+                                            )}
+                                        </TouchableOpacity>
+                                    )}}
                                     onScroll={onScroll}
                                     bounces={false}
                                     scrollEventThrottle={16}
-
                                     numColumns={3}
-                                    columnWrapperStyle={bottomSheetGalleryStyleSheet.row}
+                                    columnWrapperStyle={styles.row}
                                     onEndReached={() => {
-                                        //Load more photos
+                                        //Load more assets
                                         if (selectedAlbum == null) {
-                                            loadFullPhotos(10, fullPhotoPagination?.endCursor);
+                                            loadFullAssets(15, fullAssetsPagination?.endCursor, assetTypeState);
                                         } else {
-                                            loadPhotos(selectedAlbum, 10, pagination[selectedAlbum.title].endCursor);
+                                            loadAssets(selectedAlbum, 15, pagination[selectedAlbum.id].endCursor, assetTypeState);
                                         }
                                     }}
                                     onEndReachedThreshold={0.5}
@@ -336,6 +444,16 @@ const GalleryBottomSheet = forwardRef<BottomSheetGalleryMethods, BottomSheetGall
                             setIsTop={setIsTop}
                             openHeight={openHeight}
                             setShowAlbumsList={setShowAlbumsList}
+                            albums={albums}
+                            assets={assets}
+                            fullAssets={fullAssets}
+                            totalAssets={totalAssets}
+                            headerTitle={headerTitle}
+                            headerBarColor={headerBarColor}
+                            backgroundColor={backgroundColor}
+                            albumItemStyle={albumItemStyle}
+                            emptyGalleryMsg={emptyGalleryMsg}
+                            safeEmptyGalleryMsgStyle={safeEmptyGalleryMsgStyle}
                         />
                     </Animated.View>
                 </GestureDetector>
@@ -362,9 +480,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'black',
         borderRadius: 20,
     },
-});
-
-const bottomSheetGalleryStyleSheet = StyleSheet.create({
     handleContainer: {
         alignItems: 'center',
         paddingVertical: 10, // Tăng chiều cao của panning area
@@ -376,13 +491,10 @@ const bottomSheetGalleryStyleSheet = StyleSheet.create({
         width: 40,
         height: 6,
         borderRadius: 3,
-        backgroundColor: Colors.black,
         marginBottom: 8, // Thêm khoảng cách giữa thanh kéo và chữ
     },
     handleText: {
         fontSize: 16,
-        color: Colors.black,
-        fontFamily: "RobotoMedium"
     },
     contentContainer: {
         flex: 1,
@@ -396,17 +508,27 @@ const bottomSheetGalleryStyleSheet = StyleSheet.create({
     },
     noImage: {
         textAlign: "center",
-        fontFamily: "RobotoMedium",
-        fontSize: 18,
-        color: Colors.black
+        fontSize: FontSize.fontSize18,
     },
     row: {
         justifyContent: 'space-between',
     },
-    image: {
-        width: (ScreenWidth - 20) / 3,
-        height: (ScreenWidth - 20) / 3,
+    imageContainer: {
+        width: (width - 20) / 3,
+        height: (width - 20) / 3,
         borderRadius: 8,
         marginBottom: 5,
     },
+    image: {
+        width: (width - 20) / 3,
+        height: (width - 20) / 3,
+        borderRadius: 8,
+        marginBottom: 5
+    },
+    videoIcon: {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: [{ translateX: -videoIconSize/2 }, { translateY: -videoIconSize/2 }],
+    }
 });

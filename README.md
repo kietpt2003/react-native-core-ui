@@ -7,12 +7,17 @@ Accelerate your React Native development with a rich set of customizable UI comp
 
 ## Table of Contents
 
+- [Installation](#installation)
 - [Text](#text)
-- [ScrollPercentage](#scroll-percentage)
+- [GalleryBottomSheet](#gallery-bottom-sheet)
+- [useGalleryAssets](#use-gallery-assets)
+- [ScrollPercentage (Future)](#scroll-percentage)
+
+## Installation
 
 ## Text
 
-You can use Text component with custom loading (if need) and style with their own view
+Text component for displaying text with custom styles and loading state. This component also have its own view and can easily be customized.
 
 ### Props
 
