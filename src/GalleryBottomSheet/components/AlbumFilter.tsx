@@ -195,7 +195,7 @@ export const AlbumFilter = forwardRef<AlbumFilterMethods, AlbumFilterProps>(
                         <Animated.FlatList
                             data={albums}
                             scrollEnabled={enableScroll}
-                            keyExtractor={(item) => item.id.toString()}
+                            keyExtractor={(_item, index) => index.toString()}
                             showsVerticalScrollIndicator={false}
                             renderItem={({ item }) => {
                                 return (

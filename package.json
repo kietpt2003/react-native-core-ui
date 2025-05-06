@@ -1,13 +1,21 @@
 {
   "name": "@kietpt2003/react-native-core-ui",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "React Native Core UI components by KietPT",
   "main": "index.js",
   "types": "index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "index.d.ts",
+    "index.js",
+    "package.json"
+  ],
   "scripts": {
     "example": "yarn --cwd example",
     "build": "node build.js",
-    "publish-lib": "yarn build && npm publish --access public && npm publish --registry=https://npm.pkg.github.com/ --access public"
+    "publish-lib": "yarn build && npm publish --registry=https://registry.npmjs.org/ --access public && npm publish --registry=https://npm.pkg.github.com/ --access public"
   },
   "author": "tuankiet.pham",
   "keywords": [
@@ -44,7 +52,7 @@
     "react-native-vector-icons": ">=8.1.0"
   },
   "devDependencies": {
-    "@react-native-camera-roll/camera-roll": "^7.10.0",
+    "@react-native-camera-roll/camera-roll": "7.10.0",
     "@types/react": "18.2.38",
     "@types/react-native": "0.71",
     "@types/react-native-vector-icons": "^6.4.18",

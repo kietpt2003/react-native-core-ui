@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   ScrollView,
@@ -6,20 +6,18 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-import { height, scale, width } from '@utils'; // Scale tùy device
+import { scale, width } from '@utils'; // Scale tùy device
 import { Colors } from '@constant'; // Bảng màu của bạn
 import ScrollPercentage from './components/ScrollPercentageV2/ScrollPercentageV2';
 import { GalleryBottomSheet, Text as TextEst } from '@kietpt2003/react-native-core-ui';
 
 const TermsAndConditionsScreen = () => {
-  const galleryBottomSheetRef = React.useRef(null);
-  const [scrollPercent, setScrollPercent] = useState(0);
-  const [assetType, setAssetType] = useState('Photos');
+  const [scrollPercent, setScrollPercent] = React.useState(0);
+  const [assetType, setAssetType] = React.useState('All');
+  const [isOpen, setIsOpen] = React.useState(false);
 
   const handleShowBottomSheet = () => {
-    if (galleryBottomSheetRef.current) {
-      galleryBottomSheetRef.current.handleBottomSheetGallery();
-    }
+    setIsOpen(!isOpen);
   };
 
   const handleScroll = (event) => {
@@ -39,7 +37,7 @@ const TermsAndConditionsScreen = () => {
     setAssetType(type);
   };
 
-  const [assets, setAssets] = useState(0);
+  const [assets, setAssets] = React.useState(0);
   const onSelectedAssetsChange = (a) => {
     setAssets(a);
   };
@@ -111,7 +109,7 @@ const TermsAndConditionsScreen = () => {
           {'\n\n'}
           Thank you for using our service!
         </Text>
-        <TextEst color={'red'}>Hello World {assets.length}</TextEst>
+        <TextEst color={'red'}>Selected assets: {assets.length}</TextEst>
       </ScrollView>
 
       {/* <ScrollPercentage
@@ -120,17 +118,27 @@ const TermsAndConditionsScreen = () => {
     size={scale(50)}
     /> */}
       <TouchableOpacity
-        style={{ position: 'absolute', top: 50, left: 20 }}
-        onPress={() => changeAssetType(assetType === 'Photos' ? 'All' : 'Photos')}>
-        <Text style={{ color: Colors.white }}>{assetType}</Text>
+        style={[styles.actionButton, assetType == "All" ? styles.selected : null, { left: 20 }]}
+        onPress={() => changeAssetType('All')}>
+        <Text style={styles.buttonContent}>All</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={{ position: 'absolute', top: 50, right: 20 }}
+        style={[styles.actionButton, assetType === "Photos" ? styles.selected : null, { left: 80 }]}
+        onPress={() => changeAssetType('Photos')}>
+        <Text style={styles.buttonContent}>Photos</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[styles.actionButton, assetType === "Videos" ? styles.selected : null, { left: 140 }]}
+        onPress={() => changeAssetType('Videos')}>
+        <Text style={styles.buttonContent}>Videos</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[styles.actionButton, isOpen ? styles.selected : null]}
         onPress={() => handleShowBottomSheet()}>
-        <Text style={{ color: Colors.white }}>Click</Text>
+        <Text style={styles.buttonContent}>{isOpen ? "Close" : "Open"}</Text>
       </TouchableOpacity>
       <GalleryBottomSheet
-        ref={galleryBottomSheetRef}
+        isOpen={isOpen}
         openHeight={width - width / 3.5}
         videoIconStyle={{
           circleStyle: {
@@ -139,14 +147,15 @@ const TermsAndConditionsScreen = () => {
         }}
         assetType={assetType}
         onSelectedAssetsChange={onSelectedAssetsChange}
+        headerTitle='All assets'
       />
-      <ScrollPercentage
+      {/* <ScrollPercentage
         percent={scrollPercent}
         hide={false}
         borderRadius={scale(20)}
         size={scale(80)}
-      />
-    </SafeAreaView>
+      /> */}
+    </SafeAreaView >
   );
 };
 
@@ -159,6 +168,23 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     padding: scale(20),
+  },
+  selected: {
+    backgroundColor: Colors.green1,
+  },
+  actionButton: {
+    position: 'absolute',
+    top: 50,
+    right: 20,
+    backgroundColor: Colors.white,
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: scale(10)
+  },
+  buttonContent: {
+    color: Colors.black,
   },
   title: {
     fontSize: scale(22),

@@ -9,6 +9,9 @@ import {
 import { check, request, PERMISSIONS, RESULTS } from "react-native-permissions";
 
 export interface Album extends AlbumType {
+  /**
+   * id property exist at @react-native-camera-roll/camera-roll version 7.7.0 or higher.
+   */
   id: string;
 }
 

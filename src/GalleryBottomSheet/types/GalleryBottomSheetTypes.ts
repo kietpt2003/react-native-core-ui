@@ -4,6 +4,13 @@ import { CircleStyleProps } from "GalleryBottomSheet/components/PlayCircle";
 import { ColorValue, TextStyle } from "react-native";
 
 export interface BottomSheetGalleryProps {
+  /** Define to open gallery or not.
+   * 
+   * *Default:* `isOpen = false`
+   * 
+   * *Example:* `isOpen = true` => open the gallery
+   */
+  isOpen?: boolean;
   /** Define the position to open gallery.
    * 
    * *Default:* `openHeight = height / 2`

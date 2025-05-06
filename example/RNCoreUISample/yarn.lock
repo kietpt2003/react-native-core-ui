@@ -1920,9 +1920,9 @@ __metadata:
 
 "@kietpt2003/react-native-core-ui@file:../../dist::locator=RNCoreUISample%40workspace%3A.":
   version: 0.0.1
-  resolution: "@kietpt2003/react-native-core-ui@file:../../dist#../../dist::hash=177b1f&locator=RNCoreUISample%40workspace%3A."
+  resolution: "@kietpt2003/react-native-core-ui@file:../../dist#../../dist::hash=4ef82c&locator=RNCoreUISample%40workspace%3A."
   peerDependencies:
-    "@react-native-camera-roll/camera-roll": "*"
+    "@react-native-camera-roll/camera-roll": ">=7.10.0"
     d4dpocket: ^0.1.8
     react: 18.2.0
     react-native: 0.71.0
@@ -1934,7 +1934,7 @@ __metadata:
     react-native-safe-area-context: ">=3.2.0"
     react-native-svg: ">=12.1.1"
     react-native-vector-icons: ">=8.1.0"
-  checksum: 10c0/bf50ffa9ed43ae761bb5d86eb5ec25e460e3088ce44db17b49886c03bdb6e6577c62d247a2bada698862bdbdf48d1ffbb513a564e0b171dcbff87014f39db463
+  checksum: 10c0/9b61b1fce29a476ba3af4390f821f1a70eac90d29fb61b333d944beb80f9a68bf8c1229136b44a44a3353a630b877beb5811fcb38ec622aa87d66c9f1618f450
   languageName: node
   linkType: hard
 
