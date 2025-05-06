@@ -21,6 +21,10 @@ interface TextProps extends RNTextProps {
   children?: ReactNode;
 }
 
+/**
+ * Text component for displaying text with custom styles and loading state.
+ * This component also have its own view and can easily be customized.
+ */
 const Text: React.FC<TextProps> = ({
   style,
   color,
