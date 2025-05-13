@@ -9,7 +9,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { scale } from '@utils';
-import { Colors, FontSize } from '@constant';
+import { colors, fontSize } from '@themes';
 import { ReactNode } from 'react';
 
 interface TextProps extends RNTextProps {
@@ -44,7 +44,7 @@ const Text: React.FC<TextProps> = ({
           {...rest}
           style={[
             {
-              color: color || Colors.black,
+              color: color || colors.black,
               ...Platform.select({
                 android: {
                   fontWeight: bold ? '700' : '400',
@@ -68,10 +68,10 @@ const Text: React.FC<TextProps> = ({
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: FontSize.normal,
+    fontSize: fontSize._14,
   },
   load: {
-    backgroundColor: Colors.grayLoading,
+    backgroundColor: colors.gray_E1E5EA,
     borderRadius: 8,
     paddingVertical: scale(10),
   },

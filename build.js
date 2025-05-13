@@ -1,11 +1,17 @@
 const esbuild = require('esbuild');
-const { join } = require('path');
+const path = require('path');
+const glob = require('fast-glob');
 const fsPromises = require('fs').promises; // Rename the promises API import
 const fs = require('fs'); // Import the standard synchronous fs module
 const { execSync } = require('child_process');
+const alias = require('esbuild-plugin-alias');
+
+async function getAllTSFilesRecursively(dir) {
+  return await glob(`${dir}/**/*.{ts,tsx}`, { absolute: false });
+}
 
 // Xóa thư mục dist
-const distPath = join(__dirname, 'dist');
+const distPath = path.join(__dirname, 'dist');
 async function removeDist() {
   if (fs.existsSync(distPath)) { // Use the synchronous existsSync
     await fsPromises.rm(distPath, { recursive: true, force: true });
@@ -23,10 +29,10 @@ async function build() {
   console.log('📦 Bundling JS with esbuild...');
   try {
     await esbuild.build({
-      entryPoints: ['src/index.ts'],
+      outdir: 'dist',
+      entryPoints: await getAllTSFilesRecursively('src'),
       bundle: true,
       format: 'cjs',
-      outfile: 'dist/index.js',
       external: [
         'react',
         'react-native',
@@ -50,16 +56,24 @@ async function build() {
       sourcemap: true,
       platform: 'node',
       target: 'esnext',
+      plugins: [
+        alias({
+          "@constant": path.resolve(__dirname, 'src/constants/index.ts'),
+          "@utils": path.resolve(__dirname, 'src/utils/index.ts'),
+          "@hooks": path.resolve(__dirname, 'src/hooks/index.ts'),
+          "@themes": path.resolve(__dirname, 'src/themes/index.ts')
+        }),
+      ],
     });
     console.log('✅ JS Bundle success!');
 
     console.log('📦 Copying package.json...');
-    await fsPromises.copyFile('package.json', join(distPath, 'package.json'));
+    await fsPromises.copyFile('package.json', path.join(distPath, 'package.json'));
     console.log('✅ package.json copied!');
 
     if (fs.existsSync('LICENSE')) { // Use the synchronous existsSync
       console.log('📦 Copying LICENSE...');
-      await fsPromises.copyFile('LICENSE', join(distPath, 'LICENSE'));
+      await fsPromises.copyFile('LICENSE', path.join(distPath, 'LICENSE'));
       console.log('✅ LICENSE copied!');
     } else {
       console.warn('⚠️ LICENSE file not found in the root.');
@@ -67,7 +81,7 @@ async function build() {
 
     if (fs.existsSync('README.md')) { // Use the synchronous existsSync
       console.log('📦 Copying README.md...');
-      await fsPromises.copyFile('README.md', join(distPath, 'README.md'));
+      await fsPromises.copyFile('README.md', path.join(distPath, 'README.md'));
       console.log('✅ README.md copied!');
     } else {
       console.warn('⚠️ README.md file not found in the root.');

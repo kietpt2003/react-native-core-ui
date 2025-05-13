@@ -5,12 +5,15 @@ import {
   SafeAreaView,
   Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import { scale, width } from '@utils'; // Scale tùy device
-import { Colors } from '@constant'; // Bảng màu của bạn
+// import { scale, width } from '@utils'; // Scale tùy device
+// import { colors } from '@constant'; // Bảng màu của bạn
 import ScrollPercentage from './components/ScrollPercentageV2/ScrollPercentageV2';
-import { GalleryBottomSheet, Text as TextEst } from '@kietpt2003/react-native-core-ui';
-
+import { GalleryBottomSheet, Text as TextEst, SvgIcon } from '@kietpt2003/react-native-core-ui';
+import  { colors } from '@kietpt2003/react-native-core-ui/themes'
+import { scale, width } from '@kietpt2003/react-native-core-ui/utils';
+// import {scale} from '@kietpt2003/react-native-core-ui/utils'
 const TermsAndConditionsScreen = () => {
   const [scrollPercent, setScrollPercent] = React.useState(0);
   const [assetType, setAssetType] = React.useState('All');
@@ -109,7 +112,7 @@ const TermsAndConditionsScreen = () => {
           {'\n\n'}
           Thank you for using our service!
         </Text>
-        <TextEst color={'red'}>Selected assets: {assets.length}</TextEst>
+        <TextEst color={colors.red_E00102}>Selected assets: {assets.length}</TextEst>
       </ScrollView>
 
       {/* <ScrollPercentage
@@ -117,6 +120,13 @@ const TermsAndConditionsScreen = () => {
     hide={scrollPercent === 0}
     size={scale(50)}
     /> */}
+      <View
+        style={[styles.actionButton, { left: 20, top: 120 }]}
+      >
+        <SvgIcon
+          name='alert-circle'
+        />
+      </View>
       <TouchableOpacity
         style={[styles.actionButton, assetType == "All" ? styles.selected : null, { left: 20 }]}
         onPress={() => changeAssetType('All')}>
@@ -164,19 +174,19 @@ export default TermsAndConditionsScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.black,
+    backgroundColor: colors.black,
   },
   scrollView: {
     padding: scale(20),
   },
   selected: {
-    backgroundColor: Colors.green1,
+    backgroundColor: colors.green_00A720,
   },
   actionButton: {
     position: 'absolute',
     top: 50,
     right: 20,
-    backgroundColor: Colors.white,
+    backgroundColor: colors.white,
     width: 50,
     height: 50,
     justifyContent: 'center',
@@ -184,17 +194,17 @@ const styles = StyleSheet.create({
     borderRadius: scale(10)
   },
   buttonContent: {
-    color: Colors.black,
+    color: colors.black,
   },
   title: {
     fontSize: scale(22),
     fontWeight: 'bold',
     marginBottom: scale(20),
-    color: Colors.white,
+    color: colors.white,
   },
   content: {
     fontSize: scale(14),
-    color: Colors.graySystem3,
+    color: colors.gray_727272,
     lineHeight: scale(22),
   },
 });
