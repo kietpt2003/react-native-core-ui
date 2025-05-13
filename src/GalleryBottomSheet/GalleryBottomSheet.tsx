@@ -1,12 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
-import React, {
-    forwardRef,
-    useImperativeHandle,
-    useCallback,
-    useState,
-    useRef,
-    useEffect,
-} from 'react';
+import React from 'react';
 import Animated, {
     useSharedValue,
     useAnimatedStyle,
@@ -17,12 +10,12 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, FontSize } from '@constant';
+import { colors, fontSize } from '@themes';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { statusBarHeight, height, width, filterAllowedTextStyle } from '@utils';
 import { useGalleryAssets } from '@hooks';
 import { AlbumFilter, AlbumFilterMethods } from './components/AlbumFilter';
-import { Album } from 'hooks/useGalleryAssets';
+import { Album } from 'hooks/types/useGalleryAssetsTypes';
 import { BottomSheetGalleryProps } from './types/GalleryBottomSheetTypes';
 import { limitedString } from 'd4dpocket';
 import PlayCircle from './components/PlayCircle';
@@ -34,23 +27,27 @@ const videoIconSize = 48;
 /**
  * A bottom sheet component for displaying a gallery of images and videos.
  * It allows users to select multiple assets and provides a filter for albums.
+ * 
+ * To get more information. Please see the [Documentation](https://github.com/kietpt2003/react-native-core-ui?tab=readme-ov-file#gallerybottomsheet)
+ * 
+ * @see: https://github.com/kietpt2003/react-native-core-ui?tab=readme-ov-file#gallerybottomsheet
  */
 const GalleryBottomSheet = ({
     isOpen = false,
     openHeight = height / 2,
     closeHeight = height,
     maxHeight = 0,
-    headerBarColor = Colors.white,
-    barIconColor = Colors.black,
+    headerBarColor = colors.white,
+    barIconColor = colors.black,
     headerTitleStyle = {
-        color: Colors.black,
+        color: colors.black,
     },
     headerTitle = "Tất cả ảnh",
-    headerTitleIconColor = Colors.black,
-    backgroundColor = Colors.white,
+    headerTitleIconColor = colors.black,
+    backgroundColor = colors.white,
     emptyGalleryMsg = "Không có hình ảnh để hiển thị",
     emptyGalleryMsgStyle = {
-        color: Colors.black,
+        color: colors.black,
     },
     videoIconStyle,
     albumItemStyle,
@@ -76,9 +73,9 @@ const GalleryBottomSheet = ({
     } = useGalleryAssets(assetType);
 
     // album filter
-    const albumFilterRef = useRef<AlbumFilterMethods>(null);
-    const [selectedAlbum, setSelectedAlbum] = useState<Album | null>(null);
-    const [showAlbumsList, setShowAlbumsList] = useState<boolean>(false);
+    const albumFilterRef = React.useRef<AlbumFilterMethods>(null);
+    const [selectedAlbum, setSelectedAlbum] = React.useState<Album | null>(null);
+    const [showAlbumsList, setShowAlbumsList] = React.useState<boolean>(false);
 
     const inset = useSafeAreaInsets();
     const topAnimation = useSharedValue(closeHeight);
@@ -86,13 +83,13 @@ const GalleryBottomSheet = ({
     const timing = useSharedValue(0);
 
     const scrollY = useSharedValue(0);
-    const [enableScroll, setEnableScroll] = useState(true);
-    const [isPanEnabled, setIsPanEnabled] = useState(true);
-    const [isTop, setIsTop] = useState(false);
+    const [enableScroll, setEnableScroll] = React.useState(true);
+    const [isPanEnabled, setIsPanEnabled] = React.useState(true);
+    const [isTop, setIsTop] = React.useState(false);
 
-    const [assetTypeState, setAssetTypeState] = useState<AssetType>(assetType);
+    const [assetTypeState, setAssetTypeState] = React.useState<AssetType>(assetType);
 
-    const [selectedAssets, setSelectedAssets] = useState<PhotoIdentifier[]>([]);
+    const [selectedAssets, setSelectedAssets] = React.useState<PhotoIdentifier[]>([]);
     const toggleAsset = (item: PhotoIdentifier) => {
         setSelectedAssets(prev => {
             const index = prev.findIndex(asset => asset.node.image.uri === item.node.image.uri);
@@ -119,13 +116,13 @@ const GalleryBottomSheet = ({
         };
     };
 
-    const expand = useCallback(() => {
+    const expand = React.useCallback(() => {
         'worklet';
         topAnimation.value = withTiming(openHeight);
         runOnJS(setIsTop)(false);
     }, [openHeight, topAnimation]);
 
-    const close = useCallback(() => {
+    const close = React.useCallback(() => {
         'worklet';
         topAnimation.value = withTiming(closeHeight);
         runOnJS(setIsTop)(false);
@@ -361,7 +358,7 @@ const GalleryBottomSheet = ({
                             </View>
                         ) : (
                             <Animated.FlatList
-                                data={selectedAlbum == null ? fullAssets : assets[selectedAlbum.id]}
+                                data={selectedAlbum == null ? fullAssets : assets[selectedAlbum?.id ?? selectedAlbum.title]}
                                 scrollEnabled={enableScroll}
                                 keyExtractor={(item) => item.node.image.uri}
                                 renderItem={({ item }) => {
@@ -388,9 +385,9 @@ const GalleryBottomSheet = ({
                                             {info.isSelected && (
                                                 <SelectItem
                                                     selectItemStyle={{
-                                                        backgroundColor: Colors.white_80,
-                                                        iconColor: Colors.blue1890FF,
-                                                        textColor: Colors.white,
+                                                        backgroundColor: colors.white_80,
+                                                        iconColor: colors.blue_1890FF,
+                                                        textColor: colors.white,
                                                     }}
                                                     value={info.index + 1}
                                                 />
@@ -408,7 +405,7 @@ const GalleryBottomSheet = ({
                                     if (selectedAlbum == null) {
                                         loadFullAssets(15, fullAssetsPagination?.endCursor, assetTypeState);
                                     } else {
-                                        loadAssets(selectedAlbum, 15, pagination[selectedAlbum.id].endCursor, assetTypeState);
+                                        loadAssets(selectedAlbum, 15, pagination[selectedAlbum?.id ?? selectedAlbum.title].endCursor, assetTypeState);
                                     }
                                 }}
                                 onEndReachedThreshold={0.5}
@@ -493,7 +490,7 @@ const styles = StyleSheet.create({
     },
     noImage: {
         textAlign: "center",
-        fontSize: FontSize.fontSize18,
+        fontSize: fontSize._18,
     },
     row: {
         justifyContent: 'space-between',

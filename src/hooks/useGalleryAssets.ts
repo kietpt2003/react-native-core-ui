@@ -1,55 +1,33 @@
-import { useEffect, useState } from "react";
+import React from "react";
 import { PermissionsAndroid, Platform } from "react-native";
 import {
   CameraRoll,
   PhotoIdentifier,
-  Album as AlbumType,
   AssetType,
 } from "@react-native-camera-roll/camera-roll";
 import { check, request, PERMISSIONS, RESULTS } from "react-native-permissions";
-
-export interface Album extends AlbumType {
-  /**
-   * id property exist at @react-native-camera-roll/camera-roll version 7.7.0 or higher.
-   */
-  id: string;
-}
-
-type UseGalleryAssetsResult = {
-  albums: Album[];
-  assets: Record<string, PhotoIdentifier[]>;
-  loading: boolean;
-  error: string | null;
-  fullAssets: PhotoIdentifier[];
-  totalAssets: number;
-  fullAssetsPagination: Pagination | undefined;
-  loadFullAssets: (numberAssetsToLoad: number, after?: string, type?: AssetType) => Promise<boolean>;
-  loadAssets: (album: Album, numberAssetsToLoad: number, after?: string, type?: AssetType) => Promise<boolean>;
-  pagination: Record<string, Pagination>;
-  requestPermission: () => Promise<boolean>;
-  checkPermission: () => Promise<boolean>;
-  hasPermission: boolean;
-  changeAssetType: (type: AssetType) => void;
-};
-
-interface Pagination {
-  hasNextPage: boolean; // Có thêm dữ liệu không?
-  endCursor: string | undefined; // Cursor để lấy dữ liệu tiếp theo
-}
+import { Album, Pagination, UseGalleryAssetsResult } from "./types/useGalleryAssetsTypes";
 
 const numberAssetsToLoad = 15;
 
+/**
+ * You can use this hook for accessing device's assets or requesting related permission.
+ * 
+ * To get more information. Please see the [Documentation](https://github.com/kietpt2003/react-native-core-ui?tab=readme-ov-file#usegalleryassetsdefaultassettype-assettype)
+ * 
+ * @see: https://github.com/kietpt2003/react-native-core-ui?tab=readme-ov-file#usegalleryassetsdefaultassettype-assettype
+ */
 export function useGalleryAssets(defaultAssetType: AssetType = "All"): UseGalleryAssetsResult {
-  const [assets, setAssets] = useState<Record<string, PhotoIdentifier[]>>({});
-  const [albums, setAlbums] = useState<Album[]>([]);
-  const [pagination, setPagination] = useState<Record<string, Pagination>>({});
-  const [fullAssets, setFullAssets] = useState<PhotoIdentifier[]>([]);
-  const [fullAssetsPagination, setFullAssetsPagination] = useState<Pagination | undefined>(undefined);
-  const [totalAssets, setTotalAssets] = useState<number>(0);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [hasPermission, setHasPermission] = useState<boolean>(false);
-  const [assetType, setAssetType] = useState<AssetType>(defaultAssetType);
+  const [assets, setAssets] = React.useState<Record<string, PhotoIdentifier[]>>({});
+  const [albums, setAlbums] = React.useState<Album[]>([]);
+  const [pagination, setPagination] = React.useState<Record<string, Pagination>>({});
+  const [fullAssets, setFullAssets] = React.useState<PhotoIdentifier[]>([]);
+  const [fullAssetsPagination, setFullAssetsPagination] = React.useState<Pagination | undefined>(undefined);
+  const [totalAssets, setTotalAssets] = React.useState<number>(0);
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState<string | null>(null);
+  const [hasPermission, setHasPermission] = React.useState<boolean>(false);
+  const [assetType, setAssetType] = React.useState<AssetType>(defaultAssetType);
 
   const changeAssetType = (type: AssetType) => {
     setAlbums([]);
@@ -180,7 +158,7 @@ export function useGalleryAssets(defaultAssetType: AssetType = "All"): UseGaller
         let total = 0;
         albumList.forEach(async (album) => {
           total += album.count;
-          await loadAssets(album, numberAssetsToLoad, isReset ? undefined : pagination[album.id]?.endCursor, type);
+          await loadAssets(album, numberAssetsToLoad, isReset ? undefined : pagination[album?.id ?? album.title]?.endCursor, type);
         });
         setTotalAssets(total);
       }
@@ -197,7 +175,7 @@ export function useGalleryAssets(defaultAssetType: AssetType = "All"): UseGaller
   const loadAssets = async (album: Album, numberAssetsToLoad: number, after?: string, type: AssetType = "All"): Promise<boolean> => {
     try {
       setLoading(true);
-      if (!assets[album.id]) assets[album.id] = [];
+      if (!assets[album?.id ?? album.title]) assets[album?.id ?? album.title] = [];
 
       if (hasPermission) {
         const albumAssets = await CameraRoll.getPhotos({
@@ -208,7 +186,7 @@ export function useGalleryAssets(defaultAssetType: AssetType = "All"): UseGaller
         });
 
         setAssets((prevAssets) => {
-          const existing = prevAssets[album.id] || [];
+          const existing = prevAssets[album?.id ?? album.title] || [];
 
           // Tạo Set để kiểm tra duplicate dựa vào uri
           const existingAssets = new Set(existing.map((a) => a.node.image.uri));
@@ -220,13 +198,13 @@ export function useGalleryAssets(defaultAssetType: AssetType = "All"): UseGaller
 
           return {
             ...prevAssets,
-            [album.id]: [...existing, ...uniqueNewAssets],
+            [album?.id ?? album.title]: [...existing, ...uniqueNewAssets],
           };
         });
 
         setPagination((prevPagination) => ({
           ...prevPagination,
-          [album.id]: {
+          [album?.id ?? album.title]: {
             hasNextPage: albumAssets.page_info.has_next_page,
             endCursor: albumAssets.page_info.end_cursor,
           },
@@ -252,14 +230,14 @@ export function useGalleryAssets(defaultAssetType: AssetType = "All"): UseGaller
   };
 
   //Load full assets + assets in albums
-  useEffect(() => {
+  React.useEffect(() => {
     if (hasPermission) {
       loadFullAssets(numberAssetsToLoad, fullAssetsPagination?.endCursor, assetType);
       loadAlbums(numberAssetsToLoad, assetType);
     }
   }, [hasPermission])
 
-  useEffect(() => {
+  React.useEffect(() => {
     checkPermission();
   }, [])
 

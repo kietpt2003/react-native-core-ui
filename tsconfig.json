@@ -8,6 +8,7 @@
     "declarationMap": true,
     "emitDeclarationOnly": false,
     "outDir": "dist",
+    "rootDir": "src",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -18,7 +19,8 @@
     "paths": {
       "@constant": ["constants"],
       "@utils": ["utils"],
-      "@hooks": ["hooks"]
+      "@hooks": ["hooks"],
+      "@themes": ["themes"]
     }
   },
   "include": ["src"],

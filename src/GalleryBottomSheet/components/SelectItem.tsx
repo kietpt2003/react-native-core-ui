@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, ColorValue } from 'react-native'
 import React from 'react'
-import { Colors, FontSize } from '@constant';
+import { colors, fontSize } from '@themes';
 
 export interface SelectItemStyleProps {
   backgroundColor?: ColorValue;
@@ -15,9 +15,9 @@ export interface SelectItemProps {
 
 const SelectItem = ({
   selectItemStyle = { 
-    backgroundColor: Colors.white_80,
-    iconColor: Colors.blue1890FF,
-    textColor: Colors.white,
+    backgroundColor: colors.white_80,
+    iconColor: colors.blue_1890FF,
+    textColor: colors.white,
   },
   value = 0,
 }: SelectItemProps) => {
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   value: {
-    fontSize: FontSize.fontSize14,
+    fontSize: fontSize._14,
     fontWeight: 'bold',
   }
 });

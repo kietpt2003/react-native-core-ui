@@ -1,7 +1,7 @@
 import { StyleProp, ViewStyle } from 'react-native'
 import Svg, { Circle, Color, Polygon } from 'react-native-svg';
 import React from 'react'
-import { Colors } from '@constant';
+import { colors } from '@themes';
 import { scale } from '@utils';
 
 export interface CircleStyleProps {
@@ -51,13 +51,13 @@ const PlayCircle = ({
       style={viewStyle}
     >
       <Circle cx="50" cy="50" r={circleRadius}
-        fill={circleStyle?.fill ? circleStyle.fill : Colors.black_50}
-        stroke={circleStyle?.stroke ? circleStyle.stroke : Colors.black}
+        fill={circleStyle?.fill ? circleStyle.fill : colors.transparent50}
+        stroke={circleStyle?.stroke ? circleStyle.stroke : colors.black}
         strokeWidth={circleStrokeWidth}
       />
       <Polygon points="40,30 40,70 70,50" 
-        fill={polygonStyle?.fill ? polygonStyle.fill : Colors.graySystem}
-        stroke={polygonStyle?.stroke ? polygonStyle.stroke : Colors.black}
+        fill={polygonStyle?.fill ? polygonStyle.fill : colors.gray_DDDDDD}
+        stroke={polygonStyle?.stroke ? polygonStyle.stroke : colors.black}
         strokeWidth={polygonStrokeWidth}
       />
     </Svg>
