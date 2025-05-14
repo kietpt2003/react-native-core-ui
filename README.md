@@ -490,7 +490,87 @@ statusBarHeight of the device
 #### Usage
 
 ```jsx
-  import { statusBarHeight } from '@kietpt2003/react-native-core-ui';
+  import { statusBarHeight } from '@kietpt2003/react-native-core-ui/utils';
+  console.log("statusBarHeight", statusBarHeight);
+```
+
+## Resolution Function
+
+### getPaddingTop
+
+Get the top padding based on the device type
+- 26 OPPO
+- 28 NOKIA
+
+#### Usage
+
+```jsx
+  import { getPaddingTop } from '@kietpt2003/react-native-core-ui/utils';
+  const paddingTop = getPaddingTop();
+  console.log("paddingTop:", paddingTop);
+```
+
+### getPaddingBottom
+
+Get the bottom padding based on the device type
+
+#### Usage
+
+```jsx
+  import { getPaddingBottom } from '@kietpt2003/react-native-core-ui/utils';
+  const paddingBottom = getPaddingBottom();
+  console.log("paddingBottom:", paddingBottom);
+```
+
+### isTablet
+
+Check if the device is a tablet
+
+#### Usage
+
+```jsx
+  import { isTablet } from '@kietpt2003/react-native-core-ui/utils';
+  console.log("isTablet", isTablet); // true/false
+```
+
+### StylePlatform
+
+Use this function to get the styles based on the device type
+
+@param {Object} styles - StyleProp
+@param {ViewStyle} styles.tablet - Styles for tablet
+@param {ViewStyle} styles.phone - Styles for phone
+
+#### Props
+
+| Prop                     | Type                                                                | Default                                                   | Description                                                                                                                                                                                                                              |
+|--------------------------|---------------------------------------------------------------------|------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **`styles`**     | `StyleProp<any>` | `undefined`      | Initiallize the styles for table and phone. Its contains 2 fields: `tablet` & `phone`. [See example](#usage-6) |
+
+#### Usage
+
+```jsx
+  <View style={StylePlatform({
+    tablet: styles.containerTablet,
+    phone: styles.containerPhone
+  })}>
+    <Text style={StylePlatform({
+      tablet: styles.textTablet,
+      phone: styles.textPhone
+    })}>
+      Hello, Platform!
+    </Text>
+  </View>
+```
+
+### statusBarHeight
+
+statusBarHeight of the device
+
+#### Usage
+
+```jsx
+  import { statusBarHeight } from '@kietpt2003/react-native-core-ui/utils';
   console.log("statusBarHeight", statusBarHeight);
 ```
 
@@ -506,7 +586,7 @@ This function converts input into a string.
 #### Usage
 
 ```js
-  import { convertString } from '@kietpt2003/react-native-core-ui';
+  import { convertString } from '@kietpt2003/react-native-core-ui/utils';
   const str = convertString(2003); // "2003"
 ```
 
@@ -520,7 +600,7 @@ This function converts input into a number.
 #### Usage
 
 ```js
-  import { convertNumber } from '@kietpt2003/react-native-core-ui';
+  import { convertNumber } from '@kietpt2003/react-native-core-ui/utils';
   const num = convertNumber("2003"); // 2003
 ```
 ### convertSeconds
@@ -533,7 +613,7 @@ This function convert seconds to a string in the format "mm:ss".
 #### Usage
 
 ```js
-  import { convertSeconds } from '@kietpt2003/react-native-core-ui';
+  import { convertSeconds } from '@kietpt2003/react-native-core-ui/utils';
   const time = convertSeconds(123); // "02:03"
 ```
 
@@ -546,7 +626,7 @@ Function to format seconds into a string in the format "hh:mm:ss".
 #### Usage
 
 ```js
-  import { formatHour } from '@kietpt2003/react-native-core-ui';
+  import { formatHour } from '@kietpt2003/react-native-core-ui/utils';
   const time = formatHour(3661); // "01:01:01"
 ```
 
@@ -562,7 +642,7 @@ Function to format a distance value.
 #### Usage
 
 ```js
-  import { fixedDistance } from '@kietpt2003/react-native-core-ui';
+  import { fixedDistance } from '@kietpt2003/react-native-core-ui/utils';
   const distance = fixedDistance(123.456); // "123.46"
   const distance2 = fixedDistance(123.4567, 3); // "123.457"
 ```
@@ -592,7 +672,7 @@ This is a string that contains a language code and an optional country code, sep
 #### Usage
 
 ```js
-  import { formatMoney } from '@estuary/rn-core-ui/utils';
+  import { formatMoney } from '@kietpt2003/react-native-core-ui/utils';
   const money = formatMoney(1234567.89); // "1,234,568"
   const money2 = formatMoney(1234567.89, 2); // "1,234,567.89"
   const money3 = formatMoney(1234567.89, 2, 'vi-VN'); // "1.234.567,89"
@@ -610,14 +690,14 @@ This is a string that contains a language code and an optional country code, sep
   const onChangeText = debounce(() => {
     console.log('Function executed!');
   }, 1000);
-  
+
   //Flush case
   const debouncedLog = debounce(logMessage, 2000);
   debouncedLog("Waiting 2s...");
   setTimeout(() => {
     debouncedLog.flush(); // Immediately execute the function
   }, 1000);
-  
+
   //Cancel case
   debouncedLog("Canceled");
   setTimeout(() => {
@@ -634,7 +714,7 @@ Provide a function to clean HTML tags and &nbsp; from a string.
 ### Usage
 
 ```js
-  import { cleanHTML } from '@kietpt2003/react-native-core-ui';
+  import { cleanHTML } from '@kietpt2003/react-native-core-ui/utils';
   const raw = `
     <div>Hello&nbsp;&nbsp;&nbsp;World</div>
     <p>This is&nbsp;a <strong>test</strong></p>

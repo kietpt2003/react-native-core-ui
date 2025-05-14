@@ -10,7 +10,14 @@ import {
 import ScrollPercentage from './components/ScrollPercentageV2/ScrollPercentageV2';
 import { GalleryBottomSheet, Text as TextEst, SvgIcon } from '@kietpt2003/react-native-core-ui';
 import  { colors } from '@kietpt2003/react-native-core-ui/themes'
-import { convertSeconds, fixedDistance, formatHour, formatMoney, scale, width } from '@kietpt2003/react-native-core-ui/utils';
+import {
+  convertSeconds,
+  fixedDistance,
+  formatHour,
+  formatMoney,
+  scale,
+  width
+} from '@kietpt2003/react-native-core-ui/utils';
 
 const TermsAndConditionsScreen = () => {
   const [scrollPercent, setScrollPercent] = React.useState(0);
