@@ -1,66 +1,72 @@
-import { Platform, StatusBar, Dimensions, StyleProp } from 'react-native';
+import { Platform, StatusBar, StyleProp } from 'react-native';
 import {
-  isIphoneX,
   getBottomSpace,
   getStatusBarHeight,
 } from 'react-native-iphone-x-helper';
 import DeviceInfo from 'react-native-device-info';
 
-const { height, width } = Dimensions.get('window');
-const guidelineBaseWidth = 360;
-const guidelineBaseHeight = 592;
-const standardLength = width > height ? width : height;
-const offset =
-  width > height ? 0 : Platform.OS === 'ios' ? 78 : StatusBar.currentHeight;
-
-const deviceHeight =
-  isIphoneX() || Platform.OS === 'android'
-    ? standardLength - offset!
-    : standardLength;
-
-export function RFPercentage(percent: number) {
-  const heightPercent = (percent * deviceHeight) / 100;
-  return Math.round(heightPercent);
-}
-
-export { width, height };
-
-// guideline height for standard 5" device screen is 680
-export function RFValue(fontSize: number, standardScreenHeight = 680) {
-  const heightPercent = (fontSize * deviceHeight) / standardScreenHeight;
-  return Math.round(heightPercent);
-}
-
-// padding, margin, fontSize, ....
-export const scale = (size: any) => (width / guidelineBaseWidth) * parseInt(size, 10);
-
-// width
-export const wScale = (size:any) =>
-  (height / guidelineBaseHeight) * parseInt(size, 10);
-
-// height
-export const hScale = (size:any, factor = 0.5) =>
-  parseInt(size, 10) +
-  (scale(parseInt(size, 10)) - parseInt(size, 10)) * factor;
-
-export const getPaddingTop = () => {
+/**
+ * getPaddingTop - Get the top padding based on the device type
+ * 
+ * 26 OPPO
+ * 28 NOKIA
+ * @returns {number} - Top padding
+ * @example
+ * ```jsx
+ * import { getPaddingTop } from '@kietpt2003/react-native-core-ui';
+ * const paddingTop = getPaddingTop();
+ * console.log("paddingTop:", paddingTop);
+ * ```
+ */
+export const getPaddingTop = (): number => {
   // 26 OPPO
   // 28 NOKIA
   let sbHeight = getStatusBarHeight();
   return (sbHeight >= 26 && sbHeight < 28) || sbHeight === 30 ? sbHeight : 0;
 };
 
-export const getPaddingBottom = () => {
+/**
+ * getPaddingBottom - Get the bottom padding based on the device type
+ * @returns {number} - Bottom padding
+ * @example
+ * ```jsx
+ * import { getPaddingBottom } from '@kietpt2003/react-native-core-ui';
+ * const paddingBottom = getPaddingBottom();
+ * console.log("paddingBottom:", paddingBottom);
+ * ```
+ */
+export const getPaddingBottom = (): number => {
   let paddingBottom = getBottomSpace() / 2;
   return paddingBottom;
 };
 
+/**
+ * isTablet - Check if the device is a tablet
+ * @returns {boolean} - true if the device is a tablet, false otherwise
+ * @example
+ * ```jsx
+ * import { isTablet } from '@kietpt2003/react-native-core-ui';
+ * console.log("isTablet", isTablet); // true/false
+ * ```
+ */
 export const isTablet = DeviceInfo.isTablet();
 
 /**
- * @param {Object} styles - StyleProp
- * @param {ViewStyle} styles.tablet - Styles for tablet
- * @param {ViewStyle} styles.phone - Styles for phone
+ * Use this function to get the styles based on the device type
+ * @example
+ * ```jsx
+ * <View style={StylePlatform({
+      tablet: styles.containerTablet,
+      phone: styles.containerPhone
+    })}>
+      <Text style={StylePlatform({
+        tablet: styles.textTablet,
+        phone: styles.textPhone
+      })}>
+        Hello, Platform!
+      </Text>
+    </View>
+    ```
  */
 export const StylePlatform = (styles: StyleProp<any>) => {
   if (isTablet) {
@@ -69,7 +75,13 @@ export const StylePlatform = (styles: StyleProp<any>) => {
   return styles.phone || {};
 };
 
-export const SIZE_IMAGE = width / 2 - 2 - scale(5);
-export const SIZE_IMAGE_2 = (width - 8 - scale(10)) / 3;
-
+/**
+ * statusBarHeight of the device
+ * @returns {number} - statusBarHeight
+ * @example
+ * ```jsx
+ * import { statusBarHeight } from '@kietpt2003/react-native-core-ui';
+ * console.log("statusBarHeight", statusBarHeight);
+ * ```
+ */
 export const statusBarHeight = (Platform.OS == "android" && StatusBar.currentHeight) ? StatusBar.currentHeight : 0;
