@@ -1,6 +1,12 @@
-import { RFValue, statusBarHeight } from './resolutions';
+import {
+  statusBarHeight,
+  StylePlatform,
+  getPaddingBottom,
+  getPaddingTop,
+  isTablet,
+} from './resolutions';
 import { filterAllowedTextStyle } from './filters';
-import { 
+import {
   width,
   height,
   IPHONE_12_HEIGTH,
@@ -11,6 +17,16 @@ import {
   moderateScale,
   moderateHeightScale,
 } from './scale';
+import cleanTagHTML from './cleanTagHTML';
+import {
+  convertString,
+  convertNumber,
+  convertSeconds,
+  formatHour,
+} from './converter';
+import debounce from './debounce';
+import fixedDistance from './fixedDistance';
+import formatMoney from './formatMoney';
 
 export {
   width,
@@ -20,9 +36,20 @@ export {
   scale,
   scaleH,
   scaleFont,
-  RFValue,
   statusBarHeight,
   filterAllowedTextStyle,
   moderateScale,
   moderateHeightScale,
+  StylePlatform,
+  getPaddingBottom,
+  getPaddingTop,
+  isTablet,
+  cleanTagHTML,
+  convertString,
+  convertNumber,
+  convertSeconds,
+  formatHour,
+  debounce,
+  fixedDistance,
+  formatMoney,
 }

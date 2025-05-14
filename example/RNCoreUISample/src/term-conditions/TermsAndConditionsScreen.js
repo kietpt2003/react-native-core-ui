@@ -7,13 +7,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-// import { scale, width } from '@utils'; // Scale tùy device
-// import { colors } from '@constant'; // Bảng màu của bạn
 import ScrollPercentage from './components/ScrollPercentageV2/ScrollPercentageV2';
 import { GalleryBottomSheet, Text as TextEst, SvgIcon } from '@kietpt2003/react-native-core-ui';
 import  { colors } from '@kietpt2003/react-native-core-ui/themes'
-import { scale, width } from '@kietpt2003/react-native-core-ui/utils';
-// import {scale} from '@kietpt2003/react-native-core-ui/utils'
+import { convertSeconds, fixedDistance, formatHour, formatMoney, scale, width } from '@kietpt2003/react-native-core-ui/utils';
+
 const TermsAndConditionsScreen = () => {
   const [scrollPercent, setScrollPercent] = React.useState(0);
   const [assetType, setAssetType] = React.useState('All');
@@ -54,6 +52,10 @@ const TermsAndConditionsScreen = () => {
         scrollEventThrottle={16} // 16ms để bắt scroll mượt mà (60fps)
       >
         <Text style={styles.title}>Terms and Conditions</Text>
+        <Text style={styles.content}>Convert seconds: {convertSeconds(3599)}</Text>
+        <Text style={styles.content}>Format hour: {formatHour(86399)}</Text>
+        <Text style={styles.content}>Fixed distance: {fixedDistance(123.4567, 3)}</Text>
+        <Text style={styles.content}>Format money: {formatMoney(1234567.89, 2, 'vi-VN')}</Text>
 
         <Text style={styles.content}>
           {/* Nội dung Term dài */}
