@@ -13,12 +13,12 @@
  * 
  * @example
  * ```js
- * import { formatMoney } from '@estuary/rn-core-ui/utils';
+ * import { formatMoney } from '@kietpt2003/react-native-core-ui/utils';
  * const money = formatMoney(1234567.89); // "1,234,568"
  * const money2 = formatMoney(1234567.89, 2); // "1,234,567.89"
  * const money3 = formatMoney(1234567.89, 2, 'vi-VN'); // "1.234.567,89"
  * 
- * To get more information. Please see the [Documentation](https://lubrytics.com:9929/minhnhat.tran/estuary-rn-core-ui?tab=readme-ov-file#formatmoney)
+ * To get more information. Please see the [Documentation](https://github.com/kietpt2003/react-native-core-ui?tab=readme-ov-file#formatmoney)
  * 
  * *Reference:*
  * - [List of ISO 639 language codes](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes)

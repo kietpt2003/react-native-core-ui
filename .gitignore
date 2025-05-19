@@ -19,7 +19,6 @@ dist/
 
 # VSCode
 .vscode/
-jsconfig.json
 
 # Xcode
 #

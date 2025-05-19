@@ -5,7 +5,7 @@
  * * Otherwise, it returns the string representation of the input.
  * @example
  * ```js
- * import { convertString } from '@kietpt2003/react-native-core-ui';
+ * import { convertString } from '@kietpt2003/react-native-core-ui/utils';
  * const str = convertString(2003); // "2003"
  * ```
  */
@@ -20,7 +20,7 @@ export const convertString = (value: any) => {
  * * Otherwise, it returns the parsed float value of the input.
  * @example
  * ```js
- * import { convertNumber } from '@kietpt2003/react-native-core-ui';
+ * import { convertNumber } from '@kietpt2003/react-native-core-ui/utils';
  * const num = convertNumber("2003"); // 2003
  * ```
  */
@@ -34,7 +34,7 @@ export const convertNumber = (value: any) => {
  * * If the input is greater than 3599, it returns "00:00".
  * @example
  * ```js
- * import { convertSeconds } from '@kietpt2003/react-native-core-ui';
+ * import { convertSeconds } from '@kietpt2003/react-native-core-ui/utils';
  * const time = convertSeconds(123); // "02:03"
  * ```
  */
@@ -48,7 +48,7 @@ export const convertSeconds = (seconds: number = 0) => {
  * * If the input is greater than 86399, it returns "00:00:00".
  * @example
  * ```js
- * import { formatHour } from '@kietpt2003/react-native-core-ui';
+ * import { formatHour } from '@kietpt2003/react-native-core-ui/utils';
  * const time = formatHour(3661); // "01:01:01"
  * ```
  */

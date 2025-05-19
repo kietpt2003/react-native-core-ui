@@ -7,7 +7,7 @@
  * *Note:* The toFixed value should be between 1 and 5, otherwise it defaults to 2.
  * @example
  * ```js
- * import { fixedDistance } from '@kietpt2003/react-native-core-ui';
+ * import { fixedDistance } from '@kietpt2003/react-native-core-ui/utils';
  * const distance = fixedDistance(123.456); // "123.46"
  * ```
  */

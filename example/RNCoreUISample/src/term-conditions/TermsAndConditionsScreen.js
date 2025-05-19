@@ -7,8 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import ScrollPercentage from './components/ScrollPercentageV2/ScrollPercentageV2';
-import { GalleryBottomSheet, Text as TextEst, SvgIcon } from '@kietpt2003/react-native-core-ui';
+import { GalleryBottomSheet, Text as TextEst, SvgIcon, ScrollPercentage } from '@kietpt2003/react-native-core-ui';
 import  { colors } from '@kietpt2003/react-native-core-ui/themes'
 import {
   convertSeconds,
@@ -124,11 +123,6 @@ const TermsAndConditionsScreen = () => {
         <TextEst color={colors.red_E00102}>Selected assets: {assets.length}</TextEst>
       </ScrollView>
 
-      {/* <ScrollPercentage
-    percent={scrollPercent}
-    hide={scrollPercent === 0}
-    size={scale(50)}
-    /> */}
       <View
         style={[styles.actionButton, { left: 20, top: 120 }]}
       >
@@ -168,12 +162,16 @@ const TermsAndConditionsScreen = () => {
         onSelectedAssetsChange={onSelectedAssetsChange}
         headerTitle='All assets'
       />
-      {/* <ScrollPercentage
+      <ScrollPercentage
         percent={scrollPercent}
         hide={false}
         borderRadius={scale(20)}
         size={scale(80)}
-      /> */}
+        fill={[colors.red_E00102, colors.gray_888888, colors.green_00A720]}
+        gradientDirection='vertical'
+        // fill={colors.red_E00102}
+        figure='circle'
+      />
     </SafeAreaView >
   );
 };

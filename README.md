@@ -13,6 +13,7 @@ Accelerate your React Native development with a rich set of customizable UI comp
 - [Custom components](#custom-components)
   - [Text](#text)
   - [GalleryBottomSheet](#gallerybottomsheet)
+  - [ScrollPercentage](#scrollpercentage)
 - [Custom hooks](#custom-hooks)
   - [useGalleryAssets](#usegalleryassetsdefaultassettype-assettype)
 - [ScrollPercentage (Future)](#scrollpercentage)
@@ -48,7 +49,6 @@ Accelerate your React Native development with a rich set of customizable UI comp
 Please install required packages:
 
 - @react-native-camera-roll/camera-roll: ">=7.10.0" => For access devices media support [GalleryBottomSheet](#gallerybottomsheet) & [useGalleryAssets](#usegalleryassetsdefaultassettype-assettype). `Note`: This package should be upper then 7.10.0. Due to error in v7.7.0 and lowwer version this package won't work correct in [GalleryBottomSheet](#gallerybottomsheet) & [useGalleryAssets](#usegalleryassetsdefaultassettype-assettype)
-- d4dpocket: "^0.1.8", => Use for constants, utils, fontSize, etc
 - react-native-device-info: ">=8.1.3", => Use for knowing device is table or not
 - react-native-gesture-handler: ">=2.9.0", => Support handling gesture for [GalleryBottomSheet](#gallerybottomsheet)
 - react-native-reanimated: ">=2.8.0", => For handling package animation
@@ -186,6 +186,50 @@ Only support: `titleColor`, `countColor`.
     }}
     ...
   />
+```
+
+### ScrollPercentage
+
+ScrollPercentage is a component that displays a loading indicator with a percentage value. It can be customized with different shapes (circle or square), colors, and gradients.
+
+#### Props
+
+| Prop                     | Type                                                                | Default                                                   | Description                                                                                                                                                                                                                              |
+|--------------------------|---------------------------------------------------------------------|------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **`hide`**     | `boolean` | `false`      | Define to show or hide the loading figure. |
+| **`percent`**     | `number` | `0`      | Please provide the percent for calculate the loading percentage. |
+| **`size`**     | `number` | `60`      | Provide the size for the loading figure. |
+| **`borderRadius`**     | `number` | `45`      | The border radius of the square figure. Just apply with square fiugre only. |
+| **`backgroundColor`**     | `ColorValue` | `none`      | The inline color of the loading figure before the loading start. |
+| **`strokeEmptyColor`**     | `ColorValue` | `#FFFFFF`      | The stroke color while the percent is 0. |
+| **`fill`**     | `ColorValue` | `#FFFFFF`      | The fill of the loading figure. Can be a single color or an array of colors. |
+| **`gradientDirection`**     | `GradientDirection` | `horizontal`      | The gradient direction of the fill. This property is only affected when the fill is an array of colors. The gradient direction can be `'horizontal'`, `'vertical'`, or `'diagonal'`. |
+| **`checkColor`**     | `ColorValue` | `#000000`      | The color of the check mark. |
+
+#### Example
+
+```jsx
+  import { ScrollPercentage } from '@estuary/rn-core-ui';
+    const MyComponent = () => {
+    const [scrollPercent, setScrollPercent] = React.useState(0);
+    const [isOpen, setIsOpen] = React.useState(false);
+    return (
+      <ScrollPercentage
+        hide={isOpen}
+        size={60}
+        percent={scrollPercent}
+        backgroundColor="red"
+        strokeEmptyColor="blue"
+        fill="green" // Can be a single color or an array of colors
+        gradientDirection="horizontal" // Choose the gradient direction of the fill
+        checkColor="yellow" // Color of the check mark
+        animateSpeed={200} // Animation speed in milliseconds when showing/hiding the loading figure
+        figure="circle" // Choose between 'circle' or 'square'
+        startPosition="top-left" // Only for square figure
+        borderRadius={45} // Only for square figure
+      />
+    );
+  }
 ```
 
 ## Custom hooks
@@ -378,9 +422,35 @@ We provide variety of fontSize that aldready scaled by our [scaleFont](#scalefon
 
 Will return a linear scaled result of the provided size, based on your device's screen width.
 
+#### Usage
+```jsx
+  import  { scale } from '@kietpt2003/react-native-core-ui/utils';
+  import { StyleSheet } from 'react-native';
+
+  const styles = StyleSheet.create({
+    container: {
+      padding: scale(5),
+    },
+  });
+```
+
 ### scaleH(size: number)
 
 Will return a linear scaled result of the provided size, based on your device's screen height.
+
+#### Usage
+
+```jsx
+  import  { scaleH } from '@kietpt2003/react-native-core-ui/utils';
+  import { StyleSheet } from 'react-native';
+
+  const styles = StyleSheet.create({
+    container: {
+      position: 'absolute',
+      top: scaleH(5),
+    },
+  });
+```
 
 ### moderateScale(size: number, factor?: number)
 
@@ -391,107 +461,68 @@ If normal scale will increase your size by +2X, moderateScale will only increase
 ➡️ &nbsp;&nbsp;moderateScale(10) = 15  
 ➡️ &nbsp;&nbsp;moderateScale(10, 0.1) = 11
 
+#### Usage
+
+```jsx
+  import  { moderateScale } from '@kietpt2003/react-native-core-ui/utils';
+  import { StyleSheet } from 'react-native';
+
+  const styles = StyleSheet.create({
+    container: {
+      padding: moderateScale(5),
+    },
+  });
+```
+
 ### moderateHeightScale(size: number, factor?: number)
 
-Same as moderateScale, but using scaleH instead of scale.
+Same as [moderateScale](#moderatescalesize-number-factor-number), but using scaleH instead of scale.
+
+#### Usage
+
+```jsx
+  import  { moderateHeightScale } from '@kietpt2003/react-native-core-ui/utils';
+  import { StyleSheet } from 'react-native';
+
+  const styles = StyleSheet.create({
+    container: {
+      padding: moderateHeightScale(5),
+    },
+  });
+```
 
 ### scaleFont(size: number)
 
 Will return a linear scaled result of the provided size, based on PixelRatio & scaleAvg.
 You can use [fontSize](#fontsize) from /theme instead of using scalefont().
 
+#### Usage
+
+```jsx
+  import  { scaleFont } from '@kietpt2003/react-native-core-ui/utils';
+  import { StyleSheet } from 'react-native';
+
+  const styles = StyleSheet.create({
+    text: {
+      fontSize: scaleFont(16), // fontSize._16
+    },
+  });
+```
+
 ### IPHONE_12_WIDTH
 
 Just a constants that specify iPhone 12 width.
 ```js
-  const IPHONE_12_WIDTH = 375;
+  import { IPHONE_12_WIDTH } from '@kietpt2003/react-native-core-ui/utils';
+  console.log(IPHONE_12_WIDTH); // 375
 ```
 
 ### IPHONE_12_HEIGTH
 
 Just a constants that specify iPhone 12 height.
 ```js
-  const IPHONE_12_HEIGTH = 812;
-```
-
-## Resolution Function
-
-### getPaddingTop
-
-Get the top padding based on the device type
-- 26 OPPO
-- 28 NOKIA
-
-#### Usage
-
-```jsx
-  import { getPaddingTop } from '@kietpt2003/react-native-core-ui';
-  const paddingTop = getPaddingTop();
-  console.log("paddingTop:", paddingTop);
-```
-
-### getPaddingBottom
-
-Get the bottom padding based on the device type
-
-#### Usage
-
-```jsx
-  import { getPaddingBottom } from '@kietpt2003/react-native-core-ui';
-  const paddingBottom = getPaddingBottom();
-  console.log("paddingBottom:", paddingBottom);
-```
-
-### isTablet
-
-Check if the device is a tablet
-
-#### Usage
-
-```jsx
-  import { isTablet } from '@kietpt2003/react-native-core-ui';
-  console.log("isTablet", isTablet); // true/false
-```
-
-### StylePlatform
-
-Use this function to get the styles based on the device type
-
-@param {Object} styles - StyleProp
-@param {ViewStyle} styles.tablet - Styles for tablet
-@param {ViewStyle} styles.phone - Styles for phone
-
-#### Props
-
-| Prop                     | Type                                                                | Default                                                   | Description                                                                                                                                                                                                                              |
-|--------------------------|---------------------------------------------------------------------|------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **`styles`**     | `StyleProp<any>` | `undefined`      | Initiallize the styles for table and phone. Its contains 2 fields: `tablet` & `phone`. [See example](#usage-6) |
-
-#### Usage
-
-```jsx
-  <View style={StylePlatform({
-    tablet: styles.containerTablet,
-    phone: styles.containerPhone
-  })}>
-    <Text style={StylePlatform({
-      tablet: styles.textTablet,
-      phone: styles.textPhone
-    })}>
-      Hello, Platform!
-    </Text>
-  </View>
-```
-
-### statusBarHeight
-
-statusBarHeight of the device
-
-#### Usage
-
-```jsx
-  import { statusBarHeight } from '@kietpt2003/react-native-core-ui/utils';
-  console.log("statusBarHeight", statusBarHeight);
+  import { IPHONE_12_HEIGTH } from '@kietpt2003/react-native-core-ui/utils';
+  console.log(IPHONE_12_HEIGTH); // 812
 ```
 
 ## Resolution Function
@@ -545,7 +576,7 @@ Use this function to get the styles based on the device type
 
 | Prop                     | Type                                                                | Default                                                   | Description                                                                                                                                                                                                                              |
 |--------------------------|---------------------------------------------------------------------|------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **`styles`**     | `StyleProp<any>` | `undefined`      | Initiallize the styles for table and phone. Its contains 2 fields: `tablet` & `phone`. [See example](#usage-6) |
+| **`styles`**     | `StyleProp<any>` | `undefined`      | Initiallize the styles for table and phone. Its contains 2 fields: `tablet` & `phone`. [See example](#usage-11) |
 
 #### Usage
 
@@ -686,7 +717,7 @@ This is a string that contains a language code and an optional country code, sep
 ### Usage
 
 ```jsx
-  import { debounce } from '@kietpt2003/react-native-core-ui';
+  import { debounce } from '@kietpt2003/react-native-core-ui/utils';
   const onChangeText = debounce(() => {
     console.log('Function executed!');
   }, 1000);
