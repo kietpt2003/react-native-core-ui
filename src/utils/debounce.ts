@@ -12,7 +12,7 @@ export type DebouncedFunction<F extends (...args: any[]) => any> = {
  * debounced invocation and to immediately invoke the function, respectively.
  * @example
  * ```jsx
- * import { debounce } from '@kietpt2003/react-native-core-ui';
+ * import { debounce } from '@kietpt2003/react-native-core-ui/utils';
  * const onChangeText = debounce(() => {
  *   console.log('Function executed!');
  * }, 1000);

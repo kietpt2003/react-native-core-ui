@@ -13,7 +13,7 @@ import DeviceInfo from 'react-native-device-info';
  * @returns {number} - Top padding
  * @example
  * ```jsx
- * import { getPaddingTop } from '@kietpt2003/react-native-core-ui';
+ * import { getPaddingTop } from '@kietpt2003/react-native-core-ui/utils';
  * const paddingTop = getPaddingTop();
  * console.log("paddingTop:", paddingTop);
  * ```
@@ -30,7 +30,7 @@ export const getPaddingTop = (): number => {
  * @returns {number} - Bottom padding
  * @example
  * ```jsx
- * import { getPaddingBottom } from '@kietpt2003/react-native-core-ui';
+ * import { getPaddingBottom } from '@kietpt2003/react-native-core-ui/utils';
  * const paddingBottom = getPaddingBottom();
  * console.log("paddingBottom:", paddingBottom);
  * ```
@@ -45,7 +45,7 @@ export const getPaddingBottom = (): number => {
  * @returns {boolean} - true if the device is a tablet, false otherwise
  * @example
  * ```jsx
- * import { isTablet } from '@kietpt2003/react-native-core-ui';
+ * import { isTablet } from '@kietpt2003/react-native-core-ui/utils';
  * console.log("isTablet", isTablet); // true/false
  * ```
  */
@@ -80,7 +80,7 @@ export const StylePlatform = (styles: StyleProp<any>) => {
  * @returns {number} - statusBarHeight
  * @example
  * ```jsx
- * import { statusBarHeight } from '@kietpt2003/react-native-core-ui';
+ * import { statusBarHeight } from '@kietpt2003/react-native-core-ui/utils';
  * console.log("statusBarHeight", statusBarHeight);
  * ```
  */
