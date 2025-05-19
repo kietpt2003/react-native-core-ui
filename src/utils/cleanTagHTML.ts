@@ -3,7 +3,7 @@
  * 
  * @example
  * ```js
- * import { cleanHTML } from '@kietpt2003/react-native-core-ui';
+ * import { cleanHTML } from '@kietpt2003/react-native-core-ui/utils';
  *
  * const raw = `
  *   <div>Hello&nbsp;&nbsp;&nbsp;World</div>

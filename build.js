@@ -38,7 +38,6 @@ async function build() {
         'react-native',
         'react-native-device-info',
         'react-native-iphone-x-helper',
-        'd4dpocket',
         '@react-native-camera-roll/camera-roll',
         'react-native-gesture-handler',
         'react-native-reanimated',

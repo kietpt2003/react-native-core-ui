@@ -27,6 +27,7 @@ import {
 import debounce from './debounce';
 import fixedDistance from './fixedDistance';
 import formatMoney from './formatMoney';
+import limitedString from './limitedString'
 
 export {
   width,
@@ -52,4 +53,5 @@ export {
   debounce,
   fixedDistance,
   formatMoney,
+  limitedString,
 }
