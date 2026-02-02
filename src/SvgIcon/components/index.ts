@@ -1,19 +1,12 @@
-import IconPlus from './IconPlus';
-import IconCheckBox from './IconCheckBox';
-import IconCheckBoxWithBg from './IconCheckBoxWithBg';
-import IconCheckBoxOutlineBlank from './IconCheckBoxOutlineBlank';
-import IconAlertCircle from './IconAlertCircle';
-import IconAngleRight from './IconAngleRight';
-import IconAngleLeft from './IconAngleLeft';
-import IconPlayCircle from './IconPlayCircle';
-
-export {
-  IconPlus,
-  IconCheckBox,
-  IconCheckBoxWithBg,
-  IconCheckBoxOutlineBlank,
-  IconAlertCircle,
-  IconAngleRight,
-  IconAngleLeft,
-  IconPlayCircle
-}
+export { default as IconPlus } from './IconPlus';
+export { default as IconCheckBox } from './IconCheckBox';
+export { default as IconCheckBoxWithBg } from './IconCheckBoxWithBg';
+export { default as IconCheckBoxOutlineBlank } from './IconCheckBoxOutlineBlank';
+export { default as IconAlertCircle } from './IconAlertCircle';
+export { default as IconAngleRight } from './IconAngleRight';
+export { default as IconAngleLeft } from './IconAngleLeft';
+export { default as IconPlayCircle } from './IconPlayCircle';
+export { default as IconPerson } from './IconPerson';
+export { default as IconHome } from './IconHome';
+export { default as IconChevronUp } from './IconChevronUp';
+export { default as IconChevronDown } from './IconChevronDown';

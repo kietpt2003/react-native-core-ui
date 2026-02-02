@@ -1,11 +1,31 @@
 # React Native Core UI
 
-Accelerate your React Native development with a rich set of customizable UI components built for consistency and performance. Designed to streamline layout and styling, these components are ideal for building modern, responsive, and scalable interfaces across all screens. Seamlessly adaptable and theme-ready for effortless branding.
+[![NPM Version][npm-image]][npm-url]
+[![Build Status][build-image]][build-url]
+[![License][license-image]][license-url]
+
+`@kietpt2003/react-native-core-ui` provides a collection of core, reusable, and easily customizable User Interface (UI) Components built for React Native applications. Our goal is to help you build beautiful and consistent user interfaces quickly.
 
 > [!TIP]
-> * My info: <https://github.com/kietpt2003>
-> * Due to some TypeScript issues that lead to unable to suggest code correctly.
-> * But we have try our best, so now if you using our `sub path` (Example: `'/utils'`, `'/themes'`), you must initialize the import first, for the auto suggestion.
+>
+> - My info: <https://github.com/kietpt2003>
+> - Due to some TypeScript issues that lead to unable to suggest code correctly.
+> - But we have try our best, so now if you using our `sub path` (Example: `'/utils'`, `'/themes'`), you must initialize the import first, for the auto suggestion.
+
+**Note:** If you are new to this project just follow this command:
+
+```sh
+# If you are currently in root package folder
+# Run yarn install for the first time
+yarn install
+
+# Run yarn build for apply you local changes -> build -> copy to example/RNCoreUISample/node_modules
+yarn build
+
+# From now if you are in example/RNCoreUISample. Just run yarn install
+# All your changes in package will be packed and copy to example/RNCoreUISample/node_modules
+yarn install
+```
 
 ## Table of Contents
 
@@ -63,14 +83,14 @@ Text component for displaying text with custom styles and loading state. This co
 
 #### Props
 
-| Prop            | Type                   | Default     | Description                                                             |
-| --------------- | ---------------------- | ----------- | ----------------------------------------------------------------------- |
-| **`style`**     | `StyleProp<TextStyle>` | _None_      | Style of the Text component, just like [Text Style Props](https://reactnative.dev/docs/text-style-props)                 |
-| **`color`**     | `ColorValue`           | `"black"`   | Color of the text                                                       |
-| **`bold`**      | `boolean`              | `false`     | Choose to bold the text                                                 |
-| **`children`**  | `React.ReactNode`      | _None_      | Provide the text string or another Text component                       |
-| **`load`**      | `boolean`              | `false`     | Waiting before show Text                                                |
-| **`styleView`** | `StyleProp<ViewStyle>` | _None_      | For custom a View outside Text component                                |
+| Prop            | Type                   | Default   | Description                                                                                              |
+| --------------- | ---------------------- | --------- | -------------------------------------------------------------------------------------------------------- |
+| **`style`**     | `StyleProp<TextStyle>` | _None_    | Style of the Text component, just like [Text Style Props](https://reactnative.dev/docs/text-style-props) |
+| **`color`**     | `ColorValue`           | `"black"` | Color of the text                                                                                        |
+| **`bold`**      | `boolean`              | `false`   | Choose to bold the text                                                                                  |
+| **`children`**  | `React.ReactNode`      | _None_    | Provide the text string or another Text component                                                        |
+| **`load`**      | `boolean`              | `false`   | Waiting before show Text                                                                                 |
+| **`styleView`** | `StyleProp<ViewStyle>` | _None_    | For custom a View outside Text component                                                                 |
 
 ### GalleryBottomSheet
 
@@ -87,6 +107,7 @@ A bottom sheet component for displaying a gallery of images and videos. It allow
 ##### Android
 
 Add this permission to your AndroidManifest.xml:
+
 ```xml
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32"/>
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="32"/>
@@ -97,6 +118,7 @@ Add this permission to your AndroidManifest.xml:
 ##### iOS
 
 Add this perission to your Info.plist:
+
 ```xml
 <key>NSPhotoLibraryUsageDescription</key>
 <string>App request permission for access your gallery</string>
@@ -106,29 +128,30 @@ Add this perission to your Info.plist:
 
 #### Props
 
-| Prop                     | Type                                                                | Default                                                   | Description                                                                                                                                                                                                                              |
-|--------------------------|---------------------------------------------------------------------|------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **`isOpen`**     | `boolean` | `false`      | Define to open gallery or not. |
-| **`openHeight`**         | `number`                                                            | `ScreenHeight / 2`                                         | Define the position to open gallery. **Note:** y coordinate of the top of the bottom sheet from the top of the screen                                                                             |
-| **`closeHeight`**        | `number`                                                            | `ScreenHeight`                                             | Define the position when closed gallery. **Note:** y coordinate of the top of the bottom sheet from the top of the screen                                                                         |
-| **`maxHeight`**          | `number`                                                            | `0`                                                        | Define the maximum y coordinate that gallery should snapped at after finger release. **Note:** y coordinate of the top of the bottom sheet from the top of the screen                             |
-| **`headerBarColor`**     | `ColorValue`                                                        | `"#FFFFFF"`                                                | Define the background color of the header bar. **Note:** Full control over the look at each position. Whether it's beautiful or ugly is up to you.                                                 |
-| **`barIconColor`**       | `ColorValue`                                                        | `"#000000"`                                                | Define the header bar icon color. **Note:** Full control over the look at each position. Whether it's beautiful or ugly is up to you.                                                             |
-| **`headerTitleStyle`**   | `Pick<TextStyle, "color" \| "fontFamily" \| "fontWeight">`         | `{ color: '#000000' }`                                     | Define styling for the header title. Only supports: `color`, `fontFamily`, `fontWeight`.                                                                                                          |
-| **`headerTitle`**        | `string`                                                            | `'Tất cả ảnh'`                                             | Define the header title. Will be overridden by folder name when one is selected. Will be truncated if too long.                                                                                   |
-| **`headerTitleIconColor`** | `ColorValue`                                                     | `"#000000"`                                                | Define the header title icon color.                                                                                                                                                                |
-| **`backgroundColor`**    | `ColorValue`                                                        | `"#FFFFFF"`                                                | Define the background color of the gallery bottom sheet.                                                                                                                                           |
-| **`emptyGalleryMsg`**    | `string`                                                            | `'Không có hình ảnh để hiển thị'`                          | Message shown when there are no media items available. Please provide meaningful content.                                                                                                         |
-| **`emptyGalleryMsgStyle`** | `Pick<TextStyle, "color" \| "fontFamily" \| "fontWeight">`      | `{ color: '#000000' }`                                     | Define styling for the empty message. Only supports: `color`, `fontFamily`, `fontWeight`. [See example](#headertitlestyle)                                                                                                        |
-| **`videoIconStyle`**     | `{ circleStyle?: CircleStyleProps; polygonStyle?: CircleStyleProps }` | [See example](#videoiconstyle)                                        | Define styling for the video icon shown for video items. Full control over circle and polygon styles.                                                                                             |
-| **`albumItemStyle`**     | `AlbumFilterStyleProps`                                             | `{ titleColor: '#000000', countColor: '#A0A0A0' }`         | Define style for album filter items. Full control over title and count colors. [See example](#albumitemstyle)                                                                                                                     |
-| **`assetType`**          | `'All'` \| `'Photos'` \| `'Videos'`                                 | `'All'`                                                    | Asset types to display. Can be dynamically changed with setState.                                                                                                                                |
-| **`maxSelectable`**      | `number`                                                            | `5`                                                        | Max number of items selectable. Min: `0`, Max: `10`. Large values may cause performance issues.                                                                                                       |
-| **`onSelectedAssetsChange`** | `(assets: PhotoIdentifier[]) => void`                         | `undefined`                                                | Define function for handling selected assets data. This function will be called when the user select an asset.                                                                                                                     |
+| Prop                         | Type                                                                  | Default                                            | Description                                                                                                                                                           |
+| ---------------------------- | --------------------------------------------------------------------- | -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`isOpen`**                 | `boolean`                                                             | `false`                                            | Define to open gallery or not.                                                                                                                                        |
+| **`openHeight`**             | `number`                                                              | `ScreenHeight / 2`                                 | Define the position to open gallery. **Note:** y coordinate of the top of the bottom sheet from the top of the screen                                                 |
+| **`closeHeight`**            | `number`                                                              | `ScreenHeight`                                     | Define the position when closed gallery. **Note:** y coordinate of the top of the bottom sheet from the top of the screen                                             |
+| **`maxHeight`**              | `number`                                                              | `0`                                                | Define the maximum y coordinate that gallery should snapped at after finger release. **Note:** y coordinate of the top of the bottom sheet from the top of the screen |
+| **`headerBarColor`**         | `ColorValue`                                                          | `"#FFFFFF"`                                        | Define the background color of the header bar. **Note:** Full control over the look at each position. Whether it's beautiful or ugly is up to you.                    |
+| **`barIconColor`**           | `ColorValue`                                                          | `"#000000"`                                        | Define the header bar icon color. **Note:** Full control over the look at each position. Whether it's beautiful or ugly is up to you.                                 |
+| **`headerTitleStyle`**       | `Pick<TextStyle, "color" \| "fontFamily" \| "fontWeight">`            | `{ color: '#000000' }`                             | Define styling for the header title. Only supports: `color`, `fontFamily`, `fontWeight`.                                                                              |
+| **`headerTitle`**            | `string`                                                              | `'Tất cả ảnh'`                                     | Define the header title. Will be overridden by folder name when one is selected. Will be truncated if too long.                                                       |
+| **`headerTitleIconColor`**   | `ColorValue`                                                          | `"#000000"`                                        | Define the header title icon color.                                                                                                                                   |
+| **`backgroundColor`**        | `ColorValue`                                                          | `"#FFFFFF"`                                        | Define the background color of the gallery bottom sheet.                                                                                                              |
+| **`emptyGalleryMsg`**        | `string`                                                              | `'Không có hình ảnh để hiển thị'`                  | Message shown when there are no media items available. Please provide meaningful content.                                                                             |
+| **`emptyGalleryMsgStyle`**   | `Pick<TextStyle, "color" \| "fontFamily" \| "fontWeight">`            | `{ color: '#000000' }`                             | Define styling for the empty message. Only supports: `color`, `fontFamily`, `fontWeight`. [See example](#headertitlestyle)                                            |
+| **`videoIconStyle`**         | `{ circleStyle?: CircleStyleProps; polygonStyle?: CircleStyleProps }` | [See example](#videoiconstyle)                     | Define styling for the video icon shown for video items. Full control over circle and polygon styles.                                                                 |
+| **`albumItemStyle`**         | `AlbumFilterStyleProps`                                               | `{ titleColor: '#000000', countColor: '#A0A0A0' }` | Define style for album filter items. Full control over title and count colors. [See example](#albumitemstyle)                                                         |
+| **`assetType`**              | `'All'` \| `'Photos'` \| `'Videos'`                                   | `'All'`                                            | Asset types to display. Can be dynamically changed with setState.                                                                                                     |
+| **`maxSelectable`**          | `number`                                                              | `5`                                                | Max number of items selectable. Min: `0`, Max: `10`. Large values may cause performance issues.                                                                       |
+| **`onSelectedAssetsChange`** | `(assets: PhotoIdentifier[]) => void`                                 | `undefined`                                        | Define function for handling selected assets data. This function will be called when the user select an asset.                                                        |
 
 ##### headerTitleStyle
 
 Only support: `color`, `fontFamily`, `fontWeight`.
+
 ```jsx
   import { GalleryBottomSheet, Text } from '@kietpt2003/react-native-core-ui';
 
@@ -149,6 +172,7 @@ Only support: `color`, `fontFamily`, `fontWeight`.
 
 Only support: `fill`, `stroke`, `strokeWidth`.
 For the `strokeWidth`, we accept value start from `scale(5)` to `scale(8)`
+
 ```jsx
   import { GalleryBottomSheet, Text } from '@kietpt2003/react-native-core-ui';
 
@@ -174,6 +198,7 @@ For the `strokeWidth`, we accept value start from `scale(5)` to `scale(8)`
 ##### albumItemStyle
 
 Only support: `titleColor`, `countColor`.
+
 ```jsx
   import { GalleryBottomSheet, Text } from '@kietpt2003/react-native-core-ui';
 
@@ -194,42 +219,42 @@ ScrollPercentage is a component that displays a loading indicator with a percent
 
 #### Props
 
-| Prop                     | Type                                                                | Default                                                   | Description                                                                                                                                                                                                                              |
-|--------------------------|---------------------------------------------------------------------|------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **`hide`**     | `boolean` | `false`      | Define to show or hide the loading figure. |
-| **`percent`**     | `number` | `0`      | Please provide the percent for calculate the loading percentage. |
-| **`size`**     | `number` | `60`      | Provide the size for the loading figure. |
-| **`borderRadius`**     | `number` | `45`      | The border radius of the square figure. Just apply with square fiugre only. |
-| **`backgroundColor`**     | `ColorValue` | `none`      | The inline color of the loading figure before the loading start. |
-| **`strokeEmptyColor`**     | `ColorValue` | `#FFFFFF`      | The stroke color while the percent is 0. |
-| **`fill`**     | `ColorValue` | `#FFFFFF`      | The fill of the loading figure. Can be a single color or an array of colors. |
-| **`gradientDirection`**     | `GradientDirection` | `horizontal`      | The gradient direction of the fill. This property is only affected when the fill is an array of colors. The gradient direction can be `'horizontal'`, `'vertical'`, or `'diagonal'`. |
-| **`checkColor`**     | `ColorValue` | `#000000`      | The color of the check mark. |
+| Prop                    | Type                | Default      | Description                                                                                                                                                                          |
+| ----------------------- | ------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **`hide`**              | `boolean`           | `false`      | Define to show or hide the loading figure.                                                                                                                                           |
+| **`percent`**           | `number`            | `0`          | Please provide the percent for calculate the loading percentage.                                                                                                                     |
+| **`size`**              | `number`            | `60`         | Provide the size for the loading figure.                                                                                                                                             |
+| **`borderRadius`**      | `number`            | `45`         | The border radius of the square figure. Just apply with square fiugre only.                                                                                                          |
+| **`backgroundColor`**   | `ColorValue`        | `none`       | The inline color of the loading figure before the loading start.                                                                                                                     |
+| **`strokeEmptyColor`**  | `ColorValue`        | `#FFFFFF`    | The stroke color while the percent is 0.                                                                                                                                             |
+| **`fill`**              | `ColorValue`        | `#FFFFFF`    | The fill of the loading figure. Can be a single color or an array of colors.                                                                                                         |
+| **`gradientDirection`** | `GradientDirection` | `horizontal` | The gradient direction of the fill. This property is only affected when the fill is an array of colors. The gradient direction can be `'horizontal'`, `'vertical'`, or `'diagonal'`. |
+| **`checkColor`**        | `ColorValue`        | `#000000`    | The color of the check mark.                                                                                                                                                         |
 
 #### Example
 
 ```jsx
-  import { ScrollPercentage } from '@estuary/rn-core-ui';
-    const MyComponent = () => {
-    const [scrollPercent, setScrollPercent] = React.useState(0);
-    const [isOpen, setIsOpen] = React.useState(false);
-    return (
-      <ScrollPercentage
-        hide={isOpen}
-        size={60}
-        percent={scrollPercent}
-        backgroundColor="red"
-        strokeEmptyColor="blue"
-        fill="green" // Can be a single color or an array of colors
-        gradientDirection="horizontal" // Choose the gradient direction of the fill
-        checkColor="yellow" // Color of the check mark
-        animateSpeed={200} // Animation speed in milliseconds when showing/hiding the loading figure
-        figure="circle" // Choose between 'circle' or 'square'
-        startPosition="top-left" // Only for square figure
-        borderRadius={45} // Only for square figure
-      />
-    );
-  }
+import { ScrollPercentage } from "@estuary/rn-core-ui";
+const MyComponent = () => {
+  const [scrollPercent, setScrollPercent] = React.useState(0);
+  const [isOpen, setIsOpen] = React.useState(false);
+  return (
+    <ScrollPercentage
+      hide={isOpen}
+      size={60}
+      percent={scrollPercent}
+      backgroundColor="red"
+      strokeEmptyColor="blue"
+      fill="green" // Can be a single color or an array of colors
+      gradientDirection="horizontal" // Choose the gradient direction of the fill
+      checkColor="yellow" // Color of the check mark
+      animateSpeed={200} // Animation speed in milliseconds when showing/hiding the loading figure
+      figure="circle" // Choose between 'circle' or 'square'
+      startPosition="top-left" // Only for square figure
+      borderRadius={45} // Only for square figure
+    />
+  );
+};
 ```
 
 ## Custom hooks
@@ -243,6 +268,7 @@ You can use this hook for accessing device's assets or requesting related permis
 ##### Android
 
 Add this permission to your AndroidManifest.xml:
+
 ```xml
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32"/>
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="32"/>
@@ -253,6 +279,7 @@ Add this permission to your AndroidManifest.xml:
 ##### iOS
 
 Add this perission to your Info.plist:
+
 ```xml
 <key>NSPhotoLibraryUsageDescription</key>
 <string>App request permission for access your gallery</string>
@@ -262,23 +289,23 @@ Add this perission to your Info.plist:
 
 #### Props
 
-| Prop                     | Type                                                                | Default                                                   | Description                                                                                                                                                                                                                              |
-|--------------------------|---------------------------------------------------------------------|------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **`defaultAssetType`**     | `AssetType` | `'All'`      | Initiallize the default asset type. |
-| **`albums`**     | `Album[]` | `[]`      | Provide list of albums on current device. |
-| **`assets`**         | `Record<string, PhotoIdentifier[]>` | `{}` | Provide list of assets on current device grouped by album. |
-| **`fullAssets`**         | `PhotoIdentifier[]` | `[]` | Provide list of assets on current device. |
-| **`loading`**         | `boolean` | `false` | Provide loading assets state. |
-| **`error`**         | `string` | `null` | Provide string error if loading cause any error. |
-| **`totalAssets`**         | `number` | `0` | Provide the total assets that has been accessed. |
-| **`fullAssetsPagination`**         | `Pagination` | `undefined` | Provide the object related for pagination on `fullAssets`. |
-| **`loadFullAssets`**         | `Promise function` | `` | Provide function for fecth assets which not grouped by album. Return `true` if has next page. [See example](#usage) |
-| **`loadAssets`**         | `Promise function` | `` | Provide function for fecth assets which grouped by album. Return `true` if has next page. [See example](#usage) |
-| **`pagination`**         | `Pagination` | `undefined` | Provide the object related for pagination on `assets`. |
-| **`requestPermission`**         | `Promise function` | `` | Provide function for request permission. Return `true` if user provided permission. [See example](#usage) |
-| **`checkPermission`**         | `Promise function` | `` | Provide function returning if user has provided permission. [See example](#usage) |
-| **`hasPermission`**         | `boolean` | `false` | Provide a state that keep track user permisison. |
-| **`changeAssetType`**         | `function` | `` | Provide function changing with asset type that you want to fecth. Please notice that, you should provide video permision if want to access videos. Default type `'All'`. [See example](#usage) |
+| Prop                       | Type                                | Default     | Description                                                                                                                                                                                    |
+| -------------------------- | ----------------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`defaultAssetType`**     | `AssetType`                         | `'All'`     | Initiallize the default asset type.                                                                                                                                                            |
+| **`albums`**               | `Album[]`                           | `[]`        | Provide list of albums on current device.                                                                                                                                                      |
+| **`assets`**               | `Record<string, PhotoIdentifier[]>` | `{}`        | Provide list of assets on current device grouped by album.                                                                                                                                     |
+| **`fullAssets`**           | `PhotoIdentifier[]`                 | `[]`        | Provide list of assets on current device.                                                                                                                                                      |
+| **`loading`**              | `boolean`                           | `false`     | Provide loading assets state.                                                                                                                                                                  |
+| **`error`**                | `string`                            | `null`      | Provide string error if loading cause any error.                                                                                                                                               |
+| **`totalAssets`**          | `number`                            | `0`         | Provide the total assets that has been accessed.                                                                                                                                               |
+| **`fullAssetsPagination`** | `Pagination`                        | `undefined` | Provide the object related for pagination on `fullAssets`.                                                                                                                                     |
+| **`loadFullAssets`**       | `Promise function`                  | ``          | Provide function for fecth assets which not grouped by album. Return `true` if has next page. [See example](#usage)                                                                            |
+| **`loadAssets`**           | `Promise function`                  | ``          | Provide function for fecth assets which grouped by album. Return `true` if has next page. [See example](#usage)                                                                                |
+| **`pagination`**           | `Pagination`                        | `undefined` | Provide the object related for pagination on `assets`.                                                                                                                                         |
+| **`requestPermission`**    | `Promise function`                  | ``          | Provide function for request permission. Return `true` if user provided permission. [See example](#usage)                                                                                      |
+| **`checkPermission`**      | `Promise function`                  | ``          | Provide function returning if user has provided permission. [See example](#usage)                                                                                                              |
+| **`hasPermission`**        | `boolean`                           | `false`     | Provide a state that keep track user permisison.                                                                                                                                               |
+| **`changeAssetType`**      | `function`                          | ``          | Provide function changing with asset type that you want to fecth. Please notice that, you should provide video permision if want to access videos. Default type `'All'`. [See example](#usage) |
 
 #### Usage
 
@@ -371,15 +398,15 @@ We provide a variety of palete `colors` and some shadows!
 ### Usage
 
 ```jsx
-  import  { colors } from '@kietpt2003/react-native-core-ui/themes';
-  import { StyleSheet } from 'react-native';
+import { colors } from "@kietpt2003/react-native-core-ui/themes";
+import { StyleSheet } from "react-native";
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: colors.black,
-    },
-  });
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.black,
+  },
+});
 ```
 
 ## Fontsize
@@ -389,33 +416,44 @@ We provide variety of fontSize that aldready scaled by our [scaleFont](#scalefon
 ### Usage
 
 ```jsx
-  import  { fontSize } from '@kietpt2003/react-native-core-ui/themes';
-  import { StyleSheet } from 'react-native';
+import { fontSize } from "@kietpt2003/react-native-core-ui/themes";
+import { StyleSheet } from "react-native";
 
-  const styles = StyleSheet.create({
-    text: {
-      fontSize: fontSize._16,
-    },
-  });
+const styles = StyleSheet.create({
+  text: {
+    fontSize: fontSize._16,
+  },
+});
 ```
 
 ## Scaling Function
 
 ```jsx
-  import { scale, verticalScale, moderateScale } from '@kietpt2003/react-native-core-ui/utils';
-  import  { colors, fontSize } from '@kietpt2003/react-native-core-ui/themes'
+import {
+  scale,
+  verticalScale,
+  moderateScale,
+} from "@kietpt2003/react-native-core-ui/utils";
+import { colors, fontSize } from "@kietpt2003/react-native-core-ui/themes";
 
-  const Component = props =>
-    <View style={{
+const Component = (props) => (
+  <View
+    style={{
       width: scale(30),
       height: verticalScale(50),
-      padding: moderateScale(5)
-    }}>
-      <Text style={{
+      padding: moderateScale(5),
+    }}
+  >
+    <Text
+      style={{
         fontSize: fontSize._16,
-        color: colors.black
-      }}>Component</Text>
-    </View>;
+        color: colors.black,
+      }}
+    >
+      Component
+    </Text>
+  </View>
+);
 ```
 
 ### scale(size: number)
@@ -423,15 +461,16 @@ We provide variety of fontSize that aldready scaled by our [scaleFont](#scalefon
 Will return a linear scaled result of the provided size, based on your device's screen width.
 
 #### Usage
-```jsx
-  import  { scale } from '@kietpt2003/react-native-core-ui/utils';
-  import { StyleSheet } from 'react-native';
 
-  const styles = StyleSheet.create({
-    container: {
-      padding: scale(5),
-    },
-  });
+```jsx
+import { scale } from "@kietpt2003/react-native-core-ui/utils";
+import { StyleSheet } from "react-native";
+
+const styles = StyleSheet.create({
+  container: {
+    padding: scale(5),
+  },
+});
 ```
 
 ### scaleH(size: number)
@@ -441,15 +480,15 @@ Will return a linear scaled result of the provided size, based on your device's 
 #### Usage
 
 ```jsx
-  import  { scaleH } from '@kietpt2003/react-native-core-ui/utils';
-  import { StyleSheet } from 'react-native';
+import { scaleH } from "@kietpt2003/react-native-core-ui/utils";
+import { StyleSheet } from "react-native";
 
-  const styles = StyleSheet.create({
-    container: {
-      position: 'absolute',
-      top: scaleH(5),
-    },
-  });
+const styles = StyleSheet.create({
+  container: {
+    position: "absolute",
+    top: scaleH(5),
+  },
+});
 ```
 
 ### moderateScale(size: number, factor?: number)
@@ -464,14 +503,14 @@ If normal scale will increase your size by +2X, moderateScale will only increase
 #### Usage
 
 ```jsx
-  import  { moderateScale } from '@kietpt2003/react-native-core-ui/utils';
-  import { StyleSheet } from 'react-native';
+import { moderateScale } from "@kietpt2003/react-native-core-ui/utils";
+import { StyleSheet } from "react-native";
 
-  const styles = StyleSheet.create({
-    container: {
-      padding: moderateScale(5),
-    },
-  });
+const styles = StyleSheet.create({
+  container: {
+    padding: moderateScale(5),
+  },
+});
 ```
 
 ### moderateHeightScale(size: number, factor?: number)
@@ -481,14 +520,14 @@ Same as [moderateScale](#moderatescalesize-number-factor-number), but using scal
 #### Usage
 
 ```jsx
-  import  { moderateHeightScale } from '@kietpt2003/react-native-core-ui/utils';
-  import { StyleSheet } from 'react-native';
+import { moderateHeightScale } from "@kietpt2003/react-native-core-ui/utils";
+import { StyleSheet } from "react-native";
 
-  const styles = StyleSheet.create({
-    container: {
-      padding: moderateHeightScale(5),
-    },
-  });
+const styles = StyleSheet.create({
+  container: {
+    padding: moderateHeightScale(5),
+  },
+});
 ```
 
 ### scaleFont(size: number)
@@ -499,30 +538,32 @@ You can use [fontSize](#fontsize) from /theme instead of using scalefont().
 #### Usage
 
 ```jsx
-  import  { scaleFont } from '@kietpt2003/react-native-core-ui/utils';
-  import { StyleSheet } from 'react-native';
+import { scaleFont } from "@kietpt2003/react-native-core-ui/utils";
+import { StyleSheet } from "react-native";
 
-  const styles = StyleSheet.create({
-    text: {
-      fontSize: scaleFont(16), // fontSize._16
-    },
-  });
+const styles = StyleSheet.create({
+  text: {
+    fontSize: scaleFont(16), // fontSize._16
+  },
+});
 ```
 
 ### IPHONE_12_WIDTH
 
 Just a constants that specify iPhone 12 width.
+
 ```js
-  import { IPHONE_12_WIDTH } from '@kietpt2003/react-native-core-ui/utils';
-  console.log(IPHONE_12_WIDTH); // 375
+import { IPHONE_12_WIDTH } from "@kietpt2003/react-native-core-ui/utils";
+console.log(IPHONE_12_WIDTH); // 375
 ```
 
 ### IPHONE_12_HEIGTH
 
 Just a constants that specify iPhone 12 height.
+
 ```js
-  import { IPHONE_12_HEIGTH } from '@kietpt2003/react-native-core-ui/utils';
-  console.log(IPHONE_12_HEIGTH); // 812
+import { IPHONE_12_HEIGTH } from "@kietpt2003/react-native-core-ui/utils";
+console.log(IPHONE_12_HEIGTH); // 812
 ```
 
 ## Resolution Function
@@ -530,15 +571,16 @@ Just a constants that specify iPhone 12 height.
 ### getPaddingTop
 
 Get the top padding based on the device type
+
 - 26 OPPO
 - 28 NOKIA
 
 #### Usage
 
 ```jsx
-  import { getPaddingTop } from '@kietpt2003/react-native-core-ui/utils';
-  const paddingTop = getPaddingTop();
-  console.log("paddingTop:", paddingTop);
+import { getPaddingTop } from "@kietpt2003/react-native-core-ui/utils";
+const paddingTop = getPaddingTop();
+console.log("paddingTop:", paddingTop);
 ```
 
 ### getPaddingBottom
@@ -548,9 +590,9 @@ Get the bottom padding based on the device type
 #### Usage
 
 ```jsx
-  import { getPaddingBottom } from '@kietpt2003/react-native-core-ui/utils';
-  const paddingBottom = getPaddingBottom();
-  console.log("paddingBottom:", paddingBottom);
+import { getPaddingBottom } from "@kietpt2003/react-native-core-ui/utils";
+const paddingBottom = getPaddingBottom();
+console.log("paddingBottom:", paddingBottom);
 ```
 
 ### isTablet
@@ -560,8 +602,8 @@ Check if the device is a tablet
 #### Usage
 
 ```jsx
-  import { isTablet } from '@kietpt2003/react-native-core-ui/utils';
-  console.log("isTablet", isTablet); // true/false
+import { isTablet } from "@kietpt2003/react-native-core-ui/utils";
+console.log("isTablet", isTablet); // true/false
 ```
 
 ### StylePlatform
@@ -574,24 +616,28 @@ Use this function to get the styles based on the device type
 
 #### Props
 
-| Prop                     | Type                                                                | Default                                                   | Description                                                                                                                                                                                                                              |
-|--------------------------|---------------------------------------------------------------------|------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **`styles`**     | `StyleProp<any>` | `undefined`      | Initiallize the styles for table and phone. Its contains 2 fields: `tablet` & `phone`. [See example](#usage-11) |
+| Prop         | Type             | Default     | Description                                                                                                     |
+| ------------ | ---------------- | ----------- | --------------------------------------------------------------------------------------------------------------- |
+| **`styles`** | `StyleProp<any>` | `undefined` | Initiallize the styles for table and phone. Its contains 2 fields: `tablet` & `phone`. [See example](#usage-11) |
 
 #### Usage
 
 ```jsx
-  <View style={StylePlatform({
+<View
+  style={StylePlatform({
     tablet: styles.containerTablet,
-    phone: styles.containerPhone
-  })}>
-    <Text style={StylePlatform({
+    phone: styles.containerPhone,
+  })}
+>
+  <Text
+    style={StylePlatform({
       tablet: styles.textTablet,
-      phone: styles.textPhone
-    })}>
-      Hello, Platform!
-    </Text>
-  </View>
+      phone: styles.textPhone,
+    })}
+  >
+    Hello, Platform!
+  </Text>
+</View>
 ```
 
 ### statusBarHeight
@@ -601,8 +647,8 @@ statusBarHeight of the device
 #### Usage
 
 ```jsx
-  import { statusBarHeight } from '@kietpt2003/react-native-core-ui/utils';
-  console.log("statusBarHeight", statusBarHeight);
+import { statusBarHeight } from "@kietpt2003/react-native-core-ui/utils";
+console.log("statusBarHeight", statusBarHeight);
 ```
 
 ## Converter and format
@@ -610,72 +656,77 @@ statusBarHeight of the device
 ### convertString
 
 This function converts input into a string.
-* If the input is null or undefined, it returns an empty string.
-* If the input is an object, it returns a stringified version of the object.
-* Otherwise, it returns the string representation of the input.
+
+- If the input is null or undefined, it returns an empty string.
+- If the input is an object, it returns a stringified version of the object.
+- Otherwise, it returns the string representation of the input.
 
 #### Usage
 
 ```js
-  import { convertString } from '@kietpt2003/react-native-core-ui/utils';
-  const str = convertString(2003); // "2003"
+import { convertString } from "@kietpt2003/react-native-core-ui/utils";
+const str = convertString(2003); // "2003"
 ```
 
 ### convertNumber
 
 This function converts input into a number.
-* If the input is null or undefined, it returns 0.
-* If the input is not a number, it returns 0.
-* Otherwise, it returns the parsed float value of the input.
+
+- If the input is null or undefined, it returns 0.
+- If the input is not a number, it returns 0.
+- Otherwise, it returns the parsed float value of the input.
 
 #### Usage
 
 ```js
-  import { convertNumber } from '@kietpt2003/react-native-core-ui/utils';
-  const num = convertNumber("2003"); // 2003
+import { convertNumber } from "@kietpt2003/react-native-core-ui/utils";
+const num = convertNumber("2003"); // 2003
 ```
+
 ### convertSeconds
 
 This function convert seconds to a string in the format "mm:ss".
 
-* If the input is less than 0, it returns "00:00".
-* If the input is greater than 3599, it returns "00:00".
+- If the input is less than 0, it returns "00:00".
+- If the input is greater than 3599, it returns "00:00".
 
 #### Usage
 
 ```js
-  import { convertSeconds } from '@kietpt2003/react-native-core-ui/utils';
-  const time = convertSeconds(123); // "02:03"
+import { convertSeconds } from "@kietpt2003/react-native-core-ui/utils";
+const time = convertSeconds(123); // "02:03"
 ```
 
 ### formatHour
 
 Function to format seconds into a string in the format "hh:mm:ss".
-* If the input is less than 0, it returns "00:00:00".
-* If the input is greater than 86399, it returns "00:00:00".
+
+- If the input is less than 0, it returns "00:00:00".
+- If the input is greater than 86399, it returns "00:00:00".
 
 #### Usage
 
 ```js
-  import { formatHour } from '@kietpt2003/react-native-core-ui/utils';
-  const time = formatHour(3661); // "01:01:01"
+import { formatHour } from "@kietpt2003/react-native-core-ui/utils";
+const time = formatHour(3661); // "01:01:01"
 ```
 
 ### fixedDistance
 
 Function to format a distance value.
+
 - If the input is an integer, it returns the integer value.
 - If the input is a float, it returns the value formatted to a custom toFixed value decimal places.
 - If the input is null or undefined, it returns 0.
 
-*Note:* The toFixed value should be between 1 and 5, otherwise it defaults to 2.
+_Note:_ The toFixed value should be between 1 and 5, otherwise it defaults to 2.
 
 #### Usage
 
 ```js
-  import { fixedDistance } from '@kietpt2003/react-native-core-ui/utils';
-  const distance = fixedDistance(123.456); // "123.46"
-  const distance2 = fixedDistance(123.4567, 3); // "123.457"
+import { fixedDistance } from "@kietpt2003/react-native-core-ui/utils";
+const distance = fixedDistance(123.456); // "123.46"
+const distance2 = fixedDistance(123.4567, 3); // "123.457"
 ```
 
 ### formatMoney
@@ -684,29 +735,30 @@ Function to format money values.
 
 #### Props
 
-| Prop                     | Type                                                                | Default                                                   | Description                                                                                                                                                                                                                              |
-|--------------------------|---------------------------------------------------------------------|------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **`num`**     | `number` | `0`      | Define the value need to be format. |
-| **`maximumFractionDigits`**     | `number` | `0`      | Define the maximum fraction digits. [See example](#usage-18) |
-| **`lang`**     | `string` | `en-US`      | Define the language. This should be a BCP 47 language tag (e.g., 'en-US', 'vi-VN'). [View detail](#lang-prop) |
+| Prop                        | Type     | Default | Description                                                                                                   |
+| --------------------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------- |
+| **`num`**                   | `number` | `0`     | Define the value need to be format.                                                                           |
+| **`maximumFractionDigits`** | `number` | `0`     | Define the maximum fraction digits. [See example](#usage-18)                                                  |
+| **`lang`**                  | `string` | `en-US` | Define the language. This should be a BCP 47 language tag (e.g., 'en-US', 'vi-VN'). [View detail](#lang-prop) |
 
 #### lang prop
 
 This is a string that contains a language code and an optional country code, separated by a hyphen.
 
-*Structure:* `"[languageCode]-[countryCode]"`
-*Example:* `'en-IN'` => en: Language English, IN: Country India
-*Reference:*
+_Structure:_ `"[languageCode]-[countryCode]"`
+_Example:_ `'en-IN'` => en: Language English, IN: Country India
+_Reference:_
+
 - [List of ISO 639 language codes](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes)
 - [List of ISO 3166-1 country codes](https://vi.wikipedia.org/wiki/ISO_3166-1)
 
 #### Usage
 
 ```js
-  import { formatMoney } from '@kietpt2003/react-native-core-ui/utils';
-  const money = formatMoney(1234567.89); // "1,234,568"
-  const money2 = formatMoney(1234567.89, 2); // "1,234,567.89"
-  const money3 = formatMoney(1234567.89, 2, 'vi-VN'); // "1.234.567,89"
+import { formatMoney } from "@kietpt2003/react-native-core-ui/utils";
+const money = formatMoney(1234567.89); // "1,234,568"
+const money2 = formatMoney(1234567.89, 2); // "1,234,567.89"
+const money3 = formatMoney(1234567.89, 2, "vi-VN"); // "1.234.567,89"
 ```
 
 ## Debounce
@@ -717,23 +769,23 @@ This is a string that contains a language code and an optional country code, sep
 ### Usage
 
 ```jsx
-  import { debounce } from '@kietpt2003/react-native-core-ui/utils';
-  const onChangeText = debounce(() => {
-    console.log('Function executed!');
-  }, 1000);
+import { debounce } from "@kietpt2003/react-native-core-ui/utils";
+const onChangeText = debounce(() => {
+  console.log("Function executed!");
+}, 1000);
 
-  //Flush case
-  const debouncedLog = debounce(logMessage, 2000);
-  debouncedLog("Waiting 2s...");
-  setTimeout(() => {
-    debouncedLog.flush(); // Immediately execute the function
-  }, 1000);
+//Flush case
+const debouncedLog = debounce(logMessage, 2000);
+debouncedLog("Waiting 2s...");
+setTimeout(() => {
+  debouncedLog.flush(); // Immediately execute the function
+}, 1000);
 
-  //Cancel case
-  debouncedLog("Canceled");
-  setTimeout(() => {
-    debouncedLog.cancel(); // Don't execute the function
-  }, 1000);
+//Cancel case
+debouncedLog("Canceled");
+setTimeout(() => {
+  debouncedLog.cancel(); // Don't execute the function
+}, 1000);
 ```
 
 ## Others
@@ -745,16 +797,16 @@ Provide a function to clean HTML tags and &nbsp; from a string.
 ### Usage
 
 ```js
-  import { cleanHTML } from '@kietpt2003/react-native-core-ui/utils';
-  const raw = `
+import { cleanHTML } from "@kietpt2003/react-native-core-ui/utils";
+const raw = `
     <div>Hello&nbsp;&nbsp;&nbsp;World</div>
     <p>This is&nbsp;a <strong>test</strong></p>
   `;
-  console.log(cleanHTML(raw));
-  // Output:
-  // Hello
-  // World
-  // This is a test
+console.log(cleanHTML(raw));
+// Output:
+// Hello
+// World
+// This is a test
 ```
 
 ## 💖 Support Kiet!

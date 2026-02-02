@@ -1,9 +1,10 @@
 import { View, StyleSheet } from 'react-native'
 import React from 'react'
-import { LoadingSquareRadiusProps } from 'ScrollPercentage/types/ScrollPercentageTypes'
+import Svg, { Defs, Path, Rect, Stop } from 'react-native-svg'
+
+import { LinearGradient, LoadingSquareRadiusProps } from '../types/ScrollPercentageTypes'
 import { colors } from '@themes'
 import { scale } from '@utils'
-import Svg, { Defs, LinearGradient, Path, Rect, Stop } from 'react-native-svg'
 
 const LoadingSquareRadius = ({
   size = 120,

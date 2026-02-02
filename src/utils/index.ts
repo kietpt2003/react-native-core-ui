@@ -1,12 +1,12 @@
-import {
+export {
   statusBarHeight,
   StylePlatform,
   getPaddingBottom,
   getPaddingTop,
   isTablet,
 } from './resolutions';
-import { filterAllowedTextStyle } from './filters';
-import {
+export { filterAllowedTextStyle } from './filters';
+export {
   width,
   height,
   IPHONE_12_HEIGTH,
@@ -17,41 +17,17 @@ import {
   moderateScale,
   moderateHeightScale,
 } from './scale';
-import cleanTagHTML from './cleanTagHTML';
-import {
+export { default as cleanTagHTML } from './cleanTagHTML';
+export {
   convertString,
   convertNumber,
   convertSeconds,
   formatHour,
 } from './converter';
-import debounce from './debounce';
-import fixedDistance from './fixedDistance';
-import formatMoney from './formatMoney';
-import limitedString from './limitedString'
+export { default as debounce } from './debounce';
+export { default as fixedDistance } from './fixedDistance';
+export { default as formatMoney } from './formatMoney';
+export { default as limitedString } from './limitedString';
+export { IOS, ANDROID, MACOS, WEB, WINDOWS } from './getOS';
 
-export {
-  width,
-  height,
-  IPHONE_12_HEIGTH,
-  IPHONE_12_WIDTH,
-  scale,
-  scaleH,
-  scaleFont,
-  statusBarHeight,
-  filterAllowedTextStyle,
-  moderateScale,
-  moderateHeightScale,
-  StylePlatform,
-  getPaddingBottom,
-  getPaddingTop,
-  isTablet,
-  cleanTagHTML,
-  convertString,
-  convertNumber,
-  convertSeconds,
-  formatHour,
-  debounce,
-  fixedDistance,
-  formatMoney,
-  limitedString,
-}
+export { default as colorsUtils } from './colors';

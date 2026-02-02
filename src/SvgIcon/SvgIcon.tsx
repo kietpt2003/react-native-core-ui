@@ -2,7 +2,7 @@ import React from 'react';
 import { scale } from '@utils';
 import { colors } from '@themes';
 import { SvgIconProps } from './types/SvgIconTypes';
-import { IconAlertCircle, IconAngleLeft, IconAngleRight, IconCheckBox, IconCheckBoxOutlineBlank, IconCheckBoxWithBg, IconPlayCircle, IconPlus } from './components';
+import { IconAlertCircle, IconAngleLeft, IconAngleRight, IconCheckBox, IconCheckBoxOutlineBlank, IconCheckBoxWithBg, IconChevronDown, IconChevronUp, IconHome, IconPerson, IconPlayCircle, IconPlus } from './components';
 
 /**
  * The SvgIcon component provide a variety of custom icon
@@ -18,6 +18,16 @@ const SvgIcon = ({
   style,
 }: SvgIconProps) => {
   switch (name) {
+    case 'person':
+      return (
+        <IconPerson
+          size={size}
+          color={color}
+          strokeWidth={strokeWidth}
+          fill={fill}
+          style={style}
+        />
+      );
     case 'play-circle':
       return (
         <IconPlayCircle
@@ -83,6 +93,36 @@ const SvgIcon = ({
           size={size}
           color={color}
           strokeWidth={strokeWidth}
+          style={style}
+        />
+      );
+    case 'home':
+      return (
+        <IconHome
+          size={size}
+          color={color}
+          strokeWidth={strokeWidth}
+          fill={fill}
+          style={style}
+        />
+      );
+    case 'chevron-up':
+      return (
+        <IconChevronUp
+          size={size}
+          color={color}
+          strokeWidth={strokeWidth}
+          fill={fill}
+          style={style}
+        />
+      );
+    case 'chevron-down':
+      return (
+        <IconChevronDown
+          size={size}
+          color={color}
+          strokeWidth={strokeWidth}
+          fill={fill}
           style={style}
         />
       );

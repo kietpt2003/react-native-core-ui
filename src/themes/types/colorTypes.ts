@@ -1,4 +1,22 @@
 export interface Colors {
+  // Primary Colors
+  /**
+   * Preview: #29ABE2 ![#29ABE2](https://dummyimage.com/10x10/29ABE2/000000.png&text=+)
+   */
+  primary: '#29ABE2',
+
+  // Disabled Color
+  /**
+   * Preview: #F1F1F1 ![#F1F1F1](https://dummyimage.com/10x10/F1F1F1/000000.png&text=+)
+   */
+  disabled: '#F1F1F1',
+
+  // Error Color
+  /**
+   * Preview: #D92D20 ![#D92D20](https://dummyimage.com/10x10/D92D20/000000.png&text=+)
+   */
+  error: '#D92D20',
+
   // white
   /**
    * Preview: #F1F1F1 ![#F1F1F1](https://dummyimage.com/10x10/F1F1F1/000000.png&text=+)
@@ -633,4 +651,46 @@ export interface Colors {
       height: 1,
     },
   },
+
+  /**
+   * Apply light mode color
+   * 
+   * *Example: *
+   * 
+   * ```js
+   *  lightColors: {
+   *    surface: '#FFFFFF',
+   *    onSurface: '#000000',
+   *    outline: 'rgba(0,0,0,0.12)',
+   *    shadow: '#000000',
+   *  },
+   * ```
+   */
+  lightColors: {
+    surface: '#FFFFFF',
+    onSurface: '#000000',
+    outline: 'rgba(0,0,0,0.12)',
+    shadow: '#000000',
+  },
+
+  /**
+   * Apply dark mode color
+   * 
+   * *Example: *
+   * 
+   * ```js
+   *  darkColors: {
+   *    surface: '#121212',
+   *    onSurface: '#FFFFFF',
+   *    outline: 'rgba(255,255,255,0.12)',
+   *    shadow: '#000000',
+   *  },
+   * ```
+   */
+  darkColors: {
+    surface: '#121212',
+    onSurface: '#FFFFFF',
+    outline: 'rgba(255,255,255,0.12)',
+    shadow: '#000000',
+  }
 }

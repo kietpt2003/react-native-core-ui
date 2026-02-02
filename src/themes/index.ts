@@ -1,4 +1,5 @@
 import colors from "./colors"
 import fontSize from "./fontSize"
+import { elevationOverlay } from "./elevationOverlay";
 
-export { colors, fontSize };
+export { colors, fontSize, elevationOverlay };

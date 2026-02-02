@@ -72,3 +72,10 @@ yarn-error.log
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+#Storybook
+#
+debug-storybook.log
+react-native-core-ui
+
+.env
