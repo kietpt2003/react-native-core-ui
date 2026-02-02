@@ -1,9 +1,10 @@
 import { View, StyleSheet } from 'react-native'
 import React from 'react'
+import Svg, { Circle, Defs, Path, Stop } from 'react-native-svg';
+
 import { colors } from '@themes';
 import { scale } from '@utils';
-import Svg, { Circle, Defs, LinearGradient, Path, Stop } from 'react-native-svg';
-import { LoadingCircleProps } from 'ScrollPercentage/types/ScrollPercentageTypes';
+import { LinearGradient, LoadingCircleProps } from '../types/ScrollPercentageTypes';
 
 const LoadingCircle = ({
   size = 60,
@@ -107,4 +108,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoadingCircle
+export default LoadingCircle;

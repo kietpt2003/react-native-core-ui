@@ -4,6 +4,32 @@
   "description": "React Native Core UI components by KietPT",
   "main": "index.js",
   "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./index.js"
+    },
+    "./themes": {
+      "import": "./themes/index.js",
+      "require": "./themes/index.js"
+    },
+    "./utils": {
+      "import": "./utils/index.js",
+      "require": "./utils/index.js"
+    },
+    "./Cards/*": {
+      "import": "./Cards/*.js",
+      "require": "./Cards/*.js"
+    },
+    "./Badges/*": {
+      "import": "./Badges/*.js",
+      "require": "./Badges/*.js"
+    },
+    "./Accordion/*": {
+      "import": "./Accordion/*.js",
+      "require": "./Accordion/*.js"
+    }
+  },
   "files": [
     "dist",
     "src",
@@ -14,7 +40,7 @@
   ],
   "scripts": {
     "example": "yarn --cwd example",
-    "build": "node build.js",
+    "build": "node documents/buildFromRoot.js",
     "publish-lib": "yarn build && npm publish --registry=https://registry.npmjs.org/ --access public && npm publish --registry=https://npm.pkg.github.com/ --access public"
   },
   "author": "tuankiet.pham",
@@ -39,35 +65,33 @@
   },
   "license": "MIT",
   "peerDependencies": {
-    "@react-native-camera-roll/camera-roll": ">=7.10.0",
     "react": "18.2.0",
     "react-native": "0.71.0",
     "react-native-device-info": ">=8.1.3",
-    "react-native-gesture-handler": ">=2.9.0",
+    "react-native-fast-image": "^8.6.3",
+    "react-native-gesture-handler": ">=2.0.0",
     "react-native-iphone-x-helper": "^1.3.1",
-    "react-native-permissions": ">=3.6.0",
-    "react-native-reanimated": ">=2.8.0",
-    "react-native-safe-area-context": ">=3.2.0",
-    "react-native-svg": ">=13.9.0",
-    "react-native-vector-icons": ">=8.1.0"
+    "react-native-reanimated": ">=3.10.0",
+    "react-native-svg": ">=12.1.1"
   },
   "devDependencies": {
-    "@react-native-camera-roll/camera-roll": "7.10.0",
+    "@types/fs-extra": "^11",
     "@types/react": "18.2.38",
     "@types/react-native": "0.71",
-    "@types/react-native-vector-icons": "^6.4.18",
     "esbuild": "^0.25.3",
     "esbuild-plugin-alias": "^0.2.1",
     "fast-glob": "^3.3.3",
     "react-native-device-info": "8.1.3",
-    "react-native-gesture-handler": "2.9.0",
+    "react-native-fast-image": "^8.6.3",
+    "react-native-gesture-handler": "^2.25.0",
     "react-native-iphone-x-helper": "1.3.1",
-    "react-native-permissions": "3.6.0",
-    "react-native-reanimated": "2.8.0",
-    "react-native-safe-area-context": "3.2.0",
-    "react-native-svg": "13.9.0",
-    "react-native-vector-icons": "8.1.0",
+    "react-native-reanimated": "3.17.4",
+    "react-native-svg": "12.1.1",
+    "tsc-alias": "^1.8.16",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "fs-extra": "^11.3.3"
   },
   "resolutions": {
     "@types/react": "18.2.38"

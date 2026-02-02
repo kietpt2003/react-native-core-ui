@@ -17,10 +17,16 @@
     "skipLibCheck": true,
     "baseUrl": "./src",
     "paths": {
+      "@constant/*": ["constants/*"],
       "@constant": ["constants"],
+      "@utils/*": ["utils/*"],
       "@utils": ["utils"],
+      "@hooks/*": ["hooks/*"],
       "@hooks": ["hooks"],
-      "@themes": ["themes"]
+      "@themes/*": ["themes/*"],
+      "@themes": ["themes"],
+      "@context/*": ["context/*"],
+      "@context": ["context"]
     }
   },
   "include": ["src"],

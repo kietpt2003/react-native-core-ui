@@ -24,5 +24,6 @@ module.exports = {
         loose: true,
       },
     ],
+    ['module:react-native-dotenv'],
   ],
 };

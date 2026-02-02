@@ -6,6 +6,15 @@ import { Colors } from "./types/colorTypes";
  * *Example*: `import  { colors } from '@kietpt2003/react-native-core-ui/themes'`
  */
 export const colors: Colors = {
+  // Primary Colors
+  primary: '#29ABE2',
+
+  // Disabled Color
+  disabled: '#F1F1F1',
+
+  // Error Color
+  error: '#D92D20',
+
   // white
   default: '#F1F1F1',
   white: '#FFFFFF',
@@ -194,6 +203,20 @@ export const colors: Colors = {
       height: 1,
     },
   },
+
+  lightColors: {
+    surface: '#FFFFFF',
+    onSurface: '#000000',
+    outline: 'rgba(0,0,0,0.12)',
+    shadow: '#000000',
+  },
+
+  darkColors: {
+    surface: '#121212',
+    onSurface: '#FFFFFF',
+    outline: 'rgba(255,255,255,0.12)',
+    shadow: '#000000',
+  }
 };
 
 export default colors;

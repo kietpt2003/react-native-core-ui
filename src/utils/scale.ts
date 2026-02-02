@@ -38,7 +38,7 @@ export const scaleWidth = width / IPHONE_12_WIDTH;
 
 export const scaleHeight = height / IPHONE_12_HEIGTH;
 
-export const scaleAvg = ( scaleWidth + scaleHeight) / 2;
+export const scaleAvg = (scaleWidth + scaleHeight) / 2;
 
 /**
  * Will return a linear scaled result of the provided size, based on scaleAvg. Use for scaling font.

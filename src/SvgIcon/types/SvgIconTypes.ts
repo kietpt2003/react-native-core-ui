@@ -1,4 +1,5 @@
-import { ColorValue, StyleProp, ViewStyle } from "react-native";
+import { StyleProp, ViewStyle } from "react-native";
+import { Color } from "react-native-svg";
 
 export interface SvgIconProps {
   /** Define the icon that you want to use.
@@ -21,7 +22,7 @@ export interface SvgIconProps {
    * 
    * *Example:* `size = 23`
    */
-  color?: ColorValue;
+  color?: Color;
   /** Define the icon stroke width.
    * 
    * *Default:* `strokeWidth = scale(1)`
@@ -33,7 +34,7 @@ export interface SvgIconProps {
    * Optional. Some icons have a fill color, like check-box. Other icons
    * are just outlines. This prop is used to set the fill color of the icon.
    */
-  fill?: ColorValue,
+  fill?: Color,
   /** Define the style for the svg.
    * 
    * *Default:* `style = undefined`
@@ -51,4 +52,8 @@ export type SvgIconName =
   "check-box-outline-blank" |
   "alert-circle" |
   "angle-right" |
-  "play-circle"
+  "play-circle" |
+  "person" |
+  "home" |
+  "chevron-up" |
+  "chevron-down"
