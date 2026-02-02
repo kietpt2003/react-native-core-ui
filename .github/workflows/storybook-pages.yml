@@ -19,7 +19,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -29,19 +30,29 @@ jobs:
       - name: Enable Corepack (Yarn 4)
         run: corepack enable
 
-      - name: Install dependencies
+      # 1️⃣ Install root dependencies
+      - name: Install root dependencies
         run: yarn install --immutable
 
+      # 2️⃣ Install example app dependencies
+      - name: Install example Storybook dependencies
+        working-directory: example/RNCoreUISample
+        run: yarn install --immutable
+
+      # 3️⃣ Build Storybook from example app
       - name: Build Storybook (Web)
+        working-directory: example/RNCoreUISample
         run: yarn storybook-build-web
 
+      # 4️⃣ Upload Storybook static files
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: react-native-core-ui
+          path: example/RNCoreUISample/react-native-core-ui
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/deploy-pages@v4
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
