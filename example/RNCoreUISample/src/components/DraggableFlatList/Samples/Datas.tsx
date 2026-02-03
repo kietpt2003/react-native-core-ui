@@ -31,8 +31,8 @@ import {
   ScaleDecorator,
   ShadowDecorator,
   Text,
-} from '@estuary/rn-core-ui';
-import { WEB } from '@estuary/rn-core-ui/utils';
+} from '@kietpt2003/react-native-core-ui';
+import { WEB } from '@kietpt2003/react-native-core-ui/utils';
 
 const BasicSample = () => {
   const [data, setData] = React.useState([
@@ -116,7 +116,7 @@ export default BasicSample;
 export const CODE_SAMPLE_DRAGGABLE_HORIZONTAL = `
 import React from 'react';
 import { View } from 'react-native';
-import { DraggableFlatList, ShadowDecorator, Text } from '@estuary/rn-core-ui';
+import { DraggableFlatList, ShadowDecorator, Text } from '@kietpt2003/react-native-core-ui';
 
 const HorizontalList = () => {
   const [data, setData] = React.useState([
@@ -168,7 +168,7 @@ import {
   ScaleDecorator,
   OpacityDecorator,
   Text,
-} from '@estuary/rn-core-ui';
+} from '@kietpt2003/react-native-core-ui';
 
 const CallbacksExample = () => {
   const [data, setData] = React.useState([
@@ -231,7 +231,7 @@ import {
   ScaleDecorator,
   OpacityDecorator,
   Text,
-} from '@estuary/rn-core-ui';
+} from '@kietpt2003/react-native-core-ui';
 
 const CustomDecoratorsExample = () => {
   const [data, setData] = React.useState([
@@ -293,7 +293,7 @@ import {
   ScaleDecorator,
   OpacityDecorator,
   Text,
-} from '@estuary/rn-core-ui';
+} from '@kietpt2003/react-native-core-ui';
 
 const PlaceholdersExample = () => {
   const [data, setData] = React.useState([

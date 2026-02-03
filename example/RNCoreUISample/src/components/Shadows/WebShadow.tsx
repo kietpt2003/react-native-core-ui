@@ -1,8 +1,8 @@
 import React from 'react'
 import { StyleProp, View, ViewStyle } from 'react-native'
-import { WEB } from '@estuary/rn-core-ui/utils';
-import { Text } from '@estuary/rn-core-ui';
-import { colors } from '@estuary/rn-core-ui/themes';
+import { WEB } from '@kietpt2003/react-native-core-ui/utils';
+import { Text } from '@kietpt2003/react-native-core-ui';
+import { colors } from '@kietpt2003/react-native-core-ui/themes';
 
 import { shadowStyles } from './styles/shadowStyles';
 import CodeBox from './CodeBox';
@@ -34,12 +34,12 @@ const WebShadow = ({ shadowOffSet, shadowOpacity, shadowRadius }: WebShadowProps
         {
           WEB &&
           <View style={[shadowStyles.cbView, shadowStyles.ml]}>
-              <CodeBox
-                code={`const style = {
+            <CodeBox
+              code={`const style = {
   boxShadow: '${shadowOffSet.width}px ${shadowOffSet.height}px ${shadowRadius * 2}px rgba(0,0,0,${shadowOpacity})',
 };`
-            }
-                width={'100%'}
+              }
+              width={'100%'}
             />
           </View>
         }

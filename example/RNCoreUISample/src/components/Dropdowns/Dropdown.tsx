@@ -9,7 +9,7 @@ import {
   Platform,
 } from 'react-native'
 
-import { colors } from '@estuary/rn-core-ui/themes'
+import { colors } from '@kietpt2003/react-native-core-ui/themes'
 
 interface Option<T = string> {
   label: string

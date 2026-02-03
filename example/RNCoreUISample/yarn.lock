@@ -1341,11 +1341,6 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.57.1.tgz#de633db3ec2ef6a3c89e2f19038063e8a122e2c2"
   integrity sha512-d9zaMRSTIKDLhctzH12MtXvJKSSUhaHcjV+2Z+GK+EEY7XKpP5yR4x+N3TAcHTcu963nIr+TMcCb4DBCYX1z6Q==
 
-"@estuary/rn-core-ui@file:../../dist":
-  version "0.0.5"
-  dependencies:
-    fs-extra "^11.3.3"
-
 "@gorhom/bottom-sheet@5.1.6":
   version "5.1.6"
   resolved "https://registry.yarnpkg.com/@gorhom/bottom-sheet/-/bottom-sheet-5.1.6.tgz#92365894ae4d4eefdbaa577408cfaf62463a9490"
@@ -1672,6 +1667,11 @@
   dependencies:
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
+
+"@kietpt2003/react-native-core-ui@file:../../dist":
+  version "0.0.5"
+  dependencies:
+    fs-extra "^11.3.3"
 
 "@mdx-js/react@^3.0.0":
   version "3.1.1"

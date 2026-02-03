@@ -1,47 +1,47 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { View, ViewStyle } from 'react-native';
-import { Paper, SvgIcon, Text, Badge } from '@estuary/rn-core-ui';
-import { colors, fontSize } from '@estuary/rn-core-ui/themes';
-import { BadgeProps, BadgeVariant } from '@estuary/rn-core-ui/Badges/Badge';
+import { Paper, SvgIcon, Text, Badge } from '@kietpt2003/react-native-core-ui';
+import { colors, fontSize } from '@kietpt2003/react-native-core-ui/themes';
+import { BadgeProps, BadgeVariant } from '@kietpt2003/react-native-core-ui/Badges/Badge';
 
 import { booleanOptional, numberOptional, stringOptional } from '../../../src/types/types';
 
 const tmpBadgeContents = [1, 1, 0, 0];
 const tmpBadgeContentsNextGen = [99, 100, 1000];
 const tmpBadgeAlignment: {
-    variant?: BadgeVariant
-    badgeContent?: number | string
-    max?: number
+  variant?: BadgeVariant
+  badgeContent?: number | string
+  max?: number
 }[] = [
-  {
-    variant: 'dot',
-    badgeContent: 1,
-    max: 99
-  },
-  {
-    variant: 'standard',
-    badgeContent: 1,
-    max: 99
-  },
-  {
-    variant: 'standard',
-    badgeContent: 12,
-    max: 99
-  },
-  {
-    variant: 'standard',
-    badgeContent: 100,
-    max: 99
-  },
-  {
-    variant: 'standard',
-    badgeContent: 1000,
-    max: 999
-  },
-]
+    {
+      variant: 'dot',
+      badgeContent: 1,
+      max: 99
+    },
+    {
+      variant: 'standard',
+      badgeContent: 1,
+      max: 99
+    },
+    {
+      variant: 'standard',
+      badgeContent: 12,
+      max: 99
+    },
+    {
+      variant: 'standard',
+      badgeContent: 100,
+      max: 99
+    },
+    {
+      variant: 'standard',
+      badgeContent: 1000,
+      max: 999
+    },
+  ]
 
 const Rect = () => {
-  return <View style={{width: 68, aspectRatio: 1, backgroundColor: colors.yellow_EDDE5D}}/>
+  return <View style={{ width: 68, aspectRatio: 1, backgroundColor: colors.yellow_EDDE5D }} />
 }
 
 const Circle = () => {
@@ -102,8 +102,8 @@ const meta = {
         'I like this styles',
         0,
         1,
-        9, 
-        99, 
+        9,
+        99,
         999,
         1000
       ],
@@ -392,7 +392,7 @@ export const Overlap: Story = {
         >
           {i === 0 || i === 1 ?
             <Rect /> :
-            <Circle/>  
+            <Circle />
           }
         </Badge>
       ))}

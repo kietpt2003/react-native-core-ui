@@ -1,9 +1,9 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
-import { Card, CardContent, CardMedia, SvgIcon, Text } from '@estuary/rn-core-ui';
-import { colors } from '@estuary/rn-core-ui/themes';
+import { Card, CardContent, CardMedia, SvgIcon, Text } from '@kietpt2003/react-native-core-ui';
+import { colors } from '@kietpt2003/react-native-core-ui/themes';
 
-const RenderCustomItem = ({ title, url, mode, disabled } : { title: string, url?: string, mode?: boolean, disabled?: boolean }) => {
+const RenderCustomItem = ({ title, url, mode, disabled }: { title: string, url?: string, mode?: boolean, disabled?: boolean }) => {
   const [status, setStatus] = React.useState(false);
 
   if (mode) {
@@ -20,21 +20,21 @@ const RenderCustomItem = ({ title, url, mode, disabled } : { title: string, url?
   return (
     <View style={styles.container}>
       <Card raised>
-          <CardMedia
-            source={{
-              uri: url
-            }}
-            style={styles.img}
-          />
-          <CardContent>
-            <Text
-              bold
-              color={colors.purple_9370DB}
-              style={styles.text}
-            >
-              {title}
-            </Text>
-          </CardContent>
+        <CardMedia
+          source={{
+            uri: url
+          }}
+          style={styles.img}
+        />
+        <CardContent>
+          <Text
+            bold
+            color={colors.purple_9370DB}
+            style={styles.text}
+          >
+            {title}
+          </Text>
+        </CardContent>
       </Card>
     </View>
   );

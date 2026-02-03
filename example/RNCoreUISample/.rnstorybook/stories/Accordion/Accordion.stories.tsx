@@ -1,10 +1,10 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { StyleProp, StyleSheet, TextInput, View, ViewStyle } from 'react-native';
-import { Accordion, Button, SvgIcon, Text } from '@estuary/rn-core-ui';
-import { colors, fontSize } from '@estuary/rn-core-ui/themes';
+import { Accordion, Button, SvgIcon, Text } from '@kietpt2003/react-native-core-ui';
+import { colors, fontSize } from '@kietpt2003/react-native-core-ui/themes';
 import { fn } from 'storybook/internal/test';
-import { scale, WEB, width } from '@estuary/rn-core-ui/utils';
+import { scale, WEB, width } from '@kietpt2003/react-native-core-ui/utils';
 
 import { booleanOptional } from '../../../src/types/types';
 import { showAlert } from '../../../src/utils';
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   textInput: {
     paddingVertical: SPACING / 2,
     paddingHorizontal: SPACING,
-    borderWidth: 1, 
+    borderWidth: 1,
     borderRadius: 10,
     color: colors.gray_4F4F4F,
     borderColor: colors.white,

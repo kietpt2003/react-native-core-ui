@@ -1,13 +1,13 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { ScrollView, View } from 'react-native';
-import { AccordionGroup, AccordionItem, AccordionTree, Text } from '@estuary/rn-core-ui';
+import { AccordionGroup, AccordionItem, AccordionTree, Text } from '@kietpt2003/react-native-core-ui';
 import RenderItem from '../../../src/components/Accordion/RenderItem';
 import { CODE_BASIC_SAMPLE_1, CODE_SAMPLE_2, CODE_SAMPLE_3, CODE_SAMPLE_4, CODE_SAMPLE_5, nestedSample, nestedSample2, sampleData, sampleData2 } from '../../../src/components/Accordion/Samples/Datas';
 import RenderRootItem from '../../../src/components/Accordion/RenderRootItem';
-import { WEB, width } from '@estuary/rn-core-ui/utils';
+import { WEB, width } from '@kietpt2003/react-native-core-ui/utils';
 import RenderItemByLevel from '../../../src/components/Accordion/RenderItemByLevel';
-import { colors } from '@estuary/rn-core-ui/themes';
+import { colors } from '@kietpt2003/react-native-core-ui/themes';
 
 const meta = {
   title: 'Data Display/AccordionTree',
@@ -136,7 +136,7 @@ export const Basic: Story = {
   name: 'Basic Accordion',
   args: {
     data: sampleData,
-    type:'single',
+    type: 'single',
     renderItem: RenderItem,
     style: {
       width: WEB ? undefined : width / 1.2,
@@ -268,7 +268,7 @@ export const NestedAccordion: Story = {
         <AccordionGroup type='single'>
           <AccordionTree data={nestedSample} renderRootItem={RenderRootItem} renderItem={RenderItemByLevel} style={args.style} />
 
-          <View style={{height:20}}/>
+          <View style={{ height: 20 }} />
 
           <AccordionTree data={nestedSample2} renderRootItem={RenderRootItem} renderItem={RenderItemByLevel} style={args.style} />
         </AccordionGroup>

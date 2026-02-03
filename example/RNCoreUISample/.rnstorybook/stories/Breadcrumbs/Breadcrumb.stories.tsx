@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { StyleSheet, View } from 'react-native';
 import { fn } from 'storybook/test';
-import { Breadcrumb, SvgIcon, Text } from '@estuary/rn-core-ui'
-import { colors } from '@estuary/rn-core-ui/themes';
-import { WEB } from '@estuary/rn-core-ui/utils';
+import { Breadcrumb, SvgIcon, Text } from '@kietpt2003/react-native-core-ui'
+import { colors } from '@kietpt2003/react-native-core-ui/themes';
+import { WEB } from '@kietpt2003/react-native-core-ui/utils';
 
 import { showAlert } from '../../../src/utils';
 
@@ -35,7 +35,7 @@ const basicSamples = [
 const sampleWithIcons = [
   {
     item: <View style={styles.itemContainer}>
-      <SvgIcon name='home' size={WEB ? 25 : 18}/>
+      <SvgIcon name='home' size={WEB ? 25 : 18} />
       <Text>Estuary Solutions</Text>
     </View>,
     onPress: fn(() => showAlert('Estuary Solutions Press!', 'This is custom message')),

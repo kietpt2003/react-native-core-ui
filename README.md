@@ -9,8 +9,7 @@
 > [!TIP]
 >
 > - My info: <https://github.com/kietpt2003>
-> - Due to some TypeScript issues that lead to unable to suggest code correctly.
-> - But we have try our best, so now if you using our `sub path` (Example: `'/utils'`, `'/themes'`), you must initialize the import first, for the auto suggestion.
+> - View all component on web by [Storybook Core UI](https://kietpt2003.github.io/react-native-core-ui/) (Due to those components, designed for Mobile devices, some components are not work well on Storybook web)
 
 **Note:** If you are new to this project just follow this command:
 
@@ -30,13 +29,24 @@ yarn install
 ## Table of Contents
 
 - [Installation](#installation)
-- [Custom components](#custom-components)
+- [Inputs](#inputs)
   - [Text](#text)
-  - [GalleryBottomSheet](#gallerybottomsheet)
-  - [ScrollPercentage](#scrollpercentage)
-- [Custom hooks](#custom-hooks)
-  - [useGalleryAssets](#usegalleryassetsdefaultassettype-assettype)
-- [ScrollPercentage (Future)](#scrollpercentage)
+  - [Button](#button)
+  - [TextField](#textfield)
+- [Data Display](#data-display)
+  - [Accordion](#accordion)
+  - [AccordionTree](#accordiontree)
+  - [Badge](#badge)
+  - [Shadow](#shadow)
+- [Surfaces](#surfaces)
+  - [Card](#card)
+  - [Paper](#paper)
+- [Layout](#layout)
+  - [Flex](#flex)
+- [Lists](#lists)
+  - [DraggableFlatList](#draggableflatlist)
+- [Navigation](#navigaiton)
+  - [Breadcrumb](#breadcrumb)
 - [Color pallete](#colors)
 - [Font size template](#fontsize)
 - [Scaling Function](#scaling-function)
@@ -75,11 +85,11 @@ Please install required packages:
 - react-native-svg: ">=12.1.1", => For custom svg
 - react-native-vector-icons: ">=8.1.0", => Please config correct [installation guidline](https://www.npmjs.com/package/react-native-vector-icons#installation) for not handling icon error
 
-## Custom components
+## Inputs
 
 ### Text
 
-Text component for displaying text with custom styles and loading state. This component also have its own view and can easily be customized.
+Displays text with default styling. Use this as the baseline for typography.
 
 #### Props
 
@@ -92,304 +102,37 @@ Text component for displaying text with custom styles and loading state. This co
 | **`load`**      | `boolean`              | `false`   | Waiting before show Text                                                                                 |
 | **`styleView`** | `StyleProp<ViewStyle>` | _None_    | For custom a View outside Text component                                                                 |
 
-### GalleryBottomSheet
+### Button
 
-A bottom sheet component for displaying a gallery of images and videos. It allows users to select multiple assets and provides a filter for albums.
+### TextField
 
-<p align="center">
-  <img src="https://s4.gifyu.com/images/bLfMU.gif" width="200" style="display: inline-block; margin-right: 10px;" />
-  <img src="https://s4.gifyu.com/images/bLfzY.gif" width="200" style="display: inline-block; margin-right: 10px;" />
-  <img src="https://s4.gifyu.com/images/bLfMT.gif" width="200" style="display: inline-block;" />
-</p>
+## Data Display
 
-#### Permissions
+### Accordion
 
-##### Android
+### AccordionTree
 
-Add this permission to your AndroidManifest.xml:
+### Badge
 
-```xml
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32"/>
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="32"/>
-<uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-<uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
-```
+### Shadow
 
-##### iOS
+## Surfaces
 
-Add this perission to your Info.plist:
+### Card
 
-```xml
-<key>NSPhotoLibraryUsageDescription</key>
-<string>App request permission for access your gallery</string>
-<key>NSPhotoLibraryAddUsageDescription</key>
-<string>App request permission for create assets in your gallery</string>
-```
+### Paper
 
-#### Props
+## Layout
 
-| Prop                         | Type                                                                  | Default                                            | Description                                                                                                                                                           |
-| ---------------------------- | --------------------------------------------------------------------- | -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`isOpen`**                 | `boolean`                                                             | `false`                                            | Define to open gallery or not.                                                                                                                                        |
-| **`openHeight`**             | `number`                                                              | `ScreenHeight / 2`                                 | Define the position to open gallery. **Note:** y coordinate of the top of the bottom sheet from the top of the screen                                                 |
-| **`closeHeight`**            | `number`                                                              | `ScreenHeight`                                     | Define the position when closed gallery. **Note:** y coordinate of the top of the bottom sheet from the top of the screen                                             |
-| **`maxHeight`**              | `number`                                                              | `0`                                                | Define the maximum y coordinate that gallery should snapped at after finger release. **Note:** y coordinate of the top of the bottom sheet from the top of the screen |
-| **`headerBarColor`**         | `ColorValue`                                                          | `"#FFFFFF"`                                        | Define the background color of the header bar. **Note:** Full control over the look at each position. Whether it's beautiful or ugly is up to you.                    |
-| **`barIconColor`**           | `ColorValue`                                                          | `"#000000"`                                        | Define the header bar icon color. **Note:** Full control over the look at each position. Whether it's beautiful or ugly is up to you.                                 |
-| **`headerTitleStyle`**       | `Pick<TextStyle, "color" \| "fontFamily" \| "fontWeight">`            | `{ color: '#000000' }`                             | Define styling for the header title. Only supports: `color`, `fontFamily`, `fontWeight`.                                                                              |
-| **`headerTitle`**            | `string`                                                              | `'Tất cả ảnh'`                                     | Define the header title. Will be overridden by folder name when one is selected. Will be truncated if too long.                                                       |
-| **`headerTitleIconColor`**   | `ColorValue`                                                          | `"#000000"`                                        | Define the header title icon color.                                                                                                                                   |
-| **`backgroundColor`**        | `ColorValue`                                                          | `"#FFFFFF"`                                        | Define the background color of the gallery bottom sheet.                                                                                                              |
-| **`emptyGalleryMsg`**        | `string`                                                              | `'Không có hình ảnh để hiển thị'`                  | Message shown when there are no media items available. Please provide meaningful content.                                                                             |
-| **`emptyGalleryMsgStyle`**   | `Pick<TextStyle, "color" \| "fontFamily" \| "fontWeight">`            | `{ color: '#000000' }`                             | Define styling for the empty message. Only supports: `color`, `fontFamily`, `fontWeight`. [See example](#headertitlestyle)                                            |
-| **`videoIconStyle`**         | `{ circleStyle?: CircleStyleProps; polygonStyle?: CircleStyleProps }` | [See example](#videoiconstyle)                     | Define styling for the video icon shown for video items. Full control over circle and polygon styles.                                                                 |
-| **`albumItemStyle`**         | `AlbumFilterStyleProps`                                               | `{ titleColor: '#000000', countColor: '#A0A0A0' }` | Define style for album filter items. Full control over title and count colors. [See example](#albumitemstyle)                                                         |
-| **`assetType`**              | `'All'` \| `'Photos'` \| `'Videos'`                                   | `'All'`                                            | Asset types to display. Can be dynamically changed with setState.                                                                                                     |
-| **`maxSelectable`**          | `number`                                                              | `5`                                                | Max number of items selectable. Min: `0`, Max: `10`. Large values may cause performance issues.                                                                       |
-| **`onSelectedAssetsChange`** | `(assets: PhotoIdentifier[]) => void`                                 | `undefined`                                        | Define function for handling selected assets data. This function will be called when the user select an asset.                                                        |
+### Flex
 
-##### headerTitleStyle
+## Lists
 
-Only support: `color`, `fontFamily`, `fontWeight`.
+### DraggableFlatList
 
-```jsx
-  import { GalleryBottomSheet, Text } from '@kietpt2003/react-native-core-ui';
+## Navigaiton
 
-  <GalleryBottomSheet
-    isOpen={isOpen}
-    ...
-    headerTitleStyle={{
-      color: '#000000',
-      fontFamily: 'Arial',
-      fontWeight: 400,      // Correct ✅
-      fontSize: 20          // Wrong => Unsupport ❌
-    }}
-    ...
-  />
-```
-
-##### videoIconStyle
-
-Only support: `fill`, `stroke`, `strokeWidth`.
-For the `strokeWidth`, we accept value start from `scale(5)` to `scale(8)`
-
-```jsx
-  import { GalleryBottomSheet, Text } from '@kietpt2003/react-native-core-ui';
-
-  <GalleryBottomSheet
-    isOpen={isOpen}
-    ...
-    videoIconStyle={{
-      circleStyle: {
-        fill: 'rgba(0, 0, 0, 0.5)',
-        stroke: 'black',
-        strokeWidth: 7
-      },
-      polygonStyle: {
-        fill: 'rgba(0, 0, 0, 0.5)',
-        stroke: 'black',
-        strokeWidth: 7
-      },
-    }}
-    ...
-  />
-```
-
-##### albumItemStyle
-
-Only support: `titleColor`, `countColor`.
-
-```jsx
-  import { GalleryBottomSheet, Text } from '@kietpt2003/react-native-core-ui';
-
-  <GalleryBottomSheet
-    isOpen={isOpen}
-    ...
-    albumItemStyle={{
-      titleColor: '#000000',
-      countColor: '#A0A0A0'
-    }}
-    ...
-  />
-```
-
-### ScrollPercentage
-
-ScrollPercentage is a component that displays a loading indicator with a percentage value. It can be customized with different shapes (circle or square), colors, and gradients.
-
-#### Props
-
-| Prop                    | Type                | Default      | Description                                                                                                                                                                          |
-| ----------------------- | ------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **`hide`**              | `boolean`           | `false`      | Define to show or hide the loading figure.                                                                                                                                           |
-| **`percent`**           | `number`            | `0`          | Please provide the percent for calculate the loading percentage.                                                                                                                     |
-| **`size`**              | `number`            | `60`         | Provide the size for the loading figure.                                                                                                                                             |
-| **`borderRadius`**      | `number`            | `45`         | The border radius of the square figure. Just apply with square fiugre only.                                                                                                          |
-| **`backgroundColor`**   | `ColorValue`        | `none`       | The inline color of the loading figure before the loading start.                                                                                                                     |
-| **`strokeEmptyColor`**  | `ColorValue`        | `#FFFFFF`    | The stroke color while the percent is 0.                                                                                                                                             |
-| **`fill`**              | `ColorValue`        | `#FFFFFF`    | The fill of the loading figure. Can be a single color or an array of colors.                                                                                                         |
-| **`gradientDirection`** | `GradientDirection` | `horizontal` | The gradient direction of the fill. This property is only affected when the fill is an array of colors. The gradient direction can be `'horizontal'`, `'vertical'`, or `'diagonal'`. |
-| **`checkColor`**        | `ColorValue`        | `#000000`    | The color of the check mark.                                                                                                                                                         |
-
-#### Example
-
-```jsx
-import { ScrollPercentage } from "@estuary/rn-core-ui";
-const MyComponent = () => {
-  const [scrollPercent, setScrollPercent] = React.useState(0);
-  const [isOpen, setIsOpen] = React.useState(false);
-  return (
-    <ScrollPercentage
-      hide={isOpen}
-      size={60}
-      percent={scrollPercent}
-      backgroundColor="red"
-      strokeEmptyColor="blue"
-      fill="green" // Can be a single color or an array of colors
-      gradientDirection="horizontal" // Choose the gradient direction of the fill
-      checkColor="yellow" // Color of the check mark
-      animateSpeed={200} // Animation speed in milliseconds when showing/hiding the loading figure
-      figure="circle" // Choose between 'circle' or 'square'
-      startPosition="top-left" // Only for square figure
-      borderRadius={45} // Only for square figure
-    />
-  );
-};
-```
-
-## Custom hooks
-
-### useGalleryAssets(defaultAssetType?: AssetType)
-
-You can use this hook for accessing device's assets or requesting related permission.
-
-#### Permissions
-
-##### Android
-
-Add this permission to your AndroidManifest.xml:
-
-```xml
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32"/>
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="32"/>
-<uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-<uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
-```
-
-##### iOS
-
-Add this perission to your Info.plist:
-
-```xml
-<key>NSPhotoLibraryUsageDescription</key>
-<string>App request permission for access your gallery</string>
-<key>NSPhotoLibraryAddUsageDescription</key>
-<string>App request permission for create assets in your gallery</string>
-```
-
-#### Props
-
-| Prop                       | Type                                | Default     | Description                                                                                                                                                                                    |
-| -------------------------- | ----------------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`defaultAssetType`**     | `AssetType`                         | `'All'`     | Initiallize the default asset type.                                                                                                                                                            |
-| **`albums`**               | `Album[]`                           | `[]`        | Provide list of albums on current device.                                                                                                                                                      |
-| **`assets`**               | `Record<string, PhotoIdentifier[]>` | `{}`        | Provide list of assets on current device grouped by album.                                                                                                                                     |
-| **`fullAssets`**           | `PhotoIdentifier[]`                 | `[]`        | Provide list of assets on current device.                                                                                                                                                      |
-| **`loading`**              | `boolean`                           | `false`     | Provide loading assets state.                                                                                                                                                                  |
-| **`error`**                | `string`                            | `null`      | Provide string error if loading cause any error.                                                                                                                                               |
-| **`totalAssets`**          | `number`                            | `0`         | Provide the total assets that has been accessed.                                                                                                                                               |
-| **`fullAssetsPagination`** | `Pagination`                        | `undefined` | Provide the object related for pagination on `fullAssets`.                                                                                                                                     |
-| **`loadFullAssets`**       | `Promise function`                  | ``          | Provide function for fecth assets which not grouped by album. Return `true` if has next page. [See example](#usage)                                                                            |
-| **`loadAssets`**           | `Promise function`                  | ``          | Provide function for fecth assets which grouped by album. Return `true` if has next page. [See example](#usage)                                                                                |
-| **`pagination`**           | `Pagination`                        | `undefined` | Provide the object related for pagination on `assets`.                                                                                                                                         |
-| **`requestPermission`**    | `Promise function`                  | ``          | Provide function for request permission. Return `true` if user provided permission. [See example](#usage)                                                                                      |
-| **`checkPermission`**      | `Promise function`                  | ``          | Provide function returning if user has provided permission. [See example](#usage)                                                                                                              |
-| **`hasPermission`**        | `boolean`                           | `false`     | Provide a state that keep track user permisison.                                                                                                                                               |
-| **`changeAssetType`**      | `function`                          | ``          | Provide function changing with asset type that you want to fecth. Please notice that, you should provide video permision if want to access videos. Default type `'All'`. [See example](#usage) |
-
-#### Usage
-
-```jsx
-  import { View, Text } from 'react-native'
-  import React from 'react'
-  import { useGalleryAssets } from '@kietpt2003/react-native-core-ui';
-
-  const MyComponent = () => {
-    const [selectedAlbum, setSelectedAlbum] = React.useState<Album | null>(null);
-    const {
-        albums,
-        fullAssets,
-        fullAssetsPagination,
-        loadFullAssets,
-        totalAssets,
-        assets,
-        loadAssets,
-        pagination,
-        requestPermission,
-        hasPermission,
-        changeAssetType,
-    } = useGalleryAssets('All');
-
-    const getSelectedInfo = (item: any) => {
-      // Do your own selection logic
-    }
-
-    const toggleAsset = (item: any) => {
-      // Do your own selection logic
-    }
-
-    return (
-      <View>
-        {(albums.length === 0 || fullAssets.length === 0 || totalAssets == 0) ? (
-          <View>
-            <Text style={[
-              styles.noImage,
-              safeEmptyGalleryMsgStyle
-            ]}>No assets</Text>
-          </View>
-        ) : (
-        <FlatList
-          data={selectedAlbum == null ? fullAssets : assets[selectedAlbum.id]}
-          keyExtractor={(item) => item.node.image.uri}
-          renderItem={({ item }) => {
-            const info = getSelectedInfo(item);
-            return (
-              <TouchableOpacity
-                style={styles.image}
-                onPress={() => toggleAsset(item)}
-                activeOpacity={0.7}
-              >
-                <Image
-                  source={{ uri: item.node.image.uri }}
-                  style={styles.image}
-                />
-                  {
-                    item.node.type === "video/mp4" &&
-                    <PlayCircle size={videoIconSize} />
-                  }
-                  {info.isSelected && (
-                    <SelectItem value={info.index + 1} />
-                  )}
-              </TouchableOpacity>
-            )
-          }}
-          ...
-          onEndReached={() => {
-            //Load more assets
-            if (selectedAlbum == null) {
-              loadFullAssets(15, fullAssetsPagination?.endCursor, assetTypeState);
-            } else {
-              loadAssets(selectedAlbum, 15, pagination[selectedAlbum.id].endCursor, assetTypeState);
-            }
-          }}
-        />
-        )}
-      </View>
-    )
-  }
-
-  export default MyComponent
-```
+### Breadcrumb
 
 ## Colors
 

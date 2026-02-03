@@ -1,8 +1,8 @@
 import React from 'react'
 import { StyleSheet, TextInput, View } from 'react-native'
 import Slider from '@react-native-community/slider';
-import { colors } from '@estuary/rn-core-ui/themes';
-import { Text } from '@estuary/rn-core-ui';
+import { colors } from '@kietpt2003/react-native-core-ui/themes';
+import { Text } from '@kietpt2003/react-native-core-ui';
 
 import { shadowStyles } from './styles/shadowStyles';
 
@@ -33,9 +33,9 @@ const CustomSlider = ({
     <View>
       <View style={shadowStyles.sliderHeader}>
         <Text bold color={colors.black} style={shadowStyles.content}>{content || ''}</Text>
-        <TextInput 
-          value={inputValue} 
-          onChangeText={onChangeText} 
+        <TextInput
+          value={inputValue}
+          onChangeText={onChangeText}
           inputMode='numeric'
           style={shadowStyles.sliderTextInput}
         />

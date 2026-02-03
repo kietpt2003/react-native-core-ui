@@ -8,8 +8,8 @@ import {
   DimensionValue,
 } from 'react-native';
 import Clipboard from '@react-native-clipboard/clipboard';
-import { Text } from '@estuary/rn-core-ui';
-import { WEB } from '@estuary/rn-core-ui/utils';
+import { Text } from '@kietpt2003/react-native-core-ui';
+import { WEB } from '@kietpt2003/react-native-core-ui/utils';
 
 interface CodeBoxProps {
   code: string;
@@ -18,12 +18,12 @@ interface CodeBoxProps {
   maxHeight?: number;
 }
 
-const CodeBox = ({ 
+const CodeBox = ({
   code,
   width,
   height,
   maxHeight = 260,
- }: CodeBoxProps) => {
+}: CodeBoxProps) => {
   const [copied, setCopied] = React.useState(false);
 
   const onCopy = async () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { SvgIcon, Text } from '@estuary/rn-core-ui';
-import { AccordionTreeItemProps } from '@estuary/rn-core-ui/Accordion/types/AccordionTypes';
+import { SvgIcon, Text } from '@kietpt2003/react-native-core-ui';
+import { AccordionTreeItemProps } from '@kietpt2003/react-native-core-ui/Accordion/types/AccordionTypes';
 
 
 const RenderItem = ({ item, isExpanded, level }: AccordionTreeItemProps) => {

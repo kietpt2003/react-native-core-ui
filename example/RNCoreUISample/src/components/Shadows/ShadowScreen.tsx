@@ -1,8 +1,8 @@
 import React from 'react'
 import { View } from 'react-native'
-import { WEB } from '@estuary/rn-core-ui/utils'
-import { colors } from '@estuary/rn-core-ui/themes'
-import { Text } from '@estuary/rn-core-ui';
+import { WEB } from '@kietpt2003/react-native-core-ui/utils'
+import { colors } from '@kietpt2003/react-native-core-ui/themes'
+import { Text } from '@kietpt2003/react-native-core-ui';
 
 import {
   androidDepth,
@@ -67,13 +67,13 @@ const ShadowScreen = () => {
   const onChangeShadow = () => {
     if (elevation >= 1) {
       const s = parseShadow(androidDepth.penumbra[elevation - 1]);
-  
+
       const y = s.y === 1 ? 1 : Math.floor(s.y * 0.5);
-  
+
       const opacity = Number(
         interpolate(elevation - 1, 1, 24, 0.2, 0.6).toFixed(2)
       );
-  
+
       const radius = Number(
         interpolate(s.blur, 1, 38, 1, 16).toFixed(2)
       );
@@ -136,87 +136,87 @@ const ShadowScreen = () => {
     <View style={shadowStyles.container}>
       <View style={shadowStyles.actionsContainer}>
         <CustomSlider
-            minimumValue={-512}
-            maximumValue={512}
-            step={1}
-            onValueChange={
+          minimumValue={-512}
+          maximumValue={512}
+          step={1}
+          onValueChange={
+            (v) =>
+              setShadowOffset(prev => ({
+                ...prev,
+                width: v,
+              }))
+          }
+          value={WEB ? shadowOffSet.width : tmpShadowOffSet.width}
+          onSlidingComplete={
+            WEB ?
+              undefined :
               (v) =>
-                setShadowOffset(prev => ({
+                setTmpShadowOffset(prev => ({
                   ...prev,
                   width: v,
                 }))
-            }
-            value={WEB ? shadowOffSet.width : tmpShadowOffSet.width}
-            onSlidingComplete={
-              WEB ?
-                undefined :
-                (v) =>
-                  setTmpShadowOffset(prev => ({
-                    ...prev,
-                    width: v,
-                  }))
-            }
-            content={'X: '}
-            inputValue={shadowOffSet.width?.toString() || ''}
-            onChangeText={
-              (t) =>
-                setShadowOffset(prev => ({
-                  ...prev,
-                  width: Number(t),
-                }))
-            }
-          />
+          }
+          content={'X: '}
+          inputValue={shadowOffSet.width?.toString() || ''}
+          onChangeText={
+            (t) =>
+              setShadowOffset(prev => ({
+                ...prev,
+                width: Number(t),
+              }))
+          }
+        />
 
-          <CustomSlider
-            minimumValue={-512}
-            maximumValue={512}
-            step={1}
-            onValueChange={
+        <CustomSlider
+          minimumValue={-512}
+          maximumValue={512}
+          step={1}
+          onValueChange={
+            (v) =>
+              setShadowOffset(prev => ({
+                ...prev,
+                height: v,
+              }))
+          }
+          value={WEB ? shadowOffSet.height : tmpShadowOffSet.height}
+          onSlidingComplete={
+            WEB ?
+              undefined :
               (v) =>
-                setShadowOffset(prev => ({
+                setTmpShadowOffset(prev => ({
                   ...prev,
                   height: v,
                 }))
-            }
-            value={WEB ? shadowOffSet.height : tmpShadowOffSet.height}
-            onSlidingComplete={
-              WEB ?
-                undefined :
-                (v) =>
-                  setTmpShadowOffset(prev => ({
-                    ...prev,
-                    height: v,
-                  }))
-            }
-            content={'Y: '}
-            inputValue={shadowOffSet.height?.toString() || ''}
-            onChangeText={
-              (t) =>
-                setShadowOffset(prev => ({
-                  ...prev,
-                  height: Number(t),
-                }))
-            }
-          />
+          }
+          content={'Y: '}
+          inputValue={shadowOffSet.height?.toString() || ''}
+          onChangeText={
+            (t) =>
+              setShadowOffset(prev => ({
+                ...prev,
+                height: Number(t),
+              }))
+          }
+        />
 
-          <CustomSlider
-            minimumValue={1}
-            maximumValue={24}
-            step={1}
-            onValueChange={setElevation}
-            value={WEB ? elevation : tmpElevation}
-            onSlidingComplete={
-              WEB ?
-                undefined :
-                setTmpElevation
-            }
-            content={'Z: '}
-            inputValue={elevation?.toString() || ''}
-            onChangeText={
-              (t) =>
-                setElevation(Number(t))
-            }
-          />
+        <CustomSlider
+          minimumValue={1}
+          maximumValue={24}
+          step={1}
+          onValueChange={setElevation}
+          value={WEB ? elevation : tmpElevation}
+          onSlidingComplete={
+            WEB ?
+              undefined :
+              setTmpElevation
+          }
+          content={'Z: '}
+          inputValue={elevation?.toString() || ''}
+          onChangeText={
+            (t) =>
+              setElevation(Number(t))
+          }
+        />
       </View>
       <Dropdown
         value={elevation}

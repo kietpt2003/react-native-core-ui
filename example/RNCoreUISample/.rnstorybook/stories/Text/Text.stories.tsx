@@ -1,13 +1,14 @@
-import { colors, fontSize } from '@estuary/rn-core-ui/themes'
+import { colors, fontSize } from '@kietpt2003/react-native-core-ui/themes'
 import type { Meta, StoryObj } from '@storybook/react';
 import { View } from 'react-native';
-import { Text } from '@estuary/rn-core-ui';
+import { Text } from '@kietpt2003/react-native-core-ui';
 
-import { 
+import {
   booleanOptional,
   stringOptional,
   numberOptional
 } from '../../../src/types/types'
+import { TEXT_BOLD_SAMPLE, TEXT_DEFAULT_SAMPLE } from '../../../src/components/Texts/Samples/Data';
 
 const meta = {
   title: 'Inputs/Text',
@@ -123,7 +124,7 @@ const meta = {
         },
         type: {
           summary: 'Type',
-          detail:'string\nundefined\nReactNode',
+          detail: 'string\nundefined\nReactNode',
         }
       },
     },
@@ -131,6 +132,12 @@ const meta = {
   parameters: {
     range: {
       size: { type: "number", min: 10, max: 50, step: 1 }
+    },
+    docs: {
+      description: {
+        component:
+          `A reusable text component that extends React Native's \`Text\`, supporting font size, color, weight variants, and italic styling for consistent typography across the app.`,
+      },
     },
   },
 } satisfies Meta<typeof Text>;
@@ -152,6 +159,17 @@ export const Default: Story = {
     thin: false,
     children: 'This is default content. You can change this if you want.'
   },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          `Displays text with default styling. Use this as the baseline for typography.`,
+      },
+      source: {
+        code: TEXT_DEFAULT_SAMPLE,
+      },
+    },
+  },
 }
 
 export const Bold: Story = {
@@ -159,6 +177,17 @@ export const Bold: Story = {
   args: {
     bold: true,
     children: 'This is bold content. You can change this if you want.'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          `Renders text with a bold font weight for strong emphasis.`,
+      },
+      source: {
+        code: TEXT_BOLD_SAMPLE,
+      },
+    },
   },
 };
 
@@ -168,6 +197,14 @@ export const SemiBold: Story = {
     semiBold: true,
     children: 'This is semi bold content. You can change this if you want.'
   },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          `Displays text with a semi-bold font weight for medium emphasis.`,
+      },
+    },
+  },
 };
 
 export const Medium: Story = {
@@ -175,6 +212,14 @@ export const Medium: Story = {
   args: {
     medium: true,
     children: 'This is default content. You can change this if you want.'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          `Uses a medium font weight, suitable for labels or secondary emphasis.`,
+      },
+    },
   },
 };
 
@@ -184,6 +229,14 @@ export const Light: Story = {
     light: false,
     children: 'This is light content. You can change this if you want.'
   },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          `Renders text with a light font weight for subtle or less prominent content.`,
+      },
+    },
+  },
 };
 
 export const Thin: Story = {
@@ -192,6 +245,14 @@ export const Thin: Story = {
     thin: true,
     children: 'This is thin content. You can change this if you want.'
   },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          `Displays text with a very thin font weight for minimal visual emphasis.`,
+      },
+    },
+  },
 };
 
 export const Italic: Story = {
@@ -199,5 +260,13 @@ export const Italic: Story = {
   args: {
     italic: true,
     children: 'This is italic content. You can change this if you want.'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          `Renders italic text, commonly used for quotes or emphasis.`,
+      },
+    },
   },
 };

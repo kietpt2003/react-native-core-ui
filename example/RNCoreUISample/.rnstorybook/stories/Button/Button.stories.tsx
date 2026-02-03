@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { View } from 'react-native';
 import { fn } from 'storybook/test';
-import { Button, SvgIcon } from '@estuary/rn-core-ui'
-import { colors, fontSize } from '@estuary/rn-core-ui/themes';
+import { Button, SvgIcon } from '@kietpt2003/react-native-core-ui'
+import { colors, fontSize } from '@kietpt2003/react-native-core-ui/themes';
 
 import { showAlert } from '../../../src/utils';
 import {
@@ -21,7 +21,7 @@ const meta = {
     ),
   ],
   tags: ['autodocs'],
-  args: { 
+  args: {
     onPress: fn(() => showAlert('Button Press!', 'This is custom message')),
     onPressIn: fn(() => console.log('Button press in!')),
     onPressOut: fn(() => console.log('Button press out!')),

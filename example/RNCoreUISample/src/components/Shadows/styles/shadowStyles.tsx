@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
-import { colors, fontSize } from "@estuary/rn-core-ui/themes";
-import { WEB, width } from "@estuary/rn-core-ui/utils";
+import { colors, fontSize } from "@kietpt2003/react-native-core-ui/themes";
+import { WEB, width } from "@kietpt2003/react-native-core-ui/utils";
 
 const ITEM_WIDTH_LARGE = width / 2.5;
 const SPACING = 30;
