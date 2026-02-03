@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { View, ViewStyle } from 'react-native';
-import { Paper, SvgIcon, Text } from '@estuary/rn-core-ui';
-import { colors, fontSize } from '@estuary/rn-core-ui/themes';
-import { PaperElevation } from '@estuary/rn-core-ui/Cards/Paper';
+import { Paper, SvgIcon, Text } from '@kietpt2003/react-native-core-ui';
+import { colors, fontSize } from '@kietpt2003/react-native-core-ui/themes';
+import { PaperElevation } from '@kietpt2003/react-native-core-ui/Cards/Paper';
 
 import { booleanOptional, numberOptional, stringOptional } from '../../../src/types/types';
 
@@ -134,7 +134,7 @@ export const Elevation: Story = {
     }
   },
   render: (args) => (
-    <View style={{ flexDirection: 'row', flexWrap:'wrap', gap: 30 }}>
+    <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 30 }}>
       {elevations.map((item, i) => (
         <Paper
           key={i}

@@ -2,8 +2,8 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { View } from 'react-native';
-import { Flex } from '@estuary/rn-core-ui';
-import { colors } from '@estuary/rn-core-ui/themes';
+import { Flex } from '@kietpt2003/react-native-core-ui';
+import { colors } from '@kietpt2003/react-native-core-ui/themes';
 
 import { Box } from '../../../src/components/Flex';
 
@@ -68,7 +68,7 @@ const meta = {
         'space-around',
         'space-evenly',
       ],
-      description: 'Justify items on the main axis',     
+      description: 'Justify items on the main axis',
       table: {
         defaultValue: {
           summary: 'flex-start',

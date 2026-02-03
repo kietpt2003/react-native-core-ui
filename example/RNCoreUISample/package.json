@@ -19,7 +19,7 @@
     "change-pro-windows": "powershell -ExecutionPolicy Bypass -File .\\change-production.ps1"
   },
   "dependencies": {
-    "@estuary/rn-core-ui": "file:../../dist",
+    "@kietpt2003/react-native-core-ui": "file:../../dist",
     "@react-native-clipboard/clipboard": "^1.16.3",
     "@react-native-community/blur": "4.4.1",
     "@react-native-community/datetimepicker": "8.4.2",

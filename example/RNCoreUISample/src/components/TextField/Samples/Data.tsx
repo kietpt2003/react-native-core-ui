@@ -1,6 +1,6 @@
 export const BASIC_INPUT_SAMPLE = `
 import React from 'react';
-import { TextField } from '@estuary/rn-core-ui';
+import { TextField } from '@kietpt2003/react-native-core-ui';
 
 const BasicInput = () => {
   const [text, setText] = React.useState('');
@@ -21,8 +21,8 @@ export default BasicInput;
 
 export const INPUT_WITH_HELPER_SAMPLE = `
 import React from 'react';
-import { TextField } from '@estuary/rn-core-ui';
-import { colors } from '@estuary/rn-core-ui/themes';
+import { TextField } from '@kietpt2003/react-native-core-ui';
+import { colors } from '@kietpt2003/react-native-core-ui/themes';
 
 const InputWithHelperText = () => {
   const [text, setText] = React.useState('');
@@ -46,8 +46,8 @@ export default InputWithHelperText;
 
 export const INPUT_WITH_ERROR_SAMPLE = `
 import React from 'react';
-import { TextField } from '@estuary/rn-core-ui';
-import { colors } from '@estuary/rn-core-ui/themes';
+import { TextField } from '@kietpt2003/react-native-core-ui';
+import { colors } from '@kietpt2003/react-native-core-ui/themes';
 
 const InputWithError = () => {
   const [text, setText] = React.useState('');
@@ -72,8 +72,8 @@ export default InputWithError;
 export const INPUT_WITH_ICON_SAMPLE = `
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { SvgIcon, TextField } from '@estuary/rn-core-ui';
-import { colors } from '@estuary/rn-core-ui/themes';
+import { SvgIcon, TextField } from '@kietpt2003/react-native-core-ui';
+import { colors } from '@kietpt2003/react-native-core-ui/themes';
 
 const InputWithIcon = () => {
   const [text, setText] = React.useState('');
@@ -102,8 +102,8 @@ export default InputWithIcon;
 
 export const WRONG_INPUT_MULTILINE_SAMPLE = `
 import React from 'react';
-import { TextField } from '@estuary/rn-core-ui';
-import { colors, fontSize } from '@estuary/rn-core-ui/themes';
+import { TextField } from '@kietpt2003/react-native-core-ui';
+import { colors, fontSize } from '@kietpt2003/react-native-core-ui/themes';
 
 const WrongInputDemo = () => {
   const [text, setText] = React.useState('');
@@ -141,8 +141,8 @@ export default WrongInputDemo;
 
 export const CORRECT_INPUT_MULTILINE_SAMPLE = `
 import React from 'react';
-import { TextField } from '@estuary/rn-core-ui';
-import { colors, fontSize } from '@estuary/rn-core-ui/themes';
+import { TextField } from '@kietpt2003/react-native-core-ui';
+import { colors, fontSize } from '@kietpt2003/react-native-core-ui/themes';
 
 const CorrectInputDemo = () => {
   const [text, setText] = React.useState('');
@@ -173,8 +173,8 @@ export default CorrectInputDemo;
 
 export const INPUT_MULTILINE_SAMPLE = `
 import React from 'react';
-import { TextField } from '@estuary/rn-core-ui';
-import { colors, fontSize } from '@estuary/rn-core-ui/themes';
+import { TextField } from '@kietpt2003/react-native-core-ui';
+import { colors, fontSize } from '@kietpt2003/react-native-core-ui/themes';
 
 const InputWithIcon = () => {
   const [text, setText] = React.useState('');
@@ -204,7 +204,7 @@ export default InputWithIcon;
 
 export const INPUT_DISABLE_SAMPLE = `
 import React from 'react';
-import { TextField } from '@estuary/rn-core-ui';
+import { TextField } from '@kietpt2003/react-native-core-ui';
 
 const InputDisable = () => {
   const [text, setText] = React.useState('');
@@ -230,8 +230,8 @@ export default InputDisable;
 
 export const INPUT_CUSTOM_COLOR_SAMPLE = `
 import React from 'react';
-import { TextField } from '@estuary/rn-core-ui';
-import { colors } from '@estuary/rn-core-ui/themes';
+import { TextField } from '@kietpt2003/react-native-core-ui';
+import { colors } from '@kietpt2003/react-native-core-ui/themes';
 
 const InputCustomColor = () => {
   const [text, setText] = React.useState('');
@@ -257,8 +257,8 @@ export default InputCustomColor;
 
 export const INPUT_LABEL_SIZE_SAMPLE = `
 import React from 'react';
-import { TextField } from '@estuary/rn-core-ui';
-import { fontSize } from '@estuary/rn-core-ui/themes';
+import { TextField } from '@kietpt2003/react-native-core-ui';
+import { fontSize } from '@kietpt2003/react-native-core-ui/themes';
 
 const InputLabelSize = () => {
   const [text, setText] = React.useState('');
@@ -283,7 +283,7 @@ export default InputLabelSize;
 
 export const INPUT_FLOATING_LABEL_SAMPLE = `
 import React from 'react';
-import { TextField } from '@estuary/rn-core-ui';
+import { TextField } from '@kietpt2003/react-native-core-ui';
 
 const InputFloatingLabel = () => {
   const [text, setText] = React.useState('');
@@ -307,7 +307,7 @@ export default InputFloatingLabel;
 
 export const INPUT_CONTROLLED_SAMPLE = `
 import React from 'react';
-import { Text, TextField } from '@estuary/rn-core-ui';
+import { Text, TextField } from '@kietpt2003/react-native-core-ui';
 
 const InputFloatingLabel = () => {
   const [phone, setPhone] = React.useState('');
@@ -344,8 +344,8 @@ export default InputFloatingLabel;
 export const INPUT_FORM_SAMPLE = `
 import React from 'react';
 import { Alert, View } from 'react-native';
-import { Button, Text, TextField } from '@estuary/rn-core-ui';
-import { colors, fontSize } from '@estuary/rn-core-ui/themes';
+import { Button, Text, TextField } from '@kietpt2003/react-native-core-ui';
+import { colors, fontSize } from '@kietpt2003/react-native-core-ui/themes';
 
 const InputFormSample = () => {
   const [formData, setFormData] = React.useState({

@@ -1,4 +1,4 @@
-import { AccordionNode } from '@estuary/rn-core-ui/Accordion/types/AccordionTypes';
+import { AccordionNode } from '@kietpt2003/react-native-core-ui/Accordion/types/AccordionTypes';
 import RenderCustomItem from '../RenderCustomItem';
 
 export const sampleData: AccordionNode[] = [
@@ -498,8 +498,8 @@ export const nestedSample2: AccordionNode[] = [
 export const CODE_BASIC_SAMPLE_1 = `
 import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { SvgIcon, Text } from '@estuary/rn-core-ui';
-import { WEB, width } from '@estuary/rn-core-ui/utils';
+import { SvgIcon, Text } from '@kietpt2003/react-native-core-ui';
+import { WEB, width } from '@kietpt2003/react-native-core-ui/utils';
 
 const data = [
   {
@@ -688,8 +688,8 @@ export default Demo;
 export const CODE_SAMPLE_2 = `
 import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { SvgIcon, Text } from '@estuary/rn-core-ui';
-import { WEB, width } from '@estuary/rn-core-ui/utils';
+import { SvgIcon, Text } from '@kietpt2003/react-native-core-ui';
+import { WEB, width } from '@kietpt2003/react-native-core-ui/utils';
 
 const data = [
   {
@@ -878,9 +878,9 @@ export default Demo;
 export const CODE_SAMPLE_3 = `
 import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { SvgIcon, Text } from '@estuary/rn-core-ui';
-import { colors } from '@estuary/rn-core-ui/themes';
-import { WEB, width } from '@estuary/rn-core-ui/utils';
+import { SvgIcon, Text } from '@kietpt2003/react-native-core-ui';
+import { colors } from '@kietpt2003/react-native-core-ui/themes';
+import { WEB, width } from '@kietpt2003/react-native-core-ui/utils';
 
 const data = [
   {
@@ -1095,9 +1095,9 @@ export default Demo;
 export const CODE_SAMPLE_4 = `
 import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { Card, CardContent, CardMedia, SvgIcon, Text } from '@estuary/rn-core-ui';
-import { colors } from '@estuary/rn-core-ui/themes';
-import { WEB, width } from '@estuary/rn-core-ui/utils';
+import { Card, CardContent, CardMedia, SvgIcon, Text } from '@kietpt2003/react-native-core-ui';
+import { colors } from '@kietpt2003/react-native-core-ui/themes';
+import { WEB, width } from '@kietpt2003/react-native-core-ui/utils';
 
 const RenderCustomItem = ({ title, url, mode, disabled }) => {
   const [status, setStatus] = React.useState(false);
@@ -1447,9 +1447,9 @@ export default Demo;
 export const CODE_SAMPLE_5 = `
 import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { Card, CardContent, CardMedia, SvgIcon, Text } from '@estuary/rn-core-ui';
-import { colors } from '@estuary/rn-core-ui/themes';
-import { WEB, width } from '@estuary/rn-core-ui/utils';
+import { Card, CardContent, CardMedia, SvgIcon, Text } from '@kietpt2003/react-native-core-ui';
+import { colors } from '@kietpt2003/react-native-core-ui/themes';
+import { WEB, width } from '@kietpt2003/react-native-core-ui/utils';
 
 const RenderCustomItem = ({ title, url, mode, disabled }) => {
   const [status, setStatus] = React.useState(false);

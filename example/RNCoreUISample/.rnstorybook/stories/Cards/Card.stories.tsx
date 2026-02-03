@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { Avatar, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, SvgIcon, Text } from '@estuary/rn-core-ui';
-import { colors, fontSize } from '@estuary/rn-core-ui/themes';
-import { PaperElevation } from '@estuary/rn-core-ui/Cards/Paper';
+import { Avatar, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, SvgIcon, Text } from '@kietpt2003/react-native-core-ui';
+import { colors, fontSize } from '@kietpt2003/react-native-core-ui/themes';
+import { PaperElevation } from '@kietpt2003/react-native-core-ui/Cards/Paper';
 import { fn } from 'storybook/internal/test';
 
 import { booleanOptional, numberOptional, stringOptional } from '../../../src/types/types';
 import { showAlert } from '../../../src/utils';
-import { scale } from '@estuary/rn-core-ui/utils';
+import { scale } from '@kietpt2003/react-native-core-ui/utils';
 
 const elevations: PaperElevation[] = [0, 1, 2, 3, 4, 6, 8, 12, 16, 24]
 
@@ -129,8 +129,8 @@ const styles = StyleSheet.create({
     fontSize: fontSize._14
   },
   btnContainer: {
-    flexDirection:'row',
-    justifyContent:'space-around'
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   }
 });
 
@@ -138,7 +138,7 @@ export const Basic: Story = {
   name: 'Basic Outlined Card',
   args: {
     raised: true,
-    variant:'elevation',
+    variant: 'elevation',
     square: true
   },
   render: (args) => (
@@ -172,9 +172,9 @@ export const Complex: Story = {
     >
       <CardHeader
         avatar={
-          <Avatar 
-            alt='Estuary Solutions' 
-            source={require('../../../assets/sample-avatar.jpg')} 
+          <Avatar
+            alt='Estuary Solutions'
+            source={require('../../../assets/sample-avatar.jpg')}
             iconColor={colors.white}
             isFirstAlt={false}
           />
@@ -192,7 +192,7 @@ export const Complex: Story = {
           uri: 'https://api.estuary.solutions/estuary-web-mediafile/file/02769849-d37f-4fde-b545-a076c2b35323?auto=format&fit=max&w=1080'
         }}
         style={{
-          aspectRatio: 16/9
+          aspectRatio: 16 / 9
         }}
       />
       <CardContent>
@@ -224,7 +224,7 @@ export const Media: Story = {
           uri: 'https://picsum.photos/id/445/1200/800'
         }}
         style={{
-          aspectRatio: 16/9
+          aspectRatio: 16 / 9
         }}
       />
       <CardContent>
@@ -313,7 +313,7 @@ export const Controls: Story = {
   args: {
     raised: true,
     style: {
-      flexDirection:'row'
+      flexDirection: 'row'
     }
   },
   render: (args) => (

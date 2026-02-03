@@ -1,8 +1,8 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { AccordionTreeItemProps } from '@estuary/rn-core-ui/Accordion/types/AccordionTypes'
-import { SvgIcon, Text } from '@estuary/rn-core-ui';
-import { colors } from '@estuary/rn-core-ui/themes';
+import { AccordionTreeItemProps } from '@kietpt2003/react-native-core-ui/Accordion/types/AccordionTypes'
+import { SvgIcon, Text } from '@kietpt2003/react-native-core-ui';
+import { colors } from '@kietpt2003/react-native-core-ui/themes';
 
 const RenderItemByLevel = ({ item, isExpanded, level }: AccordionTreeItemProps) => {
   const hasChildren = !!item.children?.length;

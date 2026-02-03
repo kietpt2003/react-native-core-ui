@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { View, TouchableOpacity } from 'react-native';
-import { TextField, Text, SvgIcon, Button } from '@estuary/rn-core-ui';
-import { colors, fontSize } from '@estuary/rn-core-ui/themes';
+import { TextField, Text, SvgIcon, Button } from '@kietpt2003/react-native-core-ui';
+import { colors, fontSize } from '@kietpt2003/react-native-core-ui/themes';
 import { fn } from 'storybook/internal/test';
 import React from 'react';
 

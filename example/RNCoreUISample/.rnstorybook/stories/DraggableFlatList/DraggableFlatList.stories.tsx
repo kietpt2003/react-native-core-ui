@@ -7,10 +7,10 @@ import {
   ScaleDecorator,
   ShadowDecorator,
   Text,
-} from '@estuary/rn-core-ui';
+} from '@kietpt2003/react-native-core-ui';
 import React from 'react';
-import { WEB } from '@estuary/rn-core-ui/utils';
-import { colors } from '@estuary/rn-core-ui/themes';
+import { WEB } from '@kietpt2003/react-native-core-ui/utils';
+import { colors } from '@kietpt2003/react-native-core-ui/themes';
 
 import {
   CODE_SAMPLE_CUSTOM_DECOR,

@@ -1,11 +1,11 @@
 import React from 'react'
 import { View } from 'react-native'
-import { ANDROID, IOS, WEB } from '@estuary/rn-core-ui/utils';
-import { Text } from '@estuary/rn-core-ui';
+import { ANDROID, IOS, WEB } from '@kietpt2003/react-native-core-ui/utils';
+import { Text } from '@kietpt2003/react-native-core-ui';
 
 import { shadowStyles } from './styles/shadowStyles';
 import { androidColor, androidDepth } from '../../utils';
-import { colors } from '@estuary/rn-core-ui/themes';
+import { colors } from '@kietpt2003/react-native-core-ui/themes';
 import CodeBox from './CodeBox';
 
 interface AndroidShadowProps {
@@ -34,14 +34,14 @@ const AndroidShadow = ({ elevation }: AndroidShadowProps) => {
         {
           WEB &&
           <View style={[shadowStyles.cbView, shadowStyles.ml]}>
-              <CodeBox
-                code={`const styles = StyleSheet.create({
+            <CodeBox
+              code={`const styles = StyleSheet.create({
   box: {
     elevation: ${elevation}
   },
 });`}
-                width={'100%'}
-/>
+              width={'100%'}
+            />
           </View>
         }
       </View>

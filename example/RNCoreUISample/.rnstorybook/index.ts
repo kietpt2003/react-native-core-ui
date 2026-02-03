@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { width } from '@estuary/rn-core-ui/utils';
+import { width } from '@kietpt2003/react-native-core-ui/utils';
 
 import { view } from './storybook.requires';
 

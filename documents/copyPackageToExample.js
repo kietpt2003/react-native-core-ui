@@ -6,7 +6,7 @@ async function copyPackageDirectly() {
   const distDir = path.join(root, "dist");
   const dest = path.resolve(
     __dirname,
-    "../example/RNCoreUISample/node_modules/@estuary/rn-core-ui"
+    "../example/RNCoreUISample/node_modules/@kietpt2003/react-native-core-ui",
   );
 
   console.log("👉🏻🗑️ Removing old package in node_modules...");

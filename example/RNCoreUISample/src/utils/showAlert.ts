@@ -1,4 +1,4 @@
-import { WEB } from '@estuary/rn-core-ui/utils'
+import { WEB } from '@kietpt2003/react-native-core-ui/utils'
 import { Alert } from 'react-native';
 
 export function showAlert(

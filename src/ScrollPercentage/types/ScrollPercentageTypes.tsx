@@ -9,7 +9,7 @@ export interface ScrollPercentageProps extends LoadingSquareRadiusProps {
    * 
    * *Example:*
    * ```jsx
-   *  import { ScrollPercentage } from '@estuary/rn-core-ui';
+   *  import { ScrollPercentage } from '@kietpt2003/react-native-core-ui';
    *  const MyComponent = () => {
    *    const [scrollPercent, setScrollPercent] = React.useState(0);
    *    const [isOpen, setIsOpen] = React.useState(false);
@@ -40,7 +40,7 @@ export interface ScrollPercentageProps extends LoadingSquareRadiusProps {
    * 
    * *Example:*
    * ```jsx
-   *  import { ScrollPercentage } from '@estuary/rn-core-ui';
+   *  import { ScrollPercentage } from '@kietpt2003/react-native-core-ui';
    *  const MyComponent = () => {
    *    const [scrollPercent, setScrollPercent] = React.useState(0);
    *    const [isOpen, setIsOpen] = React.useState(false);
@@ -71,7 +71,7 @@ export interface ScrollPercentageProps extends LoadingSquareRadiusProps {
    * 
    * *Example:*
    * ```jsx
-   *  import { ScrollPercentage } from '@estuary/rn-core-ui';
+   *  import { ScrollPercentage } from '@kietpt2003/react-native-core-ui';
    *  const MyComponent = () => {
    *    const [scrollPercent, setScrollPercent] = React.useState(0);
    *    const [isOpen, setIsOpen] = React.useState(false);
@@ -107,7 +107,7 @@ export interface LoadingCircleProps {
    * 
    * *Example:*
    * ```jsx
-   *  import { ScrollPercentage } from '@estuary/rn-core-ui';
+   *  import { ScrollPercentage } from '@kietpt2003/react-native-core-ui';
    *  const MyComponent = () => {
    *    const [scrollPercent, setScrollPercent] = React.useState(0);
    *    const [isOpen, setIsOpen] = React.useState(false);
@@ -138,7 +138,7 @@ export interface LoadingCircleProps {
    * 
    * *Example:*
    * ```jsx
-   *  import { ScrollPercentage } from '@estuary/rn-core-ui';
+   *  import { ScrollPercentage } from '@kietpt2003/react-native-core-ui';
    *  const MyComponent = () => {
    *    const [scrollPercent, setScrollPercent] = React.useState(0);
    *    const [isOpen, setIsOpen] = React.useState(false);
@@ -169,7 +169,7 @@ export interface LoadingCircleProps {
    * 
    * *Example:*
    * ```jsx
-   *  import { ScrollPercentage } from '@estuary/rn-core-ui';
+   *  import { ScrollPercentage } from '@kietpt2003/react-native-core-ui';
    *  const MyComponent = () => {
    *    const [scrollPercent, setScrollPercent] = React.useState(0);
    *    const [isOpen, setIsOpen] = React.useState(false);
@@ -200,7 +200,7 @@ export interface LoadingCircleProps {
    * 
    * *Example:*
    * ```jsx
-   *  import { ScrollPercentage } from '@estuary/rn-core-ui';
+   *  import { ScrollPercentage } from '@kietpt2003/react-native-core-ui';
    *  const MyComponent = () => {
    *    const [scrollPercent, setScrollPercent] = React.useState(0);
    *    const [isOpen, setIsOpen] = React.useState(false);
@@ -231,7 +231,7 @@ export interface LoadingCircleProps {
    * 
    * *Example:*
    * ```jsx
-   *  import { ScrollPercentage } from '@estuary/rn-core-ui';
+   *  import { ScrollPercentage } from '@kietpt2003/react-native-core-ui';
    *  const MyComponent = () => {
    *    const [scrollPercent, setScrollPercent] = React.useState(0);
    *    const [isOpen, setIsOpen] = React.useState(false);
@@ -266,7 +266,7 @@ export interface LoadingCircleProps {
    * 
    * *Example:*
    * ```jsx
-   *  import { ScrollPercentage } from '@estuary/rn-core-ui';
+   *  import { ScrollPercentage } from '@kietpt2003/react-native-core-ui';
    *  const MyComponent = () => {
    *    const [scrollPercent, setScrollPercent] = React.useState(0);
    *    const [isOpen, setIsOpen] = React.useState(false);
@@ -297,7 +297,7 @@ export interface LoadingCircleProps {
    * 
    * *Example:*
    * ```jsx
-   *  import { ScrollPercentage } from '@estuary/rn-core-ui';
+   *  import { ScrollPercentage } from '@kietpt2003/react-native-core-uiative-core-uiative-core-uiative-core-ui';
    *  const MyComponent = () => {
    *    const [scrollPercent, setScrollPercent] = React.useState(0);
    *    const [isOpen, setIsOpen] = React.useState(false);
@@ -339,7 +339,7 @@ export interface LoadingSquareRadiusProps extends LoadingCircleProps {
    * 
    * *Example:*
    * ```jsx
-   *  import { ScrollPercentage } from '@estuary/rn-core-ui';
+   *  import { ScrollPercentage } from '@kietpt2003/react-native-core-ui';
    *  const MyComponent = () => {
    *    const [scrollPercent, setScrollPercent] = React.useState(0);
    *    const [isOpen, setIsOpen] = React.useState(false);
@@ -373,7 +373,7 @@ export interface LoadingSquareRadiusProps extends LoadingCircleProps {
    * 
    * *Example:*
    * ```jsx
-   *  import { ScrollPercentage } from '@estuary/rn-core-ui';
+   *  import { ScrollPercentage } from '@kietpt2003/react-native-core-ui';
    *  const MyComponent = () => {
    *    const [scrollPercent, setScrollPercent] = React.useState(0);
    *    const [isOpen, setIsOpen] = React.useState(false);
