@@ -74,4 +74,6 @@ const styles = StyleSheet.create({
   },
 });
 
+Text.displayName = 'Text';
+
 export default Text;

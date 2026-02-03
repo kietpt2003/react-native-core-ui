@@ -139,4 +139,6 @@ const SvgIcon = ({
   }
 };
 
+SvgIcon.displayName = 'SvgIcon';
+
 export default SvgIcon;

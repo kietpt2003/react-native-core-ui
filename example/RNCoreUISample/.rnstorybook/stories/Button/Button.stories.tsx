@@ -3,12 +3,14 @@ import { View } from 'react-native';
 import { fn } from 'storybook/test';
 import { Button, SvgIcon } from '@kietpt2003/react-native-core-ui'
 import { colors, fontSize } from '@kietpt2003/react-native-core-ui/themes';
+import { scale } from '@kietpt2003/react-native-core-ui/utils';
 
 import { showAlert } from '../../../src/utils';
 import {
   booleanOptional,
   stringOptional,
 } from '../../../src/types/types'
+import { BUTTON_DEFAULT_SAMPLE, BUTTON_DISABLE_SAMPLE, BUTTON_END_ICON_SAMPLE, BUTTON_OUTLINE_SAMPLE, BUTTON_START_ICON_SAMPLE, BUTTON_SUBMIT_SAMPLE } from '../../../src/components/Buttons/Samples/Data';
 
 const meta = {
   title: 'Inputs/Button',
@@ -323,7 +325,15 @@ const meta = {
         type: 'object'
       }
     },
-  }
+  },
+  parameters: {
+    docs: {
+      description: {
+        component:
+          `A customizable button component supporting filled and outline variants, icons, loading state, and disabled handling, built on \`TouchableOpacity\` for consistent interactions across the app.`,
+      },
+    },
+  },
 } satisfies Meta<typeof Button>;
 
 export default meta;
@@ -337,13 +347,24 @@ export const Default: Story = {
     variant: 'filled',
     borderColor: colors.primary,
   },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          `Displays a button with default styling and interactions.`,
+      },
+      source: {
+        code: BUTTON_DEFAULT_SAMPLE,
+      },
+    },
+  },
 };
 
 export const StartIcon: Story = {
   name: 'Button With Start Icon',
   args: {
     title: 'Add Title',
-    startIcon: <SvgIcon size={fontSize._18} name='plus' color={colors.white} />,
+    startIcon: <SvgIcon size={scale(14)} name='plus' color={colors.white} />,
     startIconStyle: {
       marginRight: 0
     },
@@ -355,13 +376,24 @@ export const StartIcon: Story = {
     },
     borderColor: colors.primary,
   },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          `A button with a leading icon, commonly used for add or create actions.`,
+      },
+      source: {
+        code: BUTTON_START_ICON_SAMPLE,
+      },
+    },
+  },
 };
 
 export const EndIcon: Story = {
   name: 'Button With End Icon',
   args: {
     title: 'Play Song',
-    endIcon: <SvgIcon size={fontSize._18} name='play-circle' color={colors.white} />,
+    endIcon: <SvgIcon size={scale(12)} name='play-circle' color={colors.white} />,
     endIconStyle: {
       marginLeft: 0
     },
@@ -373,6 +405,17 @@ export const EndIcon: Story = {
     },
     borderColor: colors.primary,
   },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          `A button with a trailing icon, useful for actions like play or navigate.`,
+      },
+      source: {
+        code: BUTTON_END_ICON_SAMPLE,
+      },
+    },
+  },
 };
 
 export const Outline: Story = {
@@ -382,6 +425,17 @@ export const Outline: Story = {
     variant: 'outline',
     borderColor: colors.primary,
   },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          `Displays the outline variant of the button with a transparent background.`,
+      },
+      source: {
+        code: BUTTON_OUTLINE_SAMPLE,
+      },
+    },
+  },
 };
 
 export const Disable: Story = {
@@ -389,6 +443,17 @@ export const Disable: Story = {
   args: {
     title: 'Add Title',
     disabled: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          `Shows the button in a disabled state with interactions blocked.`,
+      },
+      source: {
+        code: BUTTON_DISABLE_SAMPLE,
+      },
+    },
   },
 };
 
@@ -398,5 +463,16 @@ export const Submit: Story = {
     title: 'Add Title',
     disabled: true,
     isSubmit: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          `Displays a loading state using an activity indicator while disabling interactions.`,
+      },
+      source: {
+        code: BUTTON_SUBMIT_SAMPLE,
+      },
+    },
   },
 };
