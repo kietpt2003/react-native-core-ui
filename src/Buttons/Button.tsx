@@ -130,4 +130,6 @@ const styles = StyleSheet.create({
   },
 });
 
+Button.displayName = 'Button';
+
 export default Button;

@@ -7,10 +7,10 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
+import FastImage, { Source, ImageStyle } from 'react-native-fast-image';
 
 import { colors } from '@themes';
 import SvgIcon from '../SvgIcon/SvgIcon';
-import FastImage, { Source, ImageStyle } from 'react-native-fast-image';
 
 export type AvatarVariant = 'circular' | 'rounded' | 'square';
 
@@ -99,7 +99,7 @@ const Avatar: React.FC<AvatarProps> = ({
           {altLetter}
         </Text>
       ) : (
-        <SvgIcon name='person' color={iconColor} size={size/2} />
+        <SvgIcon name='person' color={iconColor} size={size / 2} />
       )}
     </View>
   );
@@ -129,5 +129,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 });
+
+Avatar.displayName = 'Avatar';
 
 export default Avatar;
