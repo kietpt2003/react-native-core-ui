@@ -28,6 +28,9 @@ try {
   console.log("🔨 Building root package...");
   run("node", ["documents/buildV2.js"], { cwd: rootPath });
 
+  console.log("🔨 Override dist/package.json...");
+  run("node", ["documents/overridePackageJson.js"], { cwd: rootPath });
+
   console.log("📂 Copy package to example...");
   run("node", ["documents/copyPackageToExample.js"], {
     cwd: rootPath,

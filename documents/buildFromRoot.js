@@ -30,11 +30,18 @@ try {
   console.log("🔨 Building root package...");
   run("node", ["documents/buildV2.js"], { cwd: rootPath });
 
+  console.log("🔨 Override dist/package.json...");
+  run("node", ["documents/overridePackageJson.js"], { cwd: rootPath });
+
   if (!fs.existsSync(sampleNodeModules)) {
-    console.log("📥 node_modules not found in example/RNCoreUISample → running yarn install...");
+    console.log(
+      "📥 node_modules not found in example/RNCoreUISample → running yarn install...",
+    );
     run("yarn", [], { cwd: samplePath });
   } else {
-    console.log("✅ node_modules already exists in example/RNCoreUISample → skip yarn install");
+    console.log(
+      "✅ node_modules already exists in example/RNCoreUISample → skip yarn install",
+    );
   }
 
   console.log("📂 Copy package to example...");
